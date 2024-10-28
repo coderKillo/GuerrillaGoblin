@@ -41,33 +41,31 @@ func _process_player_state():
 
 
 func _set_animation():
-	var animation := %Animation as AnimatedSprite2D
+	var animation := %Animation as AnimationPlayer
 
 	match _action:
 		PlayerAction.IDLE:
-			animation.play("idle")
+			match _facing:
+				Direction.LEFT_UP, Direction.LEFT_DOWN, Direction.LEFT:
+					animation.play("idle_left")
+				Direction.RIGHT_UP, Direction.RIGHT_DOWN, Direction.RIGHT:
+					animation.play("idle_right")
 		PlayerAction.WALK:
-			animation.play("walk")
+			match _facing:
+				Direction.LEFT_UP, Direction.LEFT_DOWN, Direction.LEFT:
+					animation.play("walk_left")
+				Direction.RIGHT_UP, Direction.RIGHT_DOWN, Direction.RIGHT:
+					animation.play("walk_right")
 		PlayerAction.ATTACK:
 			match _facing:
 				Direction.RIGHT_DOWN, Direction.LEFT_DOWN:
-					animation.flip_h = false
 					animation.play("attack_down")
 				Direction.LEFT:
-					animation.flip_h = true
-					animation.play("attack_right")
+					animation.play("attack_left")
 				Direction.RIGHT_UP, Direction.LEFT_UP:
-					animation.flip_h = false
 					animation.play("attack_up")
 				Direction.RIGHT:
-					animation.flip_h = false
 					animation.play("attack_right")
-
-	match _facing:
-		Direction.LEFT_UP, Direction.LEFT_DOWN, Direction.LEFT:
-			animation.flip_h = true
-		Direction.RIGHT_UP, Direction.RIGHT_DOWN, Direction.RIGHT:
-			animation.flip_h = false
 
 
 func _attack():
