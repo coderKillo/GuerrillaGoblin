@@ -1,0 +1,99 @@
+[gd_scene load_steps=12 format=3 uid="uid://b265cfi0mimv8"]
+
+[ext_resource type="Script" path="res://game/entities/barrel/barrel.gd" id="1_ph5q6"]
+[ext_resource type="Texture2D" uid="uid://b6mh0yf1in0la" path="res://assets/tiny_swords/Factions/Goblins/Troops/Barrel/Red/Barrel_Red.png" id="2_j8hyr"]
+[ext_resource type="Script" path="res://game/entities/player/shadow.gd" id="3_khtq2"]
+[ext_resource type="Script" path="res://game/entities/model2d.gd" id="4_dxnlh"]
+[ext_resource type="Texture2D" uid="uid://3giv2kfnh5f2" path="res://assets/tiny_swords/Factions/Goblins/Troops/Torch/Red/Shadow.png" id="4_ndjmn"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_wmb42"]
+radius = 0.344
+height = 0.688
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mjlbu"]
+atlas = ExtResource("2_j8hyr")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_krp54"]
+atlas = ExtResource("2_j8hyr")
+region = Rect2(256, 640, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4u32m"]
+atlas = ExtResource("2_j8hyr")
+region = Rect2(128, 640, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a21tg"]
+atlas = ExtResource("2_j8hyr")
+region = Rect2(0, 640, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_j7scn"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mjlbu")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_krp54")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4u32m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a21tg")
+}],
+"loop": true,
+"name": &"ignite",
+"speed": 10.0
+}]
+
+[node name="barrel" type="Node2D" node_paths=PackedStringArray("object_3d", "model_2d")]
+y_sort_enabled = true
+position = Vector2(-1, 0)
+script = ExtResource("1_ph5q6")
+object_3d = NodePath("StaticBody3D")
+model_2d = NodePath("Model2D")
+
+[node name="StaticBody3D" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.015625, 0, 0)
+collision_layer = 2
+collision_mask = 7
+lock_rotation = true
+linear_damp = 1.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.324102, -0.329266)
+shape = SubResource("CapsuleShape3D_wmb42")
+
+[node name="Sprite3D" type="Sprite3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, -0.000732422, 0.356834, -0.35571)
+pixel_size = 0.0156
+texture = ExtResource("2_j8hyr")
+hframes = 6
+vframes = 6
+
+[node name="ShadowMath" type="RayCast3D" parent="StaticBody3D/Sprite3D" node_paths=PackedStringArray("shadow_sprite")]
+transform = Transform3D(1, 0, 0, 0, 0.707107, -0.707107, 0, 0.707107, 0.707107, 0.000732422, -0.503845, -0.00079459)
+target_position = Vector3(0, -20, 0)
+collision_mask = 4
+script = ExtResource("3_khtq2")
+shadow_sprite = NodePath("../../../Model2D/Shadow")
+
+[node name="Model2D" type="Node2D" parent="."]
+script = ExtResource("4_dxnlh")
+
+[node name="Animation" type="AnimatedSprite2D" parent="Model2D"]
+y_sort_enabled = true
+sprite_frames = SubResource("SpriteFrames_j7scn")
+animation = &"ignite"
+autoplay = "idle"
+frame_progress = 0.60797
+offset = Vector2(0, -32)
+
+[node name="Shadow" type="Sprite2D" parent="Model2D"]
+y_sort_enabled = true
+texture = ExtResource("4_ndjmn")

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dtd1dhtl4eey1"
-path="res://.godot/imported/Tilemap_Flat.png-40ef7e65f85fe8836b7544c7aa536147.ctex"
+uid="uid://dw5dd7e66apmc"
+path="res://.godot/imported/Tower_Blue2.png-ad308f4ddf8e2a6f4ea1cb1faef268b6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/tiny_swords/Terrain/Ground/Tilemap_Flat.png"
-dest_files=["res://.godot/imported/Tilemap_Flat.png-40ef7e65f85fe8836b7544c7aa536147.ctex"]
+source_file="res://assets/tiny_swords/Factions/Knights/Buildings/Tower/Tower_Blue2.png"
+dest_files=["res://.godot/imported/Tower_Blue2.png-ad308f4ddf8e2a6f4ea1cb1faef268b6.ctex"]
 
 [params]
 
@@ -31,4 +31,4 @@ process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
-detect_3d/compress_to=0
+detect_3d/compress_to=1

@@ -1,0 +1,112 @@
+[gd_scene load_steps=15 format=3 uid="uid://c87t5b248umwr"]
+
+[ext_resource type="Script" path="res://game/entities/barrel/exposion.gd" id="1_oaa1y"]
+[ext_resource type="Script" path="res://game/entities/model2d.gd" id="3_arbwx"]
+[ext_resource type="Texture2D" uid="uid://3iohb5p0n0p8" path="res://assets/tiny_swords/Effects/Explosion/Explosions.png" id="3_hqdbk"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_b5iq3"]
+radius = 1.5
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pguo2"]
+atlas = ExtResource("3_hqdbk")
+region = Rect2(0, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6ca1o"]
+atlas = ExtResource("3_hqdbk")
+region = Rect2(192, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xxlq5"]
+atlas = ExtResource("3_hqdbk")
+region = Rect2(384, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qo8jh"]
+atlas = ExtResource("3_hqdbk")
+region = Rect2(576, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wlmlt"]
+atlas = ExtResource("3_hqdbk")
+region = Rect2(768, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n0yn8"]
+atlas = ExtResource("3_hqdbk")
+region = Rect2(960, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h77jp"]
+atlas = ExtResource("3_hqdbk")
+region = Rect2(1152, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gfcip"]
+atlas = ExtResource("3_hqdbk")
+region = Rect2(1344, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qm7xl"]
+atlas = ExtResource("3_hqdbk")
+region = Rect2(1536, 0, 192, 192)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_t0i8t"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pguo2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6ca1o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xxlq5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qo8jh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wlmlt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n0yn8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h77jp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gfcip")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qm7xl")
+}],
+"loop": false,
+"name": &"default",
+"speed": 10.0
+}]
+
+[node name="explosion" type="Node2D" node_paths=PackedStringArray("object_3d", "model_2d")]
+y_sort_enabled = true
+script = ExtResource("1_oaa1y")
+object_3d = NodePath("ExplosionArea")
+model_2d = NodePath("Model2D")
+
+[node name="ExplosionArea" type="Area3D" parent="."]
+collision_layer = 2
+collision_mask = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ExplosionArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.388284, 0)
+shape = SubResource("SphereShape3D_b5iq3")
+
+[node name="Sprite3D" type="Sprite3D" parent="ExplosionArea"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, -0.000732422, 0.356834, 0.000208616)
+pixel_size = 0.0156
+texture = ExtResource("3_hqdbk")
+hframes = 9
+frame = 2
+
+[node name="Model2D" type="Node2D" parent="."]
+script = ExtResource("3_arbwx")
+
+[node name="Animation" type="AnimatedSprite2D" parent="Model2D"]
+y_sort_enabled = true
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_t0i8t")
+autoplay = "default"
+frame = 8
+frame_progress = 1.0
+offset = Vector2(0, -32)
