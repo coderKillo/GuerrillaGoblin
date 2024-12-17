@@ -7,6 +7,7 @@ enum PlayerAction { IDLE, WALK, ATTACK }
 @export var attack_duration: float = 0.7
 
 @export var direction := Vector2.ZERO
+@export var speed := 1.0
 @export var attack := false
 
 var _facing: int = Direction.RIGHT
@@ -14,7 +15,10 @@ var _action: PlayerAction = PlayerAction.IDLE
 
 
 func _physics_process(_delta):
-	velocity = direction * movement_speed
+	if _action == PlayerAction.ATTACK:
+		velocity = Vector2.ZERO
+	else:
+		velocity = direction * movement_speed * speed
 	move_and_slide()
 
 
@@ -73,3 +77,4 @@ func _attack():
 	_action = PlayerAction.ATTACK
 	await get_tree().create_timer(attack_duration).timeout
 	_action = PlayerAction.IDLE
+	attack = false

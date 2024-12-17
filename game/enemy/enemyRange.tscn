@@ -1,16 +1,13 @@
-[gd_scene load_steps=17 format=3 uid="uid://dbvjtipbgggot"]
+[gd_scene load_steps=16 format=3 uid="uid://b2hkp10y1jajr"]
 
-[ext_resource type="Script" path="res://game/enemy/enemy.gd" id="1_yaodn"]
-[ext_resource type="Texture2D" uid="uid://brm0gft82hn6y" path="res://assets/tiny_swords/Factions/Knights/Troops/Warrior/Blue/Warrior_Blue.png" id="2_dxlco"]
-[ext_resource type="Script" path="res://game/enemy/enemyAi.gd" id="4_7uq4l"]
-[ext_resource type="Script" path="res://game/player/weapon.gd" id="4_al1lm"]
+[ext_resource type="Script" path="res://game/enemy/enemy.gd" id="1_op4wj"]
+[ext_resource type="Texture2D" uid="uid://v3pjkwx8pmfl" path="res://assets/tiny_swords/Factions/Knights/Troops/Archer/Blue/Archer_Blue.png" id="2_hfui1"]
+[ext_resource type="Script" path="res://game/enemy/bow.gd" id="3_4434a"]
+[ext_resource type="Script" path="res://game/enemy/enemyAi.gd" id="4_so76u"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_775cu"]
 radius = 18.0
 height = 60.0
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_b6rts"]
-size = Vector2(51.015, 89)
 
 [sub_resource type="Animation" id="Animation_qlr8w"]
 length = 0.001
@@ -38,34 +35,10 @@ tracks/1/keys = {
 "update": 1,
 "values": [3]
 }
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Weapon/WeaponCollision:disabled")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("Weapon:rotation")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [3.14159]
-}
 
 [sub_resource type="Animation" id="Animation_iimav"]
 resource_name = "attack_down"
-length = 0.6
+length = 0.8
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -86,39 +59,29 @@ tracks/1/path = NodePath("Model:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [24, 25, 26, 27, 28, 29]
+"values": [47, 48, 49, 50, 51, 52, 53, 54, 55]
 }
-tracks/2/type = "value"
+tracks/2/type = "method"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Weapon/WeaponCollision:disabled")
+tracks/2/path = NodePath("Bow")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.3, 0.5),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [true, false, true]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("Weapon:rotation")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
+"times": PackedFloat32Array(0.7),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [1.5708]
+"values": [{
+"args": [],
+"method": &"fire"
+}]
 }
 
 [sub_resource type="Animation" id="Animation_ye4so"]
 resource_name = "attack_left"
-length = 0.6
+length = 0.8
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -139,39 +102,29 @@ tracks/1/path = NodePath("Model:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [12, 13, 14, 15, 16, 17]
+"values": [31, 32, 33, 34, 35, 36, 37, 38, 39]
 }
-tracks/2/type = "value"
+tracks/2/type = "method"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Weapon/WeaponCollision:disabled")
+tracks/2/path = NodePath("Bow")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.3, 0.5),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [true, false, true]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("Weapon:rotation")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
+"times": PackedFloat32Array(0.7),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [3.14159]
+"values": [{
+"args": [],
+"method": &"fire"
+}]
 }
 
 [sub_resource type="Animation" id="Animation_y0aou"]
 resource_name = "attack_right"
-length = 0.6
+length = 0.8
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -192,39 +145,29 @@ tracks/1/path = NodePath("Model:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [12, 13, 14, 15, 16, 17]
+"values": [31, 32, 33, 34, 35, 36, 37, 38, 39]
 }
-tracks/2/type = "value"
+tracks/2/type = "method"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Weapon/WeaponCollision:disabled")
+tracks/2/path = NodePath("Bow")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.3, 0.5),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [true, false, true]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("Weapon:rotation")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
+"times": PackedFloat32Array(0.7),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
+"values": [{
+"args": [],
+"method": &"fire"
+}]
 }
 
 [sub_resource type="Animation" id="Animation_8q4eb"]
 resource_name = "attack_up"
-length = 0.6
+length = 0.8
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -245,39 +188,29 @@ tracks/1/path = NodePath("Model:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [36, 37, 38, 39, 40, 41]
+"values": [16, 17, 18, 19, 20, 21, 22, 23, 24]
 }
-tracks/2/type = "value"
+tracks/2/type = "method"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Weapon/WeaponCollision:disabled")
+tracks/2/path = NodePath("Bow")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.3, 0.5),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [true, false, true]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("Weapon:rotation")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
+"times": PackedFloat32Array(0.6),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [-1.5708]
+"values": [{
+"args": [],
+"method": &"fire"
+}]
 }
 
 [sub_resource type="Animation" id="Animation_pxf68"]
 resource_name = "idle_left"
-length = 0.5
+length = 0.6
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -306,7 +239,7 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id="Animation_jcvpi"]
 resource_name = "idle_right"
-length = 0.5
+length = 0.6
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -335,7 +268,7 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id="Animation_d0gqg"]
 resource_name = "walk_left"
-length = 0.5
+length = 0.6
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -356,15 +289,15 @@ tracks/1/path = NodePath("Model:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [6, 7, 8, 9, 10]
+"values": [8, 9, 10, 11, 12, 13]
 }
 
 [sub_resource type="Animation" id="Animation_lj6hp"]
 resource_name = "walk_right"
-length = 0.5
+length = 0.6
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -388,7 +321,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [6, 7, 8, 9, 10, 11]
+"values": [8, 9, 10, 11, 12, 13]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_s0pas"]
@@ -404,30 +337,25 @@ _data = {
 "walk_right": SubResource("Animation_lj6hp")
 }
 
-[node name="enemy" type="CharacterBody2D" groups=["enemy"]]
+[node name="enemyRange" type="CharacterBody2D" groups=["enemy"]]
 collision_layer = 2
 collision_mask = 7
-script = ExtResource("1_yaodn")
+script = ExtResource("1_op4wj")
+movement_speed = 50.0
 
 [node name="Model" type="Sprite2D" parent="."]
-texture = ExtResource("2_dxlco")
+texture = ExtResource("2_hfui1")
 flip_h = true
-hframes = 6
-vframes = 8
+hframes = 8
+vframes = 7
 frame = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_775cu")
 
-[node name="Weapon" type="Area2D" parent="."]
-rotation = 3.14159
-collision_layer = 2
-script = ExtResource("4_al1lm")
-
-[node name="WeaponCollision" type="CollisionShape2D" parent="Weapon"]
-position = Vector2(60, 0)
-shape = SubResource("RectangleShape2D_b6rts")
-disabled = true
+[node name="Bow" type="Node2D" parent="." node_paths=PackedStringArray("_brain")]
+script = ExtResource("3_4434a")
+_brain = NodePath("../Brain")
 
 [node name="Animation" type="AnimationPlayer" parent="."]
 unique_name_in_owner = true
@@ -436,7 +364,10 @@ libraries = {
 }
 
 [node name="Brain" type="Node2D" parent="." node_paths=PackedStringArray("_agent") groups=["listener"]]
-script = ExtResource("4_7uq4l")
+script = ExtResource("4_so76u")
+attack_distance = 500
+min_distance = 20
+stay_on_position = true
 _agent = NodePath("../NavigationAgent2D")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]

@@ -403,23 +403,22 @@ _data = {
 "walk_right": SubResource("Animation_lj6hp")
 }
 
-[node name="player" type="CharacterBody2D"]
+[node name="player" type="CharacterBody2D" groups=["player"]]
+collision_mask = 3
 script = ExtResource("1_jyd77")
 
 [node name="Model" type="Sprite2D" parent="."]
-position = Vector2(0, -30)
 texture = ExtResource("3_i0q1l")
 flip_h = true
 hframes = 34
 frame = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -30)
 shape = SubResource("CapsuleShape2D_775cu")
 
 [node name="Weapon" type="Area2D" parent="."]
-position = Vector2(0, -30)
 rotation = 3.14159
+collision_mask = 4
 script = ExtResource("4_6xy2f")
 
 [node name="WeaponCollision" type="CollisionShape2D" parent="Weapon"]

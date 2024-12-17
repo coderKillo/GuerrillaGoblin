@@ -11,8 +11,10 @@ var _action: PlayerAction = PlayerAction.IDLE
 
 
 func _physics_process(_delta):
-	# TODO: dont move when attacking?
 	var direction = Input.get_vector("move_left", "move_right", "move_up", "move_down")
+	if _action == PlayerAction.ATTACK:
+		direction = Vector2.ZERO
+
 	velocity = direction * movement_speed
 	move_and_slide()
 
@@ -75,3 +77,7 @@ func _attack():
 	_action = PlayerAction.ATTACK
 	await get_tree().create_timer(attack_duration).timeout
 	_action = PlayerAction.IDLE
+
+
+func hit():
+	get_tree().reload_current_scene()
