@@ -269,6 +269,8 @@ points = PackedVector2Array(-211, -226, 14, -2)
 width = 4.0
 
 [node name="enemy2" parent="." instance=ExtResource("2_n8rd8")]
+process_mode = 4
+visible = false
 position = Vector2(920, 378)
 
 [node name="Line2D" type="Line2D" parent="enemy2"]
@@ -277,9 +279,9 @@ points = PackedVector2Array(-134, 86, -115, 6, -135, -264)
 width = 4.0
 
 [node name="enemyRange" parent="." instance=ExtResource("5_adx8g")]
+process_mode = 4
+visible = false
 position = Vector2(234, 117)
-direction = Vector2(1, 0)
-speed = 0.0
 
 [node name="Line2D" type="Line2D" parent="enemyRange"]
 points = PackedVector2Array(63, 10)

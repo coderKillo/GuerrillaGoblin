@@ -52,7 +52,7 @@ func _process(delta):
 		State.INVESTIGATE:
 			if stay_on_position:
 				_current_state = State.LOOK_AROUND
-				Effects.spawn_sound(_agent.target_position, 300)
+				Effects.spawn_sound(_agent.target_position, 300, "BANG")
 				return
 
 			_investigate()

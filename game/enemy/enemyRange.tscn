@@ -1,9 +1,16 @@
-[gd_scene load_steps=16 format=3 uid="uid://b2hkp10y1jajr"]
+[gd_scene load_steps=23 format=3 uid="uid://b2hkp10y1jajr"]
 
 [ext_resource type="Script" path="res://game/enemy/enemy.gd" id="1_op4wj"]
 [ext_resource type="Texture2D" uid="uid://v3pjkwx8pmfl" path="res://assets/tiny_swords/Factions/Knights/Troops/Archer/Blue/Archer_Blue.png" id="2_hfui1"]
 [ext_resource type="Script" path="res://game/enemy/bow.gd" id="3_4434a"]
-[ext_resource type="Script" path="res://game/enemy/enemyAi.gd" id="4_so76u"]
+[ext_resource type="Script" path="res://game/systems/statemachine/statemachine.gd" id="4_hhlqu"]
+[ext_resource type="Script" path="res://game/systems/components/target_component.gd" id="5_3c16d"]
+[ext_resource type="Script" path="res://game/enemy/ai_states/guard.gd" id="5_perw3"]
+[ext_resource type="Script" path="res://game/systems/components/movement_component.gd" id="6_ma3y3"]
+[ext_resource type="Script" path="res://game/enemy/ai_states/alert.gd" id="6_mkba2"]
+[ext_resource type="Script" path="res://game/enemy/ai_states/notify.gd" id="7_2bone"]
+[ext_resource type="Script" path="res://game/systems/components/listener_component.gd" id="7_beowh"]
+[ext_resource type="Script" path="res://game/enemy/ai_states/attack.gd" id="8_05fvg"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_775cu"]
 radius = 18.0
@@ -353,9 +360,9 @@ frame = 3
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_775cu")
 
-[node name="Bow" type="Node2D" parent="." node_paths=PackedStringArray("_brain")]
+[node name="Bow" type="Node2D" parent="." node_paths=PackedStringArray("target_component")]
 script = ExtResource("3_4434a")
-_brain = NodePath("../Brain")
+target_component = NodePath("../target_component")
 
 [node name="Animation" type="AnimationPlayer" parent="."]
 unique_name_in_owner = true
@@ -363,12 +370,42 @@ libraries = {
 "": SubResource("AnimationLibrary_s0pas")
 }
 
-[node name="Brain" type="Node2D" parent="." node_paths=PackedStringArray("_agent") groups=["listener"]]
-script = ExtResource("4_so76u")
-attack_distance = 500
-min_distance = 20
-stay_on_position = true
-_agent = NodePath("../NavigationAgent2D")
+[node name="Brain" type="Node2D" parent="." node_paths=PackedStringArray("target_component", "movement_component", "listener_component", "start_state")]
+script = ExtResource("4_hhlqu")
+target_component = NodePath("../target_component")
+movement_component = NodePath("../movement_component")
+listener_component = NodePath("../listener_component")
+start_state = NodePath("Guard")
+
+[node name="Guard" type="Node2D" parent="Brain" node_paths=PackedStringArray("seen_target")]
+script = ExtResource("5_perw3")
+seen_target = NodePath("../Alert")
+
+[node name="Alert" type="Node2D" parent="Brain" node_paths=PackedStringArray("after_alert_time")]
+script = ExtResource("6_mkba2")
+after_alert_time = NodePath("../Notify")
+
+[node name="Notify" type="Node2D" parent="Brain" node_paths=PackedStringArray("next_state")]
+script = ExtResource("7_2bone")
+next_state = NodePath("../Attack")
+
+[node name="Attack" type="Node2D" parent="Brain" node_paths=PackedStringArray("after_attack")]
+script = ExtResource("8_05fvg")
+after_attack = NodePath("../Guard")
+attack_range = 500.0
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 path_postprocessing = 1
+
+[node name="target_component" type="Node2D" parent="."]
+script = ExtResource("5_3c16d")
+target_group = "player"
+
+[node name="movement_component" type="Node2D" parent="." node_paths=PackedStringArray("character", "agent")]
+script = ExtResource("6_ma3y3")
+character = NodePath("..")
+agent = NodePath("../NavigationAgent2D")
+min_distance = 60
+
+[node name="listener_component" type="Node2D" parent="." groups=["listener"]]
+script = ExtResource("7_beowh")
