@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://4uy8xn6u13a6"]
+
+[ext_resource type="Script" path="res://game/character/enemy/enemy.gd" id="1_gsc6h"]
+[ext_resource type="Texture2D" uid="uid://d3j8goa0kg6s4" path="res://assets/kenney_scribble-dungeons/PNG/Double (128px)/Characters/red_character.png" id="2_iwqeu"]
+[ext_resource type="PackedScene" uid="uid://fl6g6pohavju" path="res://game/character/weapon/weapon_melee_sword.tscn" id="3_4ya0b"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_8od80"]
+radius = 40.05
+
+[node name="EnemyMelee" type="CharacterBody2D" node_paths=PackedStringArray("weapon")]
+collision_mask = 7
+motion_mode = 1
+script = ExtResource("1_gsc6h")
+weapon = NodePath("WeaponMelee")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_iwqeu")
+
+[node name="WeaponMelee" parent="." instance=ExtResource("3_4ya0b")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_8od80")

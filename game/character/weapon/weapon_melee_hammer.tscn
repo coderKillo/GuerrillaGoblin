@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://18644is18nsq"]
+
+[ext_resource type="Script" path="res://game/character/weapon/melee_weapon.gd" id="1_xvth7"]
+[ext_resource type="Texture2D" uid="uid://c472tywcfodlq" path="res://assets/kenney_scribble-dungeons/PNG/Double (128px)/Items/weapon_hammer.png" id="2_iqg4t"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hdka2"]
+size = Vector2(57, 32)
+
+[node name="WeaponMelee" type="Area2D"]
+collision_mask = 10
+script = ExtResource("1_xvth7")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -42)
+texture = ExtResource("2_iqg4t")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.5, -76)
+shape = SubResource("RectangleShape2D_hdka2")
+debug_color = Color(0.870588, 0.294118, 0.486275, 0.419608)
