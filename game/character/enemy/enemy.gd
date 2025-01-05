@@ -1,23 +1,23 @@
 extends CharacterBody2D
 
-@export var speed := 500.0
+@export var movement_speed := 500.0
 @export var weapon: Node2D
 
-var attack := false
-var direction := Vector2.ZERO
-
-
-func _unhandled_input(event: InputEvent):
-	if event.is_action_pressed("attack"):
-		weapon.attack()
+@export var attack := false
+@export var direction := Vector2.ZERO
 
 
 func _physics_process(_delta):
-	if weapon.is_attacking():
-		direction = Vector2.ZERO
+	if attack:
+		weapon.attack()
+		attack = false
 
+	weapon.look_at(global_position + direction)
+
+	if weapon.is_attacking():
+		velocity = Vector2.ZERO
 	if direction:
-		velocity = direction * speed
+		velocity = direction * movement_speed
 	else:
 		velocity = velocity.lerp(Vector2.ZERO, 0.5)
 

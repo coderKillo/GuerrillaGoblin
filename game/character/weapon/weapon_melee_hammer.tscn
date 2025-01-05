@@ -4,17 +4,22 @@
 [ext_resource type="Texture2D" uid="uid://c472tywcfodlq" path="res://assets/kenney_scribble-dungeons/PNG/Double (128px)/Items/weapon_hammer.png" id="2_iqg4t"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hdka2"]
-size = Vector2(57, 32)
+size = Vector2(32.5, 59)
 
-[node name="WeaponMelee" type="Area2D"]
+[node name="WeaponMelee" type="Area2D" node_paths=PackedStringArray("area")]
 collision_mask = 10
 script = ExtResource("1_xvth7")
+area = NodePath(".")
+anticipation_angle = -75.0
+strike_angle = 75.0
+recover_time = 0.2
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(0, -42)
+position = Vector2(39, 0)
+rotation = 1.5708
 texture = ExtResource("2_iqg4t")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0.5, -76)
+position = Vector2(73.75, -0.5)
 shape = SubResource("RectangleShape2D_hdka2")
 debug_color = Color(0.870588, 0.294118, 0.486275, 0.419608)

@@ -14,6 +14,8 @@ func _physics_process(_delta):
 
 	if weapon.is_attacking():
 		direction = Vector2.ZERO
+	else:
+		weapon.look_at(get_global_mouse_position())
 
 	if direction:
 		velocity = direction * speed

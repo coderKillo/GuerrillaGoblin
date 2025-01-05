@@ -16,13 +16,6 @@ func _ready():
 	area.body_entered.connect(weapon_body_entered)
 
 
-func _process(_delta):
-	if _is_attacking:
-		return
-
-	look_at(get_global_mouse_position())
-
-
 func is_attacking():
 	return _is_attacking
 

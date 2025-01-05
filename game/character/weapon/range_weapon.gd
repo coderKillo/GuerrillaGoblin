@@ -14,13 +14,6 @@ signal weapon_done
 var _is_attacking := false
 
 
-func _process(_delta):
-	if _is_attacking:
-		return
-
-	look_at(get_global_mouse_position())
-
-
 func is_attacking():
 	return _is_attacking
 

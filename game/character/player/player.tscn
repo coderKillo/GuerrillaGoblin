@@ -7,7 +7,7 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_8od80"]
 radius = 40.05
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("weapon")]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("weapon") groups=["player"]]
 collision_mask = 7
 motion_mode = 1
 script = ExtResource("1_t5cbm")
@@ -17,7 +17,6 @@ weapon = NodePath("WeaponMelee")
 texture = ExtResource("2_7yk4d")
 
 [node name="WeaponMelee" parent="." instance=ExtResource("3_it7kh")]
-visible = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_8od80")
