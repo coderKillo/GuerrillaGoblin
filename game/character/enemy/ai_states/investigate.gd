@@ -3,8 +3,8 @@ extends State
 @export var arrive_at_position: State
 @export var seen_target: State
 
-@export var walk_speed := 0.5
-@export var run_speed := 1.2
+var walk_speed := Settings.walk_speed
+var run_speed := Settings.run_speed
 
 
 func enter():

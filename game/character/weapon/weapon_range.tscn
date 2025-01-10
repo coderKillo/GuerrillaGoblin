@@ -6,7 +6,7 @@
 
 [node name="WeaponRange" type="Node2D" node_paths=PackedStringArray("weapon_sprite")]
 script = ExtResource("1_4kc8i")
-weapon_sprite = NodePath("")
+weapon_sprite = NodePath("Sprite2D")
 normal_texture = ExtResource("2_jseey")
 reload_texture = ExtResource("3_ud1gn")
 

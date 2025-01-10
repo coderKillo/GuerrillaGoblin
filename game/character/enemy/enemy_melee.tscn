@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://4uy8xn6u13a6"]
+[gd_scene load_steps=16 format=3 uid="uid://4uy8xn6u13a6"]
 
 [ext_resource type="Script" path="res://game/character/enemy/enemy.gd" id="1_gsc6h"]
 [ext_resource type="Texture2D" uid="uid://d3j8goa0kg6s4" path="res://assets/kenney_scribble-dungeons/PNG/Double (128px)/Characters/red_character.png" id="2_iwqeu"]
@@ -13,12 +13,13 @@
 [ext_resource type="Script" path="res://game/systems/components/movement_component.gd" id="11_aqwy5"]
 [ext_resource type="Script" path="res://game/systems/components/target_component.gd" id="12_arkp5"]
 [ext_resource type="Script" path="res://game/systems/components/listener_component.gd" id="13_0bkdu"]
+[ext_resource type="Script" path="res://game/systems/components/air_component.gd" id="14_sa0r1"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_8od80"]
 radius = 40.05
 
 [node name="EnemyMelee" type="CharacterBody2D" node_paths=PackedStringArray("weapon") groups=["enemy"]]
-collision_mask = 7
+collision_mask = 783
 motion_mode = 1
 script = ExtResource("1_gsc6h")
 weapon = NodePath("WeaponMelee")
@@ -82,3 +83,7 @@ character = NodePath("..")
 
 [node name="ListenerComponent" type="Node2D" parent="." groups=["listener"]]
 script = ExtResource("13_0bkdu")
+
+[node name="AirComponent" type="Node2D" parent="." node_paths=PackedStringArray("character")]
+script = ExtResource("14_sa0r1")
+character = NodePath("..")

@@ -1,0 +1,44 @@
+[gd_scene load_steps=5 format=3 uid="uid://dqv7lmhwlcd2f"]
+
+[ext_resource type="Script" path="res://game/buildings/tower.gd" id="1_doohy"]
+[ext_resource type="Texture2D" uid="uid://dwgefddipuhkn" path="res://assets/kenney_scribble-dungeons/PNG/Double (128px)/wall_curve.png" id="2_l885o"]
+[ext_resource type="Texture2D" uid="uid://bj3jjxj1cqrb0" path="res://assets/kenney_scribble-dungeons/PNG/Double (128px)/bridge.png" id="2_seolw"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ll7lf"]
+radius = 86.0058
+
+[node name="tower" type="StaticBody2D"]
+collision_layer = 512
+collision_mask = 512
+script = ExtResource("1_doohy")
+
+[node name="Sprite2D7" type="Sprite2D" parent="."]
+texture = ExtResource("2_seolw")
+flip_h = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-42, -42)
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("2_l885o")
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+position = Vector2(41, -42)
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("2_l885o")
+flip_h = true
+
+[node name="Sprite2D3" type="Sprite2D" parent="."]
+position = Vector2(-42, 41)
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("2_l885o")
+flip_v = true
+
+[node name="Sprite2D4" type="Sprite2D" parent="."]
+position = Vector2(41, 40)
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("2_l885o")
+flip_h = true
+flip_v = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_ll7lf")

@@ -18,6 +18,8 @@ config/icon="res://icon.svg"
 
 Events="*res://game/autoload/events.gd"
 Effects="*res://game/autoload/effects.gd"
+Settings="*res://game/settings.tscn"
+Global="*res://game/global.gd"
 
 [display]
 
@@ -95,6 +97,8 @@ spawn_sound={
 2d_physics/layer_2="enemy"
 2d_physics/layer_3="walls"
 2d_physics/layer_4="objects"
+2d_physics/layer_9="water"
+2d_physics/layer_10="building"
 
 [physics]
 

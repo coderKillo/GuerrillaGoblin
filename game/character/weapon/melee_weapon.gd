@@ -3,6 +3,7 @@ extends Node2D
 signal weapon_done
 
 @export var area: Area2D
+@export var collision: CollisionShape2D
 @export var anticipation_time: float = 0.2
 @export var anticipation_angle: float = -30.0
 @export var strike_angle: float = 100.0
@@ -14,6 +15,8 @@ var _is_attacking := false
 
 func _ready():
 	area.body_entered.connect(weapon_body_entered)
+
+	collision.disabled = true
 
 
 func is_attacking():
@@ -30,7 +33,9 @@ func attack():
 	var angle = rotation_degrees
 
 	tween.tween_property(self, "rotation_degrees", angle + anticipation_angle, anticipation_time)
+	tween.tween_callback(collision.set_disabled.bind(false))
 	tween.tween_property(self, "rotation_degrees", angle + strike_angle, strike_time)
+	tween.tween_callback(collision.set_disabled.bind(true))
 	tween.tween_property(self, "rotation_degrees", angle, recover_time)
 
 	await tween.finished

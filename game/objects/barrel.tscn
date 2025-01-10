@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://43rp4a4kxfud"]
+
+[ext_resource type="Script" path="res://game/objects/barrel.gd" id="1_j1yke"]
+[ext_resource type="Texture2D" uid="uid://cfersr3ykmup0" path="res://assets/kenney_scribble-dungeons/PNG/Double (128px)/barrel.png" id="2_s0udb"]
+[ext_resource type="Script" path="res://game/systems/components/air_component.gd" id="3_beke7"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ltlg6"]
+radius = 29.0
+
+[node name="Barrel" type="CharacterBody2D"]
+collision_layer = 8
+collision_mask = 15
+platform_on_leave = 2
+platform_floor_layers = 0
+script = ExtResource("1_j1yke")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_s0udb")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_ltlg6")
+
+[node name="AirComponent" type="Node2D" parent="." node_paths=PackedStringArray("character")]
+script = ExtResource("3_beke7")
+character = NodePath("..")

@@ -5,5 +5,5 @@ extends State
 
 
 func process_state(_delta):
-	Effects.spawn_sound(global_position, radius, "GOTO:%s" % target_component.target_position)
+	Effects.spawn_sound(global_position, radius, "GOTO:%s" % target_component.last_target_position)
 	return next_state

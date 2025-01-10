@@ -1,0 +1,86 @@
+[gd_scene load_steps=13 format=3 uid="uid://c7k5l6y1xllij"]
+
+[ext_resource type="Script" path="res://game/objects/explosion.gd" id="1_ykkrv"]
+[ext_resource type="Texture2D" uid="uid://3iohb5p0n0p8" path="res://assets/tiny_swords/Effects/Explosion/Explosions.png" id="2_qfs2l"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_27het"]
+atlas = ExtResource("2_qfs2l")
+region = Rect2(0, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5q6vr"]
+atlas = ExtResource("2_qfs2l")
+region = Rect2(192, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q63jo"]
+atlas = ExtResource("2_qfs2l")
+region = Rect2(384, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yygrj"]
+atlas = ExtResource("2_qfs2l")
+region = Rect2(576, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y66qw"]
+atlas = ExtResource("2_qfs2l")
+region = Rect2(768, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8y7dt"]
+atlas = ExtResource("2_qfs2l")
+region = Rect2(960, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eeeh8"]
+atlas = ExtResource("2_qfs2l")
+region = Rect2(1152, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_18o4j"]
+atlas = ExtResource("2_qfs2l")
+region = Rect2(1344, 0, 192, 192)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_bcfjr"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_27het")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5q6vr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q63jo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yygrj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y66qw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8y7dt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eeeh8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_18o4j")
+}],
+"loop": false,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3imi3"]
+radius = 100.045
+
+[node name="explosion" type="Area2D"]
+collision_layer = 0
+collision_mask = 11
+script = ExtResource("1_ykkrv")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_bcfjr")
+autoplay = "default"
+frame = 7
+frame_progress = 1.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_3imi3")

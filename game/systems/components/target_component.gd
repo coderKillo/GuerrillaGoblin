@@ -14,7 +14,7 @@ func is_target_seen(view_direction: Vector2) -> bool:
 
 	for entity in get_tree().get_nodes_in_group(target_group):
 		var direction = global_position.direction_to(entity.global_position)
-		if view_direction.normalized().dot(direction) <= 0:
+		if view_direction.normalized().dot(direction) <= 0.5:
 			continue
 
 		var start = global_position

@@ -1,7 +1,9 @@
 extends State
 
 @export var seen_target: State
-@export var walk_movement := 0.5
+@export var hear_sound: State
+
+var walk_movement := Settings.walk_speed
 
 var _path: Array[Vector2]
 
@@ -32,10 +34,10 @@ func process_state(_delta):
 	if listener_component.has_sound_heard():
 		if listener_component.sound_string.contains("GOTO:"):
 			var coord = listener_component.sound_string.split(":")[1]
-			target_component.target_position = str_to_var("Vector2" + coord)
+			target_component.last_target_position = str_to_var("Vector2" + coord)
 		else:
-			target_component.target_position = listener_component.sound_position
-		return seen_target
+			target_component.last_target_position = listener_component.sound_position
+		return hear_sound
 
 	return null
 

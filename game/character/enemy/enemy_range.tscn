@@ -1,0 +1,77 @@
+[gd_scene load_steps=14 format=3 uid="uid://dseoqos3it6wi"]
+
+[ext_resource type="Script" path="res://game/character/enemy/enemy.gd" id="1_icidw"]
+[ext_resource type="Texture2D" uid="uid://d3j8goa0kg6s4" path="res://assets/kenney_scribble-dungeons/PNG/Double (128px)/Characters/red_character.png" id="2_phwyk"]
+[ext_resource type="PackedScene" uid="uid://gb3ojhqhegn7" path="res://game/character/weapon/weapon_range.tscn" id="3_38s8k"]
+[ext_resource type="Script" path="res://game/systems/statemachine/statemachine.gd" id="4_k4jsp"]
+[ext_resource type="Script" path="res://game/character/enemy/ai_states/alert.gd" id="6_ue5u6"]
+[ext_resource type="Script" path="res://game/character/enemy/ai_states/guard.gd" id="7_gy4e3"]
+[ext_resource type="Script" path="res://game/character/enemy/ai_states/notify.gd" id="8_fj4tw"]
+[ext_resource type="Script" path="res://game/character/enemy/ai_states/attack.gd" id="8_xejl0"]
+[ext_resource type="Script" path="res://game/systems/components/movement_component.gd" id="11_v7wox"]
+[ext_resource type="Script" path="res://game/systems/components/target_component.gd" id="12_4lpwe"]
+[ext_resource type="Script" path="res://game/systems/components/air_component.gd" id="12_uehlx"]
+[ext_resource type="Script" path="res://game/systems/components/listener_component.gd" id="13_0ivqs"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_8od80"]
+radius = 40.05
+
+[node name="EnemyRange" type="CharacterBody2D" node_paths=PackedStringArray("weapon") groups=["enemy"]]
+collision_mask = 7
+motion_mode = 1
+script = ExtResource("1_icidw")
+weapon = NodePath("WeaponRange")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_phwyk")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+
+[node name="WeaponRange" parent="." instance=ExtResource("3_38s8k")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_8od80")
+
+[node name="Brain" type="Node2D" parent="." node_paths=PackedStringArray("target_component", "movement_component", "listener_component", "start_state")]
+script = ExtResource("4_k4jsp")
+target_component = NodePath("../TargetComponent")
+movement_component = NodePath("../MovementComponent")
+listener_component = NodePath("../ListenerComponent")
+start_state = NodePath("Guard")
+
+[node name="Guard" type="Node2D" parent="Brain" node_paths=PackedStringArray("seen_target")]
+script = ExtResource("7_gy4e3")
+seen_target = NodePath("../Alert")
+view_direction = Vector2(1, 0)
+
+[node name="Alert" type="Node2D" parent="Brain" node_paths=PackedStringArray("after_alert_time")]
+script = ExtResource("6_ue5u6")
+after_alert_time = NodePath("../Notify")
+
+[node name="Notify" type="Node2D" parent="Brain" node_paths=PackedStringArray("next_state")]
+script = ExtResource("8_fj4tw")
+next_state = NodePath("../Attack")
+
+[node name="Attack" type="Node2D" parent="Brain" node_paths=PackedStringArray("after_attack", "character")]
+script = ExtResource("8_xejl0")
+after_attack = NodePath("../Guard")
+attack_range = 500.0
+character = NodePath("../..")
+
+[node name="MovementComponent" type="Node2D" parent="." node_paths=PackedStringArray("character", "agent")]
+script = ExtResource("11_v7wox")
+character = NodePath("..")
+agent = NodePath("../NavigationAgent2D")
+min_distance = 150
+
+[node name="TargetComponent" type="Node2D" parent="." node_paths=PackedStringArray("character")]
+script = ExtResource("12_4lpwe")
+target_group = "player"
+character = NodePath("..")
+
+[node name="ListenerComponent" type="Node2D" parent="." groups=["listener"]]
+script = ExtResource("13_0ivqs")
+
+[node name="AirComponent" type="Node2D" parent="." node_paths=PackedStringArray("character")]
+script = ExtResource("12_uehlx")
+character = NodePath("..")

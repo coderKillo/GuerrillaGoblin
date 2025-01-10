@@ -6,10 +6,12 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hdka2"]
 size = Vector2(32.5, 59)
 
-[node name="WeaponMelee" type="Area2D" node_paths=PackedStringArray("area")]
-collision_mask = 10
+[node name="WeaponMelee" type="Area2D" node_paths=PackedStringArray("area", "collision")]
+scale = Vector2(0.7, 0.7)
+collision_mask = 522
 script = ExtResource("1_xvth7")
 area = NodePath(".")
+collision = NodePath("CollisionShape2D")
 anticipation_angle = -75.0
 strike_angle = 75.0
 recover_time = 0.2
@@ -22,4 +24,5 @@ texture = ExtResource("2_iqg4t")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(73.75, -0.5)
 shape = SubResource("RectangleShape2D_hdka2")
+disabled = true
 debug_color = Color(0.870588, 0.294118, 0.486275, 0.419608)
