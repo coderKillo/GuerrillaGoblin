@@ -3,8 +3,6 @@ extends State
 @export var seen_target: State
 @export var hear_sound: State
 
-var walk_movement := Settings.walk_speed
-
 var _path: Array[Vector2]
 
 
@@ -16,7 +14,7 @@ func _ready():
 
 func enter():
 	movement_component.move_to(_path.front())
-	movement_component.speed = walk_movement
+	movement_component.speed = Settings.walk_speed
 
 
 func exit():

@@ -18,7 +18,7 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_8od80"]
 radius = 40.05
 
-[node name="EnemyMelee" type="CharacterBody2D" node_paths=PackedStringArray("weapon") groups=["enemy"]]
+[node name="EnemyMelee" type="CharacterBody2D" node_paths=PackedStringArray("weapon") groups=["enemy", "guard"]]
 collision_mask = 783
 motion_mode = 1
 script = ExtResource("1_gsc6h")
@@ -30,6 +30,10 @@ texture = ExtResource("2_iwqeu")
 [node name="WeaponMelee" parent="." instance=ExtResource("3_4ya0b")]
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+debug_enabled = true
+debug_use_custom = true
+debug_path_custom_color = Color(1, 0, 1, 1)
+debug_path_custom_point_size = 32.5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_8od80")
@@ -41,9 +45,10 @@ movement_component = NodePath("../MovementComponent")
 listener_component = NodePath("../ListenerComponent")
 start_state = NodePath("Patrol")
 
-[node name="Patrol" type="Node2D" parent="Brain" node_paths=PackedStringArray("seen_target")]
+[node name="Patrol" type="Node2D" parent="Brain" node_paths=PackedStringArray("seen_target", "hear_sound")]
 script = ExtResource("5_q6g40")
 seen_target = NodePath("../Alert")
+hear_sound = NodePath("../Investigate")
 
 [node name="Alert" type="Node2D" parent="Brain" node_paths=PackedStringArray("after_alert_time")]
 script = ExtResource("6_tiohj")

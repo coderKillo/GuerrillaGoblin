@@ -11,7 +11,7 @@ var speed := 1.0:
 		character.movement_speed = movement_speed * value
 
 
-func _process(_delta):
+func _physics_process(_delta):
 	if is_close_to_target():
 		return
 	character.direction = global_position.direction_to(agent.get_next_path_position())

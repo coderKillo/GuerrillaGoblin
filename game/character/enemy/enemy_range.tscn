@@ -14,7 +14,7 @@
 [ext_resource type="Script" path="res://game/systems/components/listener_component.gd" id="13_0ivqs"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_8od80"]
-radius = 40.05
+radius = 40.0
 
 [node name="EnemyRange" type="CharacterBody2D" node_paths=PackedStringArray("weapon") groups=["enemy"]]
 collision_mask = 7
@@ -51,6 +51,7 @@ after_alert_time = NodePath("../Notify")
 [node name="Notify" type="Node2D" parent="Brain" node_paths=PackedStringArray("next_state")]
 script = ExtResource("8_fj4tw")
 next_state = NodePath("../Attack")
+radius = 350.0
 
 [node name="Attack" type="Node2D" parent="Brain" node_paths=PackedStringArray("after_attack", "character")]
 script = ExtResource("8_xejl0")

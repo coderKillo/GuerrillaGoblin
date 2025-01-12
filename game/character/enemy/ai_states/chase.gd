@@ -3,12 +3,10 @@ extends State
 @export var lose_sight: State
 @export var close_to_target: State
 
-var run_speed := Settings.run_speed
-
 
 func enter():
 	movement_component.character.modulate = Color.RED
-	movement_component.speed = run_speed
+	movement_component.speed = Settings.run_speed
 
 
 func exit():

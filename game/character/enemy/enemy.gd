@@ -15,11 +15,12 @@ func _physics_process(_delta):
 		weapon.attack()
 		attack = false
 
-	weapon.look_at(global_position + direction)
+	if weapon:
+		weapon.look_at(global_position + direction)
 
 	if air_component.is_in_air():
 		pass
-	elif weapon.is_attacking():
+	elif weapon and weapon.is_attacking():
 		velocity = Vector2.ZERO
 	elif direction:
 		velocity = direction * movement_speed

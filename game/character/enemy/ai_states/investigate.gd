@@ -3,12 +3,9 @@ extends State
 @export var arrive_at_position: State
 @export var seen_target: State
 
-var walk_speed := Settings.walk_speed
-var run_speed := Settings.run_speed
-
 
 func enter():
-	movement_component.speed = walk_speed
+	movement_component.speed = Settings.walk_speed
 	movement_component.move_to(target_component.last_target_position)
 
 

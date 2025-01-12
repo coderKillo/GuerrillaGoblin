@@ -33,7 +33,7 @@ func _destroy():
 	var explosion = ExplosionScene.instantiate()
 	explosion.global_position = global_position
 
-	get_parent().add_child(explosion)
+	get_parent().call_deferred("add_child", explosion)
 
 	queue_free()
 
