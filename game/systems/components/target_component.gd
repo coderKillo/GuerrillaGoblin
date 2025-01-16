@@ -3,6 +3,7 @@ extends Node2D
 
 @export var target_group: String = ""
 @export var view_distance: float = 500.0
+@export var agent: CharacterBody2D
 
 var target: Node2D
 var target_position: Vector2
@@ -16,7 +17,9 @@ func is_target_seen_in_movement_direction(movement_component: MovementComponent)
 	)
 
 
-func is_target_seen(view_direction: Vector2, collision_mask: int, exclude: Array = []) -> bool:
+func is_target_seen(
+	view_direction: Vector2, _collision_mask: int = 0, _exclude: Array = []
+) -> bool:
 	var closest_target: Node2D
 
 	for entity in get_tree().get_nodes_in_group(target_group):
@@ -27,7 +30,7 @@ func is_target_seen(view_direction: Vector2, collision_mask: int, exclude: Array
 		var start = global_position
 
 		var query = PhysicsRayQueryParameters2D.create(
-			start, start + direction * view_distance, collision_mask, exclude
+			start, start + direction * view_distance, agent.collision_mask, [agent]
 		)
 
 		var result = get_world_2d().direct_space_state.intersect_ray(query)

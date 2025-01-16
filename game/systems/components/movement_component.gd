@@ -27,5 +27,10 @@ func move_to_target():
 	direction = global_position.direction_to(agent.get_next_path_position())
 
 
+func move_to(pos: Vector2):
+	agent.target_position = pos
+	direction = global_position.direction_to(agent.get_next_path_position())
+
+
 func is_close_to_target() -> bool:
 	return global_position.distance_to(agent.target_position) < min_distance

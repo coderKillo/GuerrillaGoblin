@@ -10,6 +10,14 @@ enum PlayerAction { IDLE, WALK, ATTACK }
 @export var speed := 1.0
 @export var attack := false
 
+@onready var target_component: TargetComponent = $TargetComponent
+@onready var movement_component: MovementComponent = $MovementComponent
+@onready var listener_component: ListenerComponent = $ListenerComponent
+@onready var path_component: PathComponent = $PathComponent
+
+@onready var status_label: Label = $StatusLabel
+var status := ""
+
 var _facing: int = Direction.RIGHT
 var _action: PlayerAction = PlayerAction.IDLE
 
@@ -28,6 +36,7 @@ func _process(_delta):
 
 	_process_player_state()
 	_set_animation()
+	_update_status_label()
 
 
 func _process_player_state():
@@ -78,3 +87,16 @@ func _attack():
 	await get_tree().create_timer(attack_duration).timeout
 	_action = PlayerAction.IDLE
 	attack = false
+
+
+func _update_status_label():
+	if status == "!":
+		status_label.show()
+		status_label.text = "!"
+		status_label.modulate = Color.RED
+	elif status == "?":
+		status_label.show()
+		status_label.text = "?"
+		status_label.modulate = Color.YELLOW
+	else:
+		status_label.hide()

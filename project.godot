@@ -12,7 +12,7 @@ config_version=5
 
 config/name="Guerrilla Goblin"
 run/main_scene="res://game/level/test_level.tscn"
-config/features=PackedStringArray("4.1", "Forward Plus")
+config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://icon.svg"
 
 [autoload]
@@ -90,6 +90,11 @@ spawn_sound={
 "events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":0,"position":Vector2(0, 0),"global_position":Vector2(0, 0),"factor":1.0,"button_index":2,"canceled":false,"pressed":false,"double_click":false,"script":null)
 ]
 }
+
+[limbo_ai]
+
+behavior_tree/behavior_tree_default_dir="res://game/enemy/ai/tasks"
+behavior_tree/user_task_dir_1="res://game/enemy/ai/tasks"
 
 [physics]
 

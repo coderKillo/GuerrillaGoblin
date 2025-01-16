@@ -1,17 +1,12 @@
-[gd_scene load_steps=26 format=3 uid="uid://dbvjtipbgggot"]
+[gd_scene load_steps=22 format=3 uid="uid://dbvjtipbgggot"]
 
 [ext_resource type="Script" path="res://game/enemy/enemy.gd" id="1_yaodn"]
 [ext_resource type="Texture2D" uid="uid://brm0gft82hn6y" path="res://assets/tiny_swords/Factions/Knights/Troops/Warrior/Blue/Warrior_Blue.png" id="2_dxlco"]
 [ext_resource type="Script" path="res://game/player/weapon.gd" id="4_al1lm"]
-[ext_resource type="Script" path="res://game/systems/statemachine/statemachine.gd" id="4_ni1uj"]
-[ext_resource type="Script" path="res://game/enemy/ai_states/patrol.gd" id="5_ow47r"]
 [ext_resource type="Script" path="res://game/systems/components/target_component.gd" id="5_qq25t"]
-[ext_resource type="Script" path="res://game/enemy/ai_states/alert.gd" id="6_2gl4q"]
 [ext_resource type="Script" path="res://game/systems/components/movement_component.gd" id="6_88iwr"]
-[ext_resource type="Script" path="res://game/enemy/ai_states/investigate.gd" id="7_h1mdt"]
-[ext_resource type="Script" path="res://game/enemy/ai_states/look_around.gd" id="8_4vefk"]
-[ext_resource type="Script" path="res://game/enemy/ai_states/chase.gd" id="9_6610f"]
-[ext_resource type="Script" path="res://game/enemy/ai_states/attack.gd" id="10_568wv"]
+[ext_resource type="Script" path="res://game/systems/components/path_component.gd" id="7_das3m"]
+[ext_resource type="BehaviorTree" uid="uid://bsn6q0e4v0m72" path="res://game/enemy/ai/trees/enemy_meele_tree.tres" id="7_praru"]
 [ext_resource type="Script" path="res://game/systems/components/listener_component.gd" id="12_xl3yl"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_775cu"]
@@ -413,6 +408,8 @@ _data = {
 "walk_right": SubResource("Animation_lj6hp")
 }
 
+[sub_resource type="BlackboardPlan" id="BlackboardPlan_wkshd"]
+
 [node name="enemy" type="CharacterBody2D" groups=["enemy"]]
 collision_layer = 2
 collision_mask = 7
@@ -444,52 +441,34 @@ libraries = {
 "": SubResource("AnimationLibrary_s0pas")
 }
 
-[node name="Brain" type="Node2D" parent="." node_paths=PackedStringArray("target_component", "movement_component", "listener_component", "start_state") groups=["listener"]]
-script = ExtResource("4_ni1uj")
-target_component = NodePath("../target_component")
-movement_component = NodePath("../movement_component")
-listener_component = NodePath("../listener_component")
-start_state = NodePath("Patrol")
-
-[node name="Patrol" type="Node2D" parent="Brain" node_paths=PackedStringArray("seen_target")]
-script = ExtResource("5_ow47r")
-seen_target = NodePath("../Alert")
-
-[node name="Alert" type="Node2D" parent="Brain" node_paths=PackedStringArray("after_alert_time")]
-script = ExtResource("6_2gl4q")
-after_alert_time = NodePath("../Investigate")
-
-[node name="Investigate" type="Node2D" parent="Brain" node_paths=PackedStringArray("arrive_at_position", "seen_target")]
-script = ExtResource("7_h1mdt")
-arrive_at_position = NodePath("../LookAround")
-seen_target = NodePath("../Chase")
-
-[node name="LookAround" type="Node2D" parent="Brain" node_paths=PackedStringArray("after_look_around", "seen_target")]
-script = ExtResource("8_4vefk")
-after_look_around = NodePath("../Patrol")
-seen_target = NodePath("../Chase")
-
-[node name="Chase" type="Node2D" parent="Brain" node_paths=PackedStringArray("lose_sight", "close_to_target")]
-script = ExtResource("9_6610f")
-lose_sight = NodePath("../Investigate")
-close_to_target = NodePath("../Attack")
-
-[node name="Attack" type="Node2D" parent="Brain" node_paths=PackedStringArray("after_attack")]
-script = ExtResource("10_568wv")
-after_attack = NodePath("../Chase")
-
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 path_postprocessing = 1
 
-[node name="target_component" type="Node2D" parent="."]
+[node name="TargetComponent" type="Node2D" parent="." node_paths=PackedStringArray("agent")]
 script = ExtResource("5_qq25t")
 target_group = "player"
+agent = NodePath("..")
 
-[node name="movement_component" type="Node2D" parent="." node_paths=PackedStringArray("character", "agent")]
+[node name="MovementComponent" type="Node2D" parent="." node_paths=PackedStringArray("character", "agent")]
 script = ExtResource("6_88iwr")
 character = NodePath("..")
 agent = NodePath("../NavigationAgent2D")
 min_distance = 60
 
-[node name="listener_component" type="Node2D" parent="." groups=["listener"]]
+[node name="ListenerComponent" type="Node2D" parent="." groups=["listener"]]
 script = ExtResource("12_xl3yl")
+
+[node name="PathComponent" type="Node2D" parent="."]
+script = ExtResource("7_das3m")
+
+[node name="BTPlayer" type="BTPlayer" parent="."]
+behavior_tree = ExtResource("7_praru")
+blackboard_plan = SubResource("BlackboardPlan_wkshd")
+
+[node name="StatusLabel" type="Label" parent="."]
+offset_left = -5.0
+offset_top = -66.0
+offset_right = 10.0
+offset_bottom = -11.0
+theme_override_font_sizes/font_size = 40
+text = "!"
