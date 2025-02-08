@@ -1,13 +1,9 @@
-[gd_scene load_steps=14 format=3 uid="uid://drkbce8xd3hx2"]
+[gd_scene load_steps=11 format=3 uid="uid://drkbce8xd3hx2"]
 
 [ext_resource type="Script" path="res://game/character/enemy/enemy.gd" id="1_411ua"]
 [ext_resource type="Texture2D" uid="uid://b6s72eixpldu4" path="res://assets/kenney_scribble-dungeons/PNG/Double (128px)/Characters/purple_character.png" id="2_lxn6x"]
-[ext_resource type="Script" path="res://game/systems/statemachine/statemachine.gd" id="4_qo14p"]
-[ext_resource type="Script" path="res://game/character/enemy/ai_states/patrol.gd" id="5_upk1t"]
-[ext_resource type="Script" path="res://game/character/enemy/ai_states/notify.gd" id="6_o3vbu"]
-[ext_resource type="Script" path="res://game/character/enemy/ai_states/alert.gd" id="6_vfgm5"]
-[ext_resource type="Script" path="res://game/character/enemy/ai_states/move_to_guard.gd" id="7_j08re"]
-[ext_resource type="Script" path="res://game/character/enemy/ai_states/panic.gd" id="8_fm7fc"]
+[ext_resource type="Script" path="res://game/systems/components/path_component.gd" id="7_rqj1v"]
+[ext_resource type="BehaviorTree" uid="uid://bqdatwroqrpnw" path="res://game/character/enemy/ai/trees/enemy_worker_tree.tres" id="8_mhd8g"]
 [ext_resource type="Script" path="res://game/systems/components/movement_component.gd" id="11_6rj3x"]
 [ext_resource type="Script" path="res://game/systems/components/target_component.gd" id="12_kdl4j"]
 [ext_resource type="Script" path="res://game/systems/components/listener_component.gd" id="13_q1glt"]
@@ -16,7 +12,10 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_8od80"]
 radius = 40.05
 
+[sub_resource type="BlackboardPlan" id="BlackboardPlan_6pb4s"]
+
 [node name="EnemyWorker" type="CharacterBody2D" groups=["enemy"]]
+collision_layer = 2
 collision_mask = 783
 motion_mode = 1
 script = ExtResource("1_411ua")
@@ -25,43 +24,17 @@ script = ExtResource("1_411ua")
 texture = ExtResource("2_lxn6x")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+path_postprocessing = 1
+avoidance_enabled = true
+max_speed = 1000.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_8od80")
-
-[node name="Brain" type="Node2D" parent="." node_paths=PackedStringArray("target_component", "movement_component", "listener_component", "start_state")]
-script = ExtResource("4_qo14p")
-target_component = NodePath("../TargetComponent")
-movement_component = NodePath("../MovementComponent")
-listener_component = NodePath("../ListenerComponent")
-start_state = NodePath("Patrol")
-
-[node name="Patrol" type="Node2D" parent="Brain" node_paths=PackedStringArray("seen_target", "hear_sound")]
-script = ExtResource("5_upk1t")
-seen_target = NodePath("../Panic")
-hear_sound = NodePath("../MoveToGuard")
-
-[node name="Alert" type="Node2D" parent="Brain" node_paths=PackedStringArray("after_alert_time")]
-script = ExtResource("6_vfgm5")
-after_alert_time = NodePath("../Notify")
-
-[node name="Notify" type="Node2D" parent="Brain" node_paths=PackedStringArray("next_state")]
-script = ExtResource("6_o3vbu")
-next_state = NodePath("../Panic")
-radius = 100.0
-
-[node name="MoveToGuard" type="Node2D" parent="Brain" node_paths=PackedStringArray("arrive_at_position")]
-script = ExtResource("7_j08re")
-arrive_at_position = NodePath("../Notify")
-
-[node name="Panic" type="Node2D" parent="Brain"]
-script = ExtResource("8_fm7fc")
 
 [node name="MovementComponent" type="Node2D" parent="." node_paths=PackedStringArray("character", "agent")]
 script = ExtResource("11_6rj3x")
 character = NodePath("..")
 agent = NodePath("../NavigationAgent2D")
-min_distance = 150
 
 [node name="TargetComponent" type="Node2D" parent="." node_paths=PackedStringArray("character")]
 script = ExtResource("12_kdl4j")
@@ -74,3 +47,20 @@ script = ExtResource("13_q1glt")
 [node name="AirComponent" type="Node2D" parent="." node_paths=PackedStringArray("character")]
 script = ExtResource("14_xe066")
 character = NodePath("..")
+
+[node name="PathComponent" type="Node2D" parent="."]
+script = ExtResource("7_rqj1v")
+
+[node name="StatusLabel" type="Label" parent="."]
+offset_left = -11.0
+offset_top = -79.0
+offset_right = 29.0
+offset_bottom = -10.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 50
+text = "?"
+
+[node name="BTPlayer" type="BTPlayer" parent="."]
+behavior_tree = ExtResource("8_mhd8g")
+blackboard_plan = SubResource("BlackboardPlan_6pb4s")

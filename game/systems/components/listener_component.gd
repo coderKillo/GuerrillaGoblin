@@ -2,7 +2,7 @@ class_name ListenerComponent
 extends Node2D
 
 @export var sound_radius := 100.0
-@export var reset_sound_time := 1.0
+@export var reset_sound_time := 0.5
 
 var sound_position := Vector2.ZERO
 var sound_string := ""

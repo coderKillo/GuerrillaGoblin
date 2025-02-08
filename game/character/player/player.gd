@@ -21,7 +21,7 @@ func _physics_process(delta):
 		weapon.look_at(get_global_mouse_position())
 
 	if air_component.is_in_air():
-		pass
+		velocity = air_component.air_velocity
 	elif direction:
 		velocity = direction * speed
 	else:

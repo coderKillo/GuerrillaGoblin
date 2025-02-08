@@ -1,15 +1,10 @@
-[gd_scene load_steps=16 format=3 uid="uid://4uy8xn6u13a6"]
+[gd_scene load_steps=12 format=3 uid="uid://4uy8xn6u13a6"]
 
 [ext_resource type="Script" path="res://game/character/enemy/enemy.gd" id="1_gsc6h"]
 [ext_resource type="Texture2D" uid="uid://d3j8goa0kg6s4" path="res://assets/kenney_scribble-dungeons/PNG/Double (128px)/Characters/red_character.png" id="2_iwqeu"]
 [ext_resource type="PackedScene" uid="uid://fl6g6pohavju" path="res://game/character/weapon/weapon_melee_sword.tscn" id="3_4ya0b"]
-[ext_resource type="Script" path="res://game/systems/statemachine/statemachine.gd" id="4_i5g6g"]
-[ext_resource type="Script" path="res://game/character/enemy/ai_states/patrol.gd" id="5_q6g40"]
-[ext_resource type="Script" path="res://game/character/enemy/ai_states/alert.gd" id="6_tiohj"]
-[ext_resource type="Script" path="res://game/character/enemy/ai_states/investigate.gd" id="7_acs5c"]
-[ext_resource type="Script" path="res://game/character/enemy/ai_states/attack.gd" id="8_tdy3f"]
-[ext_resource type="Script" path="res://game/character/enemy/ai_states/look_around.gd" id="9_uvqyi"]
-[ext_resource type="Script" path="res://game/character/enemy/ai_states/chase.gd" id="10_52jrv"]
+[ext_resource type="Script" path="res://game/systems/components/path_component.gd" id="8_2bxre"]
+[ext_resource type="BehaviorTree" uid="uid://bsn6q0e4v0m72" path="res://game/character/enemy/ai/trees/enemy_meele_tree.tres" id="8_vv4cc"]
 [ext_resource type="Script" path="res://game/systems/components/movement_component.gd" id="11_aqwy5"]
 [ext_resource type="Script" path="res://game/systems/components/target_component.gd" id="12_arkp5"]
 [ext_resource type="Script" path="res://game/systems/components/listener_component.gd" id="13_0bkdu"]
@@ -18,7 +13,10 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_8od80"]
 radius = 40.05
 
+[sub_resource type="BlackboardPlan" id="BlackboardPlan_o2ep5"]
+
 [node name="EnemyMelee" type="CharacterBody2D" node_paths=PackedStringArray("weapon") groups=["enemy", "guard"]]
+collision_layer = 2
 collision_mask = 783
 motion_mode = 1
 script = ExtResource("1_gsc6h")
@@ -30,56 +28,23 @@ texture = ExtResource("2_iwqeu")
 [node name="WeaponMelee" parent="." instance=ExtResource("3_4ya0b")]
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
-debug_enabled = true
-debug_use_custom = true
+path_desired_distance = 40.0
+target_desired_distance = 40.0
+path_postprocessing = 1
+avoidance_enabled = true
+radius = 30.0
+max_speed = 1000.0
+avoidance_mask = 2
 debug_path_custom_color = Color(1, 0, 1, 1)
-debug_path_custom_point_size = 32.5
+debug_path_custom_point_size = 20.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_8od80")
-
-[node name="Brain" type="Node2D" parent="." node_paths=PackedStringArray("target_component", "movement_component", "listener_component", "start_state")]
-script = ExtResource("4_i5g6g")
-target_component = NodePath("../TargetComponent")
-movement_component = NodePath("../MovementComponent")
-listener_component = NodePath("../ListenerComponent")
-start_state = NodePath("Patrol")
-
-[node name="Patrol" type="Node2D" parent="Brain" node_paths=PackedStringArray("seen_target", "hear_sound")]
-script = ExtResource("5_q6g40")
-seen_target = NodePath("../Alert")
-hear_sound = NodePath("../Investigate")
-
-[node name="Alert" type="Node2D" parent="Brain" node_paths=PackedStringArray("after_alert_time")]
-script = ExtResource("6_tiohj")
-after_alert_time = NodePath("../Investigate")
-
-[node name="Investigate" type="Node2D" parent="Brain" node_paths=PackedStringArray("arrive_at_position", "seen_target")]
-script = ExtResource("7_acs5c")
-arrive_at_position = NodePath("../LookAround")
-seen_target = NodePath("../Chase")
-
-[node name="Attack" type="Node2D" parent="Brain" node_paths=PackedStringArray("after_attack", "character")]
-script = ExtResource("8_tdy3f")
-after_attack = NodePath("../Chase")
-attack_range = 150.0
-character = NodePath("../..")
-
-[node name="LookAround" type="Node2D" parent="Brain" node_paths=PackedStringArray("after_look_around", "seen_target")]
-script = ExtResource("9_uvqyi")
-after_look_around = NodePath("../Patrol")
-seen_target = NodePath("../Chase")
-
-[node name="Chase" type="Node2D" parent="Brain" node_paths=PackedStringArray("lose_sight", "close_to_target")]
-script = ExtResource("10_52jrv")
-lose_sight = NodePath("../Investigate")
-close_to_target = NodePath("../Attack")
 
 [node name="MovementComponent" type="Node2D" parent="." node_paths=PackedStringArray("character", "agent")]
 script = ExtResource("11_aqwy5")
 character = NodePath("..")
 agent = NodePath("../NavigationAgent2D")
-min_distance = 150
 
 [node name="TargetComponent" type="Node2D" parent="." node_paths=PackedStringArray("character")]
 script = ExtResource("12_arkp5")
@@ -92,3 +57,20 @@ script = ExtResource("13_0bkdu")
 [node name="AirComponent" type="Node2D" parent="." node_paths=PackedStringArray("character")]
 script = ExtResource("14_sa0r1")
 character = NodePath("..")
+
+[node name="PathComponent" type="Node2D" parent="."]
+script = ExtResource("8_2bxre")
+
+[node name="BTPlayer" type="BTPlayer" parent="."]
+behavior_tree = ExtResource("8_vv4cc")
+blackboard_plan = SubResource("BlackboardPlan_o2ep5")
+
+[node name="StatusLabel" type="Label" parent="."]
+offset_left = -11.0
+offset_top = -79.0
+offset_right = 29.0
+offset_bottom = -10.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 50
+text = "?"

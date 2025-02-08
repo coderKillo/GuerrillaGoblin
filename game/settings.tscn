@@ -4,3 +4,5 @@
 
 [node name="Settings" type="Node"]
 script = ExtResource("1_pjqx1")
+base_movement_speed = 300.0
+barrel_explosion_force = 800.0

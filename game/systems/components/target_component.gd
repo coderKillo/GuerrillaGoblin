@@ -9,39 +9,47 @@ var target: Node2D
 var last_target_position: Vector2
 
 
-func is_target_seen(view_direction: Vector2) -> bool:
-	var closest_target: Node2D
-
-	for entity in get_tree().get_nodes_in_group(target_group):
-		var direction = global_position.direction_to(entity.global_position)
-		if view_direction.normalized().dot(direction) <= 0.5:
+func is_target_seen(view_direction: Vector2, view_angle: float) -> bool:
+	for entity in get_targets_by_distance(target_group):
+		if not _is_in_view_direction(entity.global_position, view_direction, view_angle):
 			continue
 
-		var start = global_position
-
-		var query = PhysicsRayQueryParameters2D.create(
-			start, start + direction * view_distance, character.collision_mask, [character]
-		)
-
-		var result = get_world_2d().direct_space_state.intersect_ray(query)
-		if not result or result.collider != entity:
+		if _is_blocked_by_obstical(entity):
 			continue
 
-		var distance_to_target = global_position.distance_to(entity.global_position)
-		var distance_to_closest_target = INF
-
-		if closest_target:
-			distance_to_closest_target = global_position.distance_to(closest_target.global_position)
-
-		if distance_to_target > distance_to_closest_target:
-			continue
-
-		closest_target = entity
-
-	if closest_target:
-		target = closest_target
-		last_target_position = closest_target.global_position
+		target = entity
+		last_target_position = entity.global_position
 		return true
-	else:
-		target = null
-		return false
+
+	target = null
+	return false
+
+
+func get_targets_by_distance(group: String) -> Array[Node]:
+	var targets = get_tree().get_nodes_in_group(group)
+	targets.sort_custom(_distance_sorter)
+	return targets
+
+
+func _is_in_view_direction(
+	entity_position: Vector2, view_direction: Vector2, view_angle: float
+) -> bool:
+	var direction = global_position.direction_to(entity_position)
+	return abs(rad_to_deg(view_direction.angle_to(direction))) <= view_angle
+
+
+func _is_blocked_by_obstical(entity: Node2D) -> bool:
+	var direction = global_position.direction_to(entity.global_position)
+	var start = global_position
+	var query = PhysicsRayQueryParameters2D.create(
+		start, start + direction * view_distance, character.collision_mask, [character]
+	)
+
+	var result = get_world_2d().direct_space_state.intersect_ray(query)
+	return not result or result.collider != entity
+
+
+func _distance_sorter(a, b) -> bool:
+	var distance_a = a.distance_squared_to(global_position)
+	var distance_b = b.distance_squared_to(global_position)
+	return distance_a <= distance_b

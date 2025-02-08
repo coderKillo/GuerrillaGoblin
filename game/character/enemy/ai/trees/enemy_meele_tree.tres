@@ -1,0 +1,281 @@
+[gd_resource type="BehaviorTree" load_steps=69 format=3 uid="uid://bsn6q0e4v0m72"]
+
+[ext_resource type="Script" path="res://game/character/enemy/ai/tasks/move_to_position.gd" id="1_7g1bd"]
+[ext_resource type="Script" path="res://game/character/enemy/ai/tasks/is_close_to_position.gd" id="1_iv2la"]
+[ext_resource type="Script" path="res://game/character/enemy/ai/tasks/see_target.gd" id="1_ru0o5"]
+[ext_resource type="Script" path="res://game/character/enemy/ai/tasks/has_heard_sound.gd" id="1_wk0oa"]
+[ext_resource type="Script" path="res://game/character/enemy/ai/tasks/set_position_from_sound.gd" id="2_114oj"]
+[ext_resource type="Script" path="res://game/character/enemy/ai/tasks/next_path_point.gd" id="2_ojo13"]
+[ext_resource type="Script" path="res://game/character/enemy/ai/tasks/set_target_position.gd" id="2_wflvc"]
+[ext_resource type="Script" path="res://game/character/enemy/ai/tasks/look_at.gd" id="4_pyvjv"]
+[ext_resource type="Script" path="res://game/character/enemy/ai/tasks/stop_movement.gd" id="6_k5p8m"]
+
+[sub_resource type="BlackboardPlan" id="BlackboardPlan_u6w21"]
+var/target_position/name = &"target_position"
+var/target_position/type = 5
+var/target_position/value = Vector2(0, 0)
+var/target_position/hint = 0
+var/target_position/hint_string = ""
+var/path_position/name = &"path_position"
+var/path_position/type = 5
+var/path_position/value = Vector2(0, 0)
+var/path_position/hint = 0
+var/path_position/hint_string = ""
+var/has_seen_target/name = &"has_seen_target"
+var/has_seen_target/type = 1
+var/has_seen_target/value = false
+var/has_seen_target/hint = 0
+var/has_seen_target/hint_string = ""
+
+[sub_resource type="BTCondition" id="BTCondition_ea1yd"]
+script = ExtResource("1_wk0oa")
+
+[sub_resource type="BTAction" id="BTAction_wts2w"]
+script = ExtResource("2_114oj")
+position = &"target_position"
+
+[sub_resource type="BTSequence" id="BTSequence_wtoin"]
+custom_name = "heard something"
+children = [SubResource("BTCondition_ea1yd"), SubResource("BTAction_wts2w")]
+
+[sub_resource type="BTCondition" id="BTCondition_hpd6d"]
+script = ExtResource("1_ru0o5")
+target_group = "player"
+view_angle = 60.0
+
+[sub_resource type="BBVariant" id="BBVariant_103x3"]
+type = 4
+saved_value = "!"
+resource_name = "!"
+
+[sub_resource type="BTSetAgentProperty" id="BTSetAgentProperty_4i228"]
+property = &"status"
+value = SubResource("BBVariant_103x3")
+
+[sub_resource type="BTAction" id="BTAction_epp86"]
+script = ExtResource("2_wflvc")
+position = &"target_position"
+
+[sub_resource type="BBVariant" id="BBVariant_0qjoi"]
+type = 1
+saved_value = false
+resource_name = "false"
+
+[sub_resource type="BTCheckVar" id="BTCheckVar_2unl7"]
+variable = &"has_seen_target"
+value = SubResource("BBVariant_0qjoi")
+
+[sub_resource type="BTAction" id="BTAction_gyu43"]
+script = ExtResource("4_pyvjv")
+position = &"target_position"
+
+[sub_resource type="BTAction" id="BTAction_ugpkq"]
+script = ExtResource("6_k5p8m")
+
+[sub_resource type="BBVariant" id="BBVariant_p8e8s"]
+type = 4
+saved_value = "?"
+resource_name = "?"
+
+[sub_resource type="BTSetAgentProperty" id="BTSetAgentProperty_tesiu"]
+property = &"status"
+value = SubResource("BBVariant_p8e8s")
+
+[sub_resource type="BBVariant" id="BBVariant_e52tq"]
+type = 1
+saved_value = true
+resource_name = "true"
+
+[sub_resource type="BTSetVar" id="BTSetVar_2sj1c"]
+variable = &"has_seen_target"
+value = SubResource("BBVariant_e52tq")
+
+[sub_resource type="BTDelay" id="BTDelay_k6rre"]
+children = [SubResource("BTSetVar_2sj1c")]
+
+[sub_resource type="BTDynamicSequence" id="BTDynamicSequence_y7wkx"]
+custom_name = "look at player if never seen"
+children = [SubResource("BTCheckVar_2unl7"), SubResource("BTAction_gyu43"), SubResource("BTAction_ugpkq"), SubResource("BTSetAgentProperty_tesiu"), SubResource("BTDelay_k6rre")]
+
+[sub_resource type="BTCondition" id="BTCondition_x42ft"]
+script = ExtResource("1_iv2la")
+position = &"target_position"
+tolerance = 100.0
+
+[sub_resource type="BBVariant" id="BBVariant_x78sy"]
+type = 1
+saved_value = true
+resource_name = "true"
+
+[sub_resource type="BTSetAgentProperty" id="BTSetAgentProperty_1twas"]
+property = &"attack"
+value = SubResource("BBVariant_x78sy")
+custom_name = "SetAttack"
+
+[sub_resource type="BTSequence" id="BTSequence_8qtaw"]
+custom_name = "attack if close"
+children = [SubResource("BTCondition_x42ft"), SubResource("BTSetAgentProperty_1twas")]
+
+[sub_resource type="BTAction" id="BTAction_yuofk"]
+script = ExtResource("4_pyvjv")
+position = &"target_position"
+
+[sub_resource type="BTAction" id="BTAction_fde2y"]
+script = ExtResource("1_7g1bd")
+position = &"target_position"
+speed = 1.3
+
+[sub_resource type="BTSequence" id="BTSequence_ts08t"]
+custom_name = "else chase"
+children = [SubResource("BTAction_yuofk"), SubResource("BTAction_fde2y")]
+
+[sub_resource type="BTSelector" id="BTSelector_dlt5o"]
+custom_name = "chose action"
+children = [SubResource("BTDynamicSequence_y7wkx"), SubResource("BTSequence_8qtaw"), SubResource("BTSequence_ts08t")]
+
+[sub_resource type="BTSequence" id="BTSequence_22bt8"]
+custom_name = "target seen"
+children = [SubResource("BTCondition_hpd6d"), SubResource("BTSetAgentProperty_4i228"), SubResource("BTAction_epp86"), SubResource("BTSelector_dlt5o")]
+
+[sub_resource type="BBVariant" id="BBVariant_ueao4"]
+type = 5
+saved_value = Vector2(0, 0)
+resource_name = "(0, 0)"
+
+[sub_resource type="BTCheckVar" id="BTCheckVar_npl2y"]
+variable = &"target_position"
+check_type = 5
+value = SubResource("BBVariant_ueao4")
+
+[sub_resource type="BBVariant" id="BBVariant_b4u74"]
+type = 4
+saved_value = "?"
+resource_name = "?"
+
+[sub_resource type="BTSetAgentProperty" id="BTSetAgentProperty_l28g4"]
+property = &"status"
+value = SubResource("BBVariant_b4u74")
+
+[sub_resource type="BTCondition" id="BTCondition_sp1tv"]
+script = ExtResource("1_iv2la")
+position = &"target_position"
+tolerance = 50.0
+
+[sub_resource type="BTAction" id="BTAction_wmajt"]
+script = ExtResource("6_k5p8m")
+
+[sub_resource type="BBVariant" id="BBVariant_g3vj3"]
+type = 3
+saved_value = -1.0
+resource_name = "-1"
+
+[sub_resource type="BTSetAgentProperty" id="BTSetAgentProperty_iv8mr"]
+property = &"direction"
+value = SubResource("BBVariant_g3vj3")
+operation = 3
+
+[sub_resource type="BTDelay" id="BTDelay_guj4w"]
+seconds = 0.5
+children = [SubResource("BTSetAgentProperty_iv8mr")]
+
+[sub_resource type="BTRepeat" id="BTRepeat_526nb"]
+times = 3
+custom_name = "LookAround"
+children = [SubResource("BTDelay_guj4w")]
+
+[sub_resource type="BBVariant" id="BBVariant_o44be"]
+type = 5
+saved_value = Vector2(0, 0)
+resource_name = "(0, 0)"
+
+[sub_resource type="BTSetVar" id="BTSetVar_l86x7"]
+variable = &"target_position"
+value = SubResource("BBVariant_o44be")
+
+[sub_resource type="BTDelay" id="BTDelay_sgrm0"]
+seconds = 3.0
+children = [SubResource("BTSetVar_l86x7")]
+
+[sub_resource type="BTSequence" id="BTSequence_0aadw"]
+custom_name = "is close to target position"
+children = [SubResource("BTCondition_sp1tv"), SubResource("BTAction_wmajt"), SubResource("BTRepeat_526nb"), SubResource("BTDelay_sgrm0")]
+
+[sub_resource type="BTAction" id="BTAction_5kvsp"]
+script = ExtResource("4_pyvjv")
+position = &"target_position"
+
+[sub_resource type="BTAction" id="BTAction_kdxif"]
+script = ExtResource("1_7g1bd")
+position = &"target_position"
+speed = 1.0
+
+[sub_resource type="BTSequence" id="BTSequence_bhe3m"]
+custom_name = "else move to position"
+children = [SubResource("BTAction_5kvsp"), SubResource("BTAction_kdxif")]
+
+[sub_resource type="BTSelector" id="BTSelector_bfkht"]
+custom_name = "move to target position"
+children = [SubResource("BTSequence_0aadw"), SubResource("BTSequence_bhe3m")]
+
+[sub_resource type="BTSequence" id="BTSequence_8r747"]
+custom_name = "has target position"
+children = [SubResource("BTCheckVar_npl2y"), SubResource("BTSetAgentProperty_l28g4"), SubResource("BTSelector_bfkht")]
+
+[sub_resource type="BTCondition" id="BTCondition_3eytx"]
+script = ExtResource("1_iv2la")
+position = &"path_position"
+tolerance = 50.0
+
+[sub_resource type="BBVariant" id="BBVariant_unnup"]
+type = 5
+saved_value = Vector2(0, 0)
+resource_name = "<null>"
+
+[sub_resource type="BTCheckVar" id="BTCheckVar_c4345"]
+variable = &"path_position"
+value = SubResource("BBVariant_unnup")
+
+[sub_resource type="BTSelector" id="BTSelector_6qj3o"]
+custom_name = "OR"
+children = [SubResource("BTCondition_3eytx"), SubResource("BTCheckVar_c4345")]
+
+[sub_resource type="BTInvert" id="BTInvert_qi8nt"]
+custom_name = "not close or no path position"
+children = [SubResource("BTSelector_6qj3o")]
+
+[sub_resource type="BTAction" id="BTAction_f25ue"]
+script = ExtResource("2_ojo13")
+position = &"path_position"
+
+[sub_resource type="BTSelector" id="BTSelector_h1o8j"]
+custom_name = "should set new path position"
+children = [SubResource("BTInvert_qi8nt"), SubResource("BTAction_f25ue")]
+
+[sub_resource type="BTAction" id="BTAction_prg64"]
+script = ExtResource("4_pyvjv")
+position = &"path_position"
+
+[sub_resource type="BTAction" id="BTAction_syrm8"]
+script = ExtResource("1_7g1bd")
+position = &"path_position"
+speed = 0.5
+
+[sub_resource type="BTSequence" id="BTSequence_3a4v0"]
+custom_name = "else guard"
+children = [SubResource("BTSelector_h1o8j"), SubResource("BTAction_prg64"), SubResource("BTAction_syrm8")]
+
+[sub_resource type="BTSelector" id="BTSelector_3nydh"]
+custom_name = "target not seen"
+children = [SubResource("BTSequence_8r747"), SubResource("BTSequence_3a4v0")]
+
+[sub_resource type="BTDynamicSelector" id="BTDynamicSelector_3hxb0"]
+custom_name = "Main"
+children = [SubResource("BTSequence_wtoin"), SubResource("BTSequence_22bt8"), SubResource("BTSelector_3nydh")]
+
+[sub_resource type="BTSequence" id="BTSequence_h5to1"]
+custom_name = "Enemy Meele Sequence"
+children = [SubResource("BTDynamicSelector_3hxb0")]
+
+[resource]
+blackboard_plan = SubResource("BlackboardPlan_u6w21")
+root_task = SubResource("BTSequence_h5to1")

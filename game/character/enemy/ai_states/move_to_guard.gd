@@ -31,7 +31,6 @@ func _get_closest_guard() -> Vector2:
 		closest_target = entity
 
 	if closest_target:
-		print(closest_target.global_position)
 		return closest_target.global_position
 	else:
 		return global_position

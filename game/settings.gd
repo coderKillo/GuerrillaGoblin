@@ -5,6 +5,7 @@ extends Node
 
 @export_group("character")
 @export var base_movement_speed := 500.0
+@export var base_health := 10
 
 @export_group("enemy")
 @export var run_speed := 1.2
