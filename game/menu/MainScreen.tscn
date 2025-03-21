@@ -1,0 +1,130 @@
+[gd_scene load_steps=3 format=3 uid="uid://dnfs3c5ov8jtc"]
+
+[ext_resource type="Script" path="res://game/menu/MainScreen.gd" id="1_kqyjb"]
+[ext_resource type="Script" path="res://game/menu/AnimationController.gd" id="2_djhih"]
+
+[node name="MainScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_kqyjb")
+play_scene = null
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.305442, 0.381014, 0.775591, 1)
+
+[node name="CenterContainer2" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="CenterContainer2"]
+layout_mode = 2
+theme_override_constants/margin_top = -200
+
+[node name="Label" type="Label" parent="CenterContainer2/MarginContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 100
+text = "PROTOTYP"
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="CenterContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 200
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/MarginContainer"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Play" type="Button" parent="CenterContainer/MarginContainer/VBoxContainer" groups=["button"]]
+unique_name_in_owner = true
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(150, 30)
+layout_mode = 2
+
+[node name="Content" type="Control" parent="CenterContainer/MarginContainer/VBoxContainer/Play"]
+anchors_preset = 0
+offset_right = 150.0
+offset_bottom = 30.0
+mouse_filter = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="ColorRect" type="ColorRect" parent="CenterContainer/MarginContainer/VBoxContainer/Play/Content"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.0257678, 0.105004, 0.125353, 0.831373)
+
+[node name="Label" type="Label" parent="CenterContainer/MarginContainer/VBoxContainer/Play/Content"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Play"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Exit" type="Button" parent="CenterContainer/MarginContainer/VBoxContainer" groups=["button"]]
+unique_name_in_owner = true
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(150, 30)
+layout_mode = 2
+
+[node name="Content" type="Control" parent="CenterContainer/MarginContainer/VBoxContainer/Exit"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="ColorRect" type="ColorRect" parent="CenterContainer/MarginContainer/VBoxContainer/Exit/Content"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.027451, 0.105882, 0.12549, 0.831373)
+
+[node name="Label" type="Label" parent="CenterContainer/MarginContainer/VBoxContainer/Exit/Content"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Exit"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AnimationController" type="Node" parent="."]
+script = ExtResource("2_djhih")

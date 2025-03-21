@@ -1,0 +1,54 @@
+[gd_scene load_steps=6 format=3 uid="uid://db2yux7hmly57"]
+
+[ext_resource type="Script" path="res://game/menu/AnimationController.gd" id="1_0ltrv"]
+[ext_resource type="Script" path="res://game/menu/LevelSelection.gd" id="1_5yoid"]
+[ext_resource type="PackedScene" uid="uid://cyiibp88yar2o" path="res://game/menu/Button.tscn" id="2_15olh"]
+[ext_resource type="PackedScene" uid="uid://yde0m1ex2wfj" path="res://game/level/level_test.tscn" id="3_tjkkm"]
+[ext_resource type="PackedScene" uid="uid://rsfudw50gnu0" path="res://game/level/level_test_melee.tscn" id="4_1tmbk"]
+
+[node name="LevelSelection" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+script = ExtResource("1_5yoid")
+button_scene = ExtResource("2_15olh")
+level_list = Array[PackedScene]([ExtResource("3_tjkkm"), ExtResource("4_1tmbk")])
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.305442, 0.381014, 0.775591, 1)
+
+[node name="CenterContainer2" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="CenterContainer2"]
+layout_mode = 2
+theme_override_constants/margin_left = 200
+theme_override_constants/margin_top = 200
+theme_override_constants/margin_right = 200
+theme_override_constants/margin_bottom = 200
+
+[node name="LevelContainer" type="GridContainer" parent="CenterContainer2/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/h_separation = 30
+theme_override_constants/v_separation = 30
+columns = 4
+
+[node name="AnimationController" type="Node" parent="."]
+script = ExtResource("1_0ltrv")
