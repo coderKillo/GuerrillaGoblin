@@ -4,7 +4,7 @@ extends Node2D
 @export var movement_speed := Settings.base_movement_speed
 @export var character: CharacterBody2D
 @export var agent: NavigationAgent2D
-@export var min_distance := 30
+@export var min_distance := 50
 @export var new_path_query_tolerance := 40
 
 @onready var air_component: AirComponent = $"../AirComponent"

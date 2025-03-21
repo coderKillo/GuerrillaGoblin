@@ -49,7 +49,7 @@ func _is_blocked_by_obstical(entity: Node2D) -> bool:
 	return not result or result.collider != entity
 
 
-func _distance_sorter(a, b) -> bool:
-	var distance_a = a.distance_squared_to(global_position)
-	var distance_b = b.distance_squared_to(global_position)
+func _distance_sorter(a: Node2D, b: Node2D) -> bool:
+	var distance_a = a.global_position.distance_squared_to(global_position)
+	var distance_b = b.global_position.distance_squared_to(global_position)
 	return distance_a <= distance_b

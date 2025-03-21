@@ -27,7 +27,8 @@ var _character_death_damage := Settings.base_health * 5.0
 func _ready():
 	queue_redraw()
 
-	_set_camera_limits()
+	if not Engine.is_editor_hint():
+		_set_camera_limits()
 
 
 func _draw():

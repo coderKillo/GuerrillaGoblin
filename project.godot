@@ -20,6 +20,7 @@ Events="*res://game/autoload/events.gd"
 Effects="*res://game/autoload/effects.gd"
 Settings="*res://game/settings.tscn"
 Global="*res://game/global.gd"
+SceneChanger="*res://game/menu/SceneChanger.tscn"
 
 [display]
 

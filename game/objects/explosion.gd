@@ -30,7 +30,7 @@ func _physics_process(_delta):
 		if body.has_method("hit"):
 			body.hit(3)
 
-	Effects.spawn_sound(global_position, radius * 5.0, "BANG")
+	Effects.spawn_sound(global_position, radius * 10.0, "BANG")
 
 	# only called once
 	set_physics_process(false)

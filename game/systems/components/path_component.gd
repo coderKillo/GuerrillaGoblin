@@ -14,6 +14,10 @@ func push_front(point: Vector2):
 	_path.push_front(point)
 
 
+func size() -> int:
+	return _path.size()
+
+
 func _ready():
 	for child in owner.get_children():
 		if child is Line2D:
