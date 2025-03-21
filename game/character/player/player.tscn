@@ -26,6 +26,7 @@ texture = ExtResource("2_7yk4d")
 shape = SubResource("CircleShape2D_8od80")
 
 [node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(0.5, 0.5)
 position_smoothing_enabled = true
 
 [node name="AirComponent" type="Node2D" parent="." node_paths=PackedStringArray("character")]

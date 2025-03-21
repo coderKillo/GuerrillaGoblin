@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://d3j8goa0kg6s4" path="res://assets/kenney_scribble-dungeons/PNG/Double (128px)/Characters/red_character.png" id="2_phwyk"]
 [ext_resource type="PackedScene" uid="uid://gb3ojhqhegn7" path="res://game/character/weapon/weapon_range.tscn" id="3_38s8k"]
 [ext_resource type="Script" path="res://game/systems/components/path_component.gd" id="8_cs6q6"]
-[ext_resource type="BehaviorTree" uid="uid://b3a7my7biibgj" path="res://game/character/enemy/ai/trees/enemy_range_tree.tres" id="9_6skou"]
+[ext_resource type="BehaviorTree" uid="uid://186fsao6i2h0" path="res://game/character/enemy/ai/trees/enemy_range_tree_2.tres" id="9_dwjte"]
 [ext_resource type="Script" path="res://game/systems/components/movement_component.gd" id="11_v7wox"]
 [ext_resource type="Script" path="res://game/systems/components/target_component.gd" id="12_4lpwe"]
 [ext_resource type="Script" path="res://game/systems/components/air_component.gd" id="12_uehlx"]
@@ -13,7 +13,8 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_8od80"]
 radius = 40.0
 
-[sub_resource type="BlackboardPlan" id="BlackboardPlan_k7e4s"]
+[sub_resource type="BlackboardPlan" id="BlackboardPlan_6haxj"]
+resource_local_to_scene = true
 
 [node name="EnemyRange" type="CharacterBody2D" node_paths=PackedStringArray("weapon") groups=["enemy"]]
 collision_layer = 2
@@ -29,6 +30,9 @@ texture = ExtResource("2_phwyk")
 path_postprocessing = 1
 avoidance_enabled = true
 max_speed = 1000.0
+debug_use_custom = true
+debug_path_custom_color = Color(0.0352941, 1, 1, 1)
+debug_path_custom_point_size = 20.0
 
 [node name="WeaponRange" parent="." instance=ExtResource("3_38s8k")]
 
@@ -39,6 +43,7 @@ shape = SubResource("CircleShape2D_8od80")
 script = ExtResource("11_v7wox")
 character = NodePath("..")
 agent = NodePath("../NavigationAgent2D")
+min_distance = 90
 
 [node name="TargetComponent" type="Node2D" parent="." node_paths=PackedStringArray("character")]
 script = ExtResource("12_4lpwe")
@@ -57,8 +62,8 @@ character = NodePath("..")
 script = ExtResource("8_cs6q6")
 
 [node name="BTPlayer" type="BTPlayer" parent="."]
-behavior_tree = ExtResource("9_6skou")
-blackboard_plan = SubResource("BlackboardPlan_k7e4s")
+behavior_tree = ExtResource("9_dwjte")
+blackboard_plan = SubResource("BlackboardPlan_6haxj")
 
 [node name="StatusLabel" type="Label" parent="."]
 offset_left = -11.0

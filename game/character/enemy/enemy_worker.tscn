@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://game/character/enemy/enemy.gd" id="1_411ua"]
 [ext_resource type="Texture2D" uid="uid://b6s72eixpldu4" path="res://assets/kenney_scribble-dungeons/PNG/Double (128px)/Characters/purple_character.png" id="2_lxn6x"]
 [ext_resource type="Script" path="res://game/systems/components/path_component.gd" id="7_rqj1v"]
-[ext_resource type="BehaviorTree" uid="uid://bqdatwroqrpnw" path="res://game/character/enemy/ai/trees/enemy_worker_tree.tres" id="8_mhd8g"]
+[ext_resource type="BehaviorTree" uid="uid://bkk5wte6kg8ap" path="res://game/character/enemy/ai/trees/enemy_worker_tree_2.tres" id="8_saslx"]
 [ext_resource type="Script" path="res://game/systems/components/movement_component.gd" id="11_6rj3x"]
 [ext_resource type="Script" path="res://game/systems/components/target_component.gd" id="12_kdl4j"]
 [ext_resource type="Script" path="res://game/systems/components/listener_component.gd" id="13_q1glt"]
@@ -35,6 +35,7 @@ shape = SubResource("CircleShape2D_8od80")
 script = ExtResource("11_6rj3x")
 character = NodePath("..")
 agent = NodePath("../NavigationAgent2D")
+min_distance = 90
 
 [node name="TargetComponent" type="Node2D" parent="." node_paths=PackedStringArray("character")]
 script = ExtResource("12_kdl4j")
@@ -62,5 +63,5 @@ theme_override_font_sizes/font_size = 50
 text = "?"
 
 [node name="BTPlayer" type="BTPlayer" parent="."]
-behavior_tree = ExtResource("8_mhd8g")
+behavior_tree = ExtResource("8_saslx")
 blackboard_plan = SubResource("BlackboardPlan_6pb4s")

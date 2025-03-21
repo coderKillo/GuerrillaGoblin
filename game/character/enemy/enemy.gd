@@ -4,6 +4,7 @@ extends CharacterBody2D
 
 @export var attack := false
 @export var direction := Vector2.ZERO  # view direction
+@export var view_angle := 60.0  # view direction
 
 var status := ""
 
@@ -13,6 +14,7 @@ var status := ""
 @onready var listener_component: ListenerComponent = $ListenerComponent
 @onready var path_component: PathComponent = $PathComponent
 @onready var status_label: Label = $StatusLabel
+@onready var bt: BTPlayer = $BTPlayer
 
 
 func _physics_process(_delta):
@@ -29,6 +31,7 @@ func _physics_process(_delta):
 
 func _process(_delta):
 	update_status()
+	update_knowlege()
 
 
 func update_status():
@@ -45,6 +48,28 @@ func update_status():
 
 		_:
 			status_label.hide()
+
+
+func update_knowlege():
+	if target_component.is_target_seen(direction, view_angle):
+		bt.blackboard.set_var(&"player_position", target_component.last_target_position)
+	else:
+		bt.blackboard.set_var(&"player_position", Vector2.ZERO)
+
+	if listener_component.has_sound_heard():
+		bt.blackboard.set_var(&"noise_position", listener_component.sound_position)
+
+	var guards := target_component.get_targets_by_distance("guard")
+	if guards:
+		bt.blackboard.set_var(&"closest_guard", guards[0].global_position)
+	else:
+		bt.blackboard.set_var(&"closest_guard", Vector2.ZERO)
+
+	var safe_spots := target_component.get_targets_by_distance("safe_spot")
+	if safe_spots:
+		bt.blackboard.set_var(&"closest_safe_spot", safe_spots[0].global_position)
+	else:
+		bt.blackboard.set_var(&"closest_safe_spot", Vector2.ZERO)
 
 
 func hit(_count: int = 1):

@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://d3j8goa0kg6s4" path="res://assets/kenney_scribble-dungeons/PNG/Double (128px)/Characters/red_character.png" id="2_iwqeu"]
 [ext_resource type="PackedScene" uid="uid://fl6g6pohavju" path="res://game/character/weapon/weapon_melee_sword.tscn" id="3_4ya0b"]
 [ext_resource type="Script" path="res://game/systems/components/path_component.gd" id="8_2bxre"]
-[ext_resource type="BehaviorTree" uid="uid://bsn6q0e4v0m72" path="res://game/character/enemy/ai/trees/enemy_meele_tree.tres" id="8_vv4cc"]
+[ext_resource type="BehaviorTree" uid="uid://dmkbd2ee3nbmd" path="res://game/character/enemy/ai/trees/enemy_meele_tree_2.tres" id="9_agbua"]
 [ext_resource type="Script" path="res://game/systems/components/movement_component.gd" id="11_aqwy5"]
 [ext_resource type="Script" path="res://game/systems/components/target_component.gd" id="12_arkp5"]
 [ext_resource type="Script" path="res://game/systems/components/listener_component.gd" id="13_0bkdu"]
@@ -13,7 +13,8 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_8od80"]
 radius = 40.05
 
-[sub_resource type="BlackboardPlan" id="BlackboardPlan_o2ep5"]
+[sub_resource type="BlackboardPlan" id="BlackboardPlan_e0ovq"]
+resource_local_to_scene = true
 
 [node name="EnemyMelee" type="CharacterBody2D" node_paths=PackedStringArray("weapon") groups=["enemy", "guard"]]
 collision_layer = 2
@@ -35,6 +36,7 @@ avoidance_enabled = true
 radius = 30.0
 max_speed = 1000.0
 avoidance_mask = 2
+debug_use_custom = true
 debug_path_custom_color = Color(1, 0, 1, 1)
 debug_path_custom_point_size = 20.0
 
@@ -45,6 +47,7 @@ shape = SubResource("CircleShape2D_8od80")
 script = ExtResource("11_aqwy5")
 character = NodePath("..")
 agent = NodePath("../NavigationAgent2D")
+min_distance = 90
 
 [node name="TargetComponent" type="Node2D" parent="." node_paths=PackedStringArray("character")]
 script = ExtResource("12_arkp5")
@@ -62,8 +65,8 @@ character = NodePath("..")
 script = ExtResource("8_2bxre")
 
 [node name="BTPlayer" type="BTPlayer" parent="."]
-behavior_tree = ExtResource("8_vv4cc")
-blackboard_plan = SubResource("BlackboardPlan_o2ep5")
+behavior_tree = ExtResource("9_agbua")
+blackboard_plan = SubResource("BlackboardPlan_e0ovq")
 
 [node name="StatusLabel" type="Label" parent="."]
 offset_left = -11.0

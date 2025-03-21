@@ -17,12 +17,12 @@ strike_angle = 75.0
 recover_time = 0.2
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(34, 0)
+position = Vector2(53, 0)
 rotation = 1.5708
 texture = ExtResource("2_l3cyv")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(46.75, -1.5)
+position = Vector2(64, 0)
 shape = SubResource("RectangleShape2D_hdka2")
 disabled = true
 debug_color = Color(0.870588, 0.294118, 0.486275, 0.419608)

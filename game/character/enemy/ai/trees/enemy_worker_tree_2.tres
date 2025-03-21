@@ -1,0 +1,181 @@
+[gd_resource type="BehaviorTree" load_steps=37 format=3 uid="uid://bkk5wte6kg8ap"]
+
+[ext_resource type="Script" path="res://game/character/enemy/ai/tasks/is_position_valid.gd" id="1_800d3"]
+[ext_resource type="Script" path="res://game/character/enemy/ai/tasks/look_at.gd" id="2_b5ytj"]
+[ext_resource type="Script" path="res://game/character/enemy/ai/tasks/move_to_position.gd" id="3_6tt16"]
+[ext_resource type="Script" path="res://game/character/enemy/ai/tasks/notify_target.gd" id="3_scxoj"]
+[ext_resource type="Script" path="res://game/character/enemy/ai/tasks/reset_position.gd" id="5_ts2ic"]
+[ext_resource type="Script" path="res://game/character/enemy/ai/tasks/patrol.gd" id="6_2odtg"]
+
+[sub_resource type="BlackboardPlan" id="BlackboardPlan_anpm0"]
+var/player_position/name = &"player_position"
+var/player_position/type = 5
+var/player_position/value = Vector2(0, 0)
+var/player_position/hint = 0
+var/player_position/hint_string = ""
+var/last_seen_player_position/name = &"last_seen_player_position"
+var/last_seen_player_position/type = 5
+var/last_seen_player_position/value = Vector2(0, 0)
+var/last_seen_player_position/hint = 0
+var/last_seen_player_position/hint_string = ""
+var/closest_guard/name = &"closest_guard"
+var/closest_guard/type = 5
+var/closest_guard/value = Vector2(0, 0)
+var/closest_guard/hint = 0
+var/closest_guard/hint_string = ""
+var/closest_safe_spot/name = &"closest_safe_spot"
+var/closest_safe_spot/type = 5
+var/closest_safe_spot/value = Vector2(0, 0)
+var/closest_safe_spot/hint = 0
+var/closest_safe_spot/hint_string = ""
+var/noise_position/name = &"noise_position"
+var/noise_position/type = 5
+var/noise_position/value = Vector2(0, 0)
+var/noise_position/hint = 0
+var/noise_position/hint_string = ""
+var/is_alerted/name = &"is_alerted"
+var/is_alerted/type = 1
+var/is_alerted/value = false
+var/is_alerted/hint = 0
+var/is_alerted/hint_string = ""
+var/check_out_position/name = &"check_out_position"
+var/check_out_position/type = 5
+var/check_out_position/value = Vector2(0, 0)
+var/check_out_position/hint = 0
+var/check_out_position/hint_string = ""
+
+[sub_resource type="BTCondition" id="BTCondition_khpq0"]
+script = ExtResource("1_800d3")
+position = &"player_position"
+
+[sub_resource type="BBVariant" id="BBVariant_0x5qp"]
+type = 4
+saved_value = "?"
+resource_name = "?"
+
+[sub_resource type="BTSetAgentProperty" id="BTSetAgentProperty_b0uq6"]
+property = &"status"
+value = SubResource("BBVariant_0x5qp")
+
+[sub_resource type="BTAction" id="BTAction_e0r85"]
+script = ExtResource("2_b5ytj")
+position = &"player_position"
+
+[sub_resource type="BTTimeLimit" id="BTTimeLimit_wo0gq"]
+time_limit = 2.0
+children = [SubResource("BTAction_e0r85")]
+
+[sub_resource type="BTRunLimit" id="BTRunLimit_qsgli"]
+count_policy = 1
+children = [SubResource("BTTimeLimit_wo0gq")]
+
+[sub_resource type="BBVariant" id="BBVariant_48kxn"]
+type = 4
+saved_value = "!"
+resource_name = "!"
+
+[sub_resource type="BTSetAgentProperty" id="BTSetAgentProperty_bvbm1"]
+property = &"status"
+value = SubResource("BBVariant_48kxn")
+
+[sub_resource type="BTAction" id="BTAction_4t460"]
+script = ExtResource("3_6tt16")
+position = &"closest_guard"
+speed = 1.2
+face_destination = true
+
+[sub_resource type="BTAction" id="BTAction_muevi"]
+script = ExtResource("3_scxoj")
+mode = 0
+group = ""
+message = ""
+message_var = &"player_position"
+radius = 100.0
+
+[sub_resource type="BTAction" id="BTAction_668xf"]
+script = ExtResource("3_6tt16")
+position = &"closest_safe_spot"
+speed = 1.0
+face_destination = true
+
+[sub_resource type="BTSequence" id="BTSequence_h2gvd"]
+custom_name = "Warn Guard"
+children = [SubResource("BTSetAgentProperty_bvbm1"), SubResource("BTAction_4t460"), SubResource("BTAction_muevi"), SubResource("BTAction_668xf")]
+
+[sub_resource type="BTSelector" id="BTSelector_uobb6"]
+children = [SubResource("BTRunLimit_qsgli"), SubResource("BTSequence_h2gvd")]
+
+[sub_resource type="BTSequence" id="BTSequence_ecktm"]
+custom_name = "see player"
+children = [SubResource("BTCondition_khpq0"), SubResource("BTSetAgentProperty_b0uq6"), SubResource("BTSelector_uobb6")]
+
+[sub_resource type="BTCondition" id="BTCondition_i3y3n"]
+script = ExtResource("1_800d3")
+position = &"noise_position"
+
+[sub_resource type="BBVariant" id="BBVariant_3j1we"]
+type = 4
+saved_value = "?"
+resource_name = "?"
+
+[sub_resource type="BTSetAgentProperty" id="BTSetAgentProperty_o110i"]
+property = &"status"
+value = SubResource("BBVariant_3j1we")
+
+[sub_resource type="BTAction" id="BTAction_03fhk"]
+script = ExtResource("2_b5ytj")
+position = &"noise_position"
+
+[sub_resource type="BTTimeLimit" id="BTTimeLimit_f1pc4"]
+time_limit = 2.0
+children = [SubResource("BTAction_03fhk")]
+
+[sub_resource type="BTAction" id="BTAction_k1yit"]
+script = ExtResource("3_6tt16")
+position = &"closest_guard"
+speed = 1.0
+face_destination = true
+
+[sub_resource type="BTAction" id="BTAction_trgfd"]
+script = ExtResource("3_scxoj")
+mode = 0
+group = ""
+message = ""
+message_var = &"noise_position"
+radius = 100.0
+
+[sub_resource type="BTAction" id="BTAction_6dxlx"]
+script = ExtResource("5_ts2ic")
+position = &"noise_position"
+
+[sub_resource type="BTAction" id="BTAction_haraq"]
+script = ExtResource("3_6tt16")
+position = &"closest_safe_spot"
+speed = 0.8
+face_destination = true
+
+[sub_resource type="BTSequence" id="BTSequence_mxpbh"]
+custom_name = "Warn Guard"
+children = [SubResource("BTAction_k1yit"), SubResource("BTAction_trgfd"), SubResource("BTAction_6dxlx"), SubResource("BTAction_haraq")]
+
+[sub_resource type="BTSelector" id="BTSelector_hrmvn"]
+children = [SubResource("BTTimeLimit_f1pc4"), SubResource("BTSequence_mxpbh")]
+
+[sub_resource type="BTDynamicSequence" id="BTDynamicSequence_ekaht"]
+custom_name = "hear noise"
+children = [SubResource("BTCondition_i3y3n"), SubResource("BTSetAgentProperty_o110i"), SubResource("BTSelector_hrmvn")]
+
+[sub_resource type="BTAction" id="BTAction_uu4xh"]
+script = ExtResource("6_2odtg")
+speed = 0.5
+
+[sub_resource type="BTSequence" id="BTSequence_8i0y5"]
+custom_name = "default"
+children = [SubResource("BTAction_uu4xh")]
+
+[sub_resource type="BTDynamicSelector" id="BTDynamicSelector_bdxun"]
+children = [SubResource("BTSequence_ecktm"), SubResource("BTDynamicSequence_ekaht"), SubResource("BTSequence_8i0y5")]
+
+[resource]
+blackboard_plan = SubResource("BlackboardPlan_anpm0")
+root_task = SubResource("BTDynamicSelector_bdxun")
