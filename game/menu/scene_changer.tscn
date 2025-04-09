@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://ds7yvpviacjva"]
 
 [ext_resource type="Shader" path="res://assets/shader/diamond_transition.gdshader" id="1_75xy3"]
-[ext_resource type="Script" path="res://game/menu/SceneChanger.gd" id="1_vv5ka"]
+[ext_resource type="Script" path="res://game/menu/scene_changer.gd" id="1_vv5ka"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jicio"]
 shader = ExtResource("1_75xy3")

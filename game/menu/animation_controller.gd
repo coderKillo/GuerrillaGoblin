@@ -14,8 +14,7 @@ const ANIM_VALUES_BUTTON: Dictionary = {
 
 
 func _ready():
-	await get_tree().root.ready
-	
+	await get_parent().ready
 	for button_node in get_tree().get_nodes_in_group(BUTTON_GROUP):
 		button_node.mouse_entered.connect(_on_mouse_entered.bind(button_node))
 		button_node.mouse_exited.connect(_on_mouse_exited.bind(button_node))
@@ -82,7 +81,10 @@ func _on_button_up(button_node: Object) -> void:
 func _do_animation(
 	object: Object, parameter: String, from: Variant, to: Variant, time: float
 ) -> void:
+	if not is_inside_tree():
+		return
 	var tween = get_tree().create_tween()
+	tween.set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
 	tween.set_parallel(true)
 	(
 		tween

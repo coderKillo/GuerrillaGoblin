@@ -7,6 +7,7 @@ extends CharacterBody2D
 @export var view_angle := 60.0  # view direction
 
 var status := ""
+var health := Settings.enemy_health
 
 @onready var air_component: AirComponent = $AirComponent
 @onready var movement_component: MovementComponent = $MovementComponent
@@ -40,11 +41,13 @@ func update_status():
 			status_label.show()
 			status_label.text = "?"
 			status_label.modulate = Color.YELLOW
+			Events.enemy_seen_player.emit(self.name)
 
 		"!":
 			status_label.show()
 			status_label.text = "!"
 			status_label.modulate = Color.RED
+			Events.enemy_seen_player.emit(self.name)
 
 		_:
 			status_label.hide()
@@ -72,5 +75,8 @@ func update_knowlege():
 		bt.blackboard.set_var(&"closest_safe_spot", Vector2.ZERO)
 
 
-func hit(_count: int = 1):
-	print("enemy hit")
+func hit(count: int = 1):
+	health -= count
+	if health <= 0:
+		Events.enemy_death.emit(self.name)
+		queue_free()

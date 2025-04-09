@@ -1,0 +1,128 @@
+[gd_scene load_steps=2 format=3 uid="uid://ck6b7rif2o7aw"]
+
+[ext_resource type="Script" path="res://game/screens/pause_screen.gd" id="1_uxdcy"]
+
+[node name="PauseScreen" type="Control"]
+process_mode = 3
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+script = ExtResource("1_uxdcy")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+color = Color(0, 0, 0, 0.396078)
+
+[node name="Panel" type="Panel" parent="."]
+custom_minimum_size = Vector2(400, 400)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 100
+theme_override_constants/margin_top = 150
+theme_override_constants/margin_right = 100
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 20
+
+[node name="Continue" type="Button" parent="Panel/MarginContainer/VBoxContainer" groups=["button"]]
+unique_name_in_owner = true
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+
+[node name="Content" type="Control" parent="Panel/MarginContainer/VBoxContainer/Continue"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="ColorRect" type="ColorRect" parent="Panel/MarginContainer/VBoxContainer/Continue/Content"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.0257678, 0.105004, 0.125353, 0.831373)
+
+[node name="Label" type="Label" parent="Panel/MarginContainer/VBoxContainer/Continue/Content"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 20
+text = "Continue"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Quit" type="Button" parent="Panel/MarginContainer/VBoxContainer" groups=["button"]]
+unique_name_in_owner = true
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+
+[node name="Content" type="Control" parent="Panel/MarginContainer/VBoxContainer/Quit"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="ColorRect" type="ColorRect" parent="Panel/MarginContainer/VBoxContainer/Quit/Content"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.0257678, 0.105004, 0.125353, 0.831373)
+
+[node name="Label" type="Label" parent="Panel/MarginContainer/VBoxContainer/Quit/Content"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 20
+text = "Quit"
+horizontal_alignment = 1
+vertical_alignment = 1

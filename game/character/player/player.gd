@@ -3,6 +3,7 @@ extends CharacterBody2D
 @export var weapon: Node2D
 
 var speed := Settings.base_movement_speed
+var health := Settings.base_health
 
 @onready var air_component: AirComponent = $AirComponent
 
@@ -30,5 +31,8 @@ func _physics_process(delta):
 	move_and_collide(velocity * delta)
 
 
-func hit(_count: int = 1):
-	print("player hit")
+func hit(count: int = 1):
+	health -= count
+	if health <= 0:
+		Events.player_death.emit()
+		queue_free()

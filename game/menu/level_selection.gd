@@ -1,6 +1,7 @@
 extends Control
 
 @export var button_scene: PackedScene
+@export var main_scene: PackedScene
 @export var level_list: Array[PackedScene]
 
 @onready var _container: Control = %LevelContainer
@@ -20,4 +21,4 @@ func _ready():
 
 
 func _on_level_pressed(level: PackedScene) -> void:
-	print(level)
+	SceneChanger.load_level(main_scene, level)

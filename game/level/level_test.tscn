@@ -937,6 +937,9 @@ points = PackedVector2Array(-525, -259, -523, -131, -137, -107, -137, 21, 440, 2
 [node name="tower" parent="." instance=ExtResource("6_kks0c")]
 position = Vector2(605, -337)
 
+[node name="tower2" parent="." instance=ExtResource("6_kks0c")]
+position = Vector2(616, 42)
+
 [node name="EnemyRange" parent="." instance=ExtResource("7_8bxym")]
 position = Vector2(-292, -602)
 

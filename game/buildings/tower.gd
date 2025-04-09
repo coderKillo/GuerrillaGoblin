@@ -6,6 +6,20 @@ var explosion_force = Settings.barrel_explosion_force
 
 var _destroied = false
 var _hits = 0
+var _task_text := "destroy tower"
+
+
+func _ready():
+	Events.game_state_changed.connect(_on_game_state_changed)
+
+
+func _on_game_state_changed(state: Global.GameState):
+	match state:
+		Global.GameState.INIT:
+			Events.task_register.emit(_task_text)
+
+		_:
+			pass
 
 
 func hit(count: int = 1) -> void:
@@ -22,6 +36,8 @@ func hit(count: int = 1) -> void:
 
 
 func _destroy() -> void:
+	Events.task_complete.emit(_task_text)
+
 	_destroied = true
 
 	var explosion := ExplosionScene.instantiate()

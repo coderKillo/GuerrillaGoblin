@@ -22,6 +22,29 @@ func change_scene(scene: PackedScene) -> void:
 	_in_transition = false
 
 
+func load_level(main_scene: PackedScene, level: PackedScene) -> void:
+	if _in_transition:
+		return
+
+	_in_transition = true
+
+	await _do_transition(true)
+
+	var new_scene := main_scene.instantiate() as Main
+	var tree = get_tree()
+	var current_scene = tree.current_scene
+	tree.root.add_child(new_scene)
+	tree.root.remove_child(current_scene)
+	tree.current_scene = new_scene
+
+	# add level to world
+	new_scene.world.add_child(level.instantiate())
+
+	await _do_transition(false)
+
+	_in_transition = false
+
+
 # wait for transition to be finished
 func _do_transition(transition_in: bool) -> void:
 	var tween := get_tree().create_tween()

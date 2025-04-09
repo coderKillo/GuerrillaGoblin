@@ -1,11 +1,11 @@
 extends Node
 
+signal game_state_changed(state: Global.GameState)
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
+signal task_register(text: String)
+signal task_complete(text: String)
 
+signal player_death
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta):
-	pass
+signal enemy_death(name: String)
+signal enemy_seen_player(name: String)
