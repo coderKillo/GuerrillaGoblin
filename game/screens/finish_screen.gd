@@ -1,7 +1,5 @@
 extends Control
 
-var main_menu: String = "res://game/menu/main_sceen.tscn"
-
 
 func _ready():
 	%Next.pressed.connect(_on_next_pressed)
@@ -29,12 +27,15 @@ func setup(time_s: int, score: int, success: bool):
 
 
 func _on_next_pressed():
-	pass
+	get_tree().paused = false
+	SceneChanger.load_level(Gamestate.current_level_index + 1)
 
 
 func _on_restart_pressed():
-	pass
+	get_tree().paused = false
+	SceneChanger.load_level(Gamestate.current_level_index)
 
 
 func _on_quit_pressed():
-	SceneChanger.change_scene(load(main_menu))
+	get_tree().paused = false
+	SceneChanger.change_scene(Resources.main_screen_scene)

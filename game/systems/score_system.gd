@@ -10,7 +10,7 @@ func _ready():
 
 
 func _on_enemy_death(enemy_name: String) -> void:
-	_data.enemies_seen_player.remove(enemy_name)
+	_data.enemies_seen_player.erase(enemy_name)
 
 
 func _on_enemy_seen_player(enemy_name: String) -> void:

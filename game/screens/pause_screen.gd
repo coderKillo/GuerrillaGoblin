@@ -2,8 +2,6 @@ extends Control
 
 signal continue_pressed
 
-var main_menu: String = "res://game/menu/main_sceen.tscn"
-
 
 func _ready():
 	%Continue.pressed.connect(_on_continue_pressed)
@@ -26,4 +24,4 @@ func _on_continue_pressed():
 
 func _on_quit_pressed():
 	get_tree().paused = false
-	SceneChanger.change_scene(load(main_menu))
+	SceneChanger.change_scene(Resources.main_menu_scene)

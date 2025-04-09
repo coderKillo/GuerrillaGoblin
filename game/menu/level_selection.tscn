@@ -1,11 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://db2yux7hmly57"]
+[gd_scene load_steps=4 format=3 uid="uid://db2yux7hmly57"]
 
 [ext_resource type="Script" path="res://game/menu/animation_controller.gd" id="1_0ltrv"]
 [ext_resource type="Script" path="res://game/menu/level_selection.gd" id="1_5yoid"]
 [ext_resource type="PackedScene" uid="uid://cyiibp88yar2o" path="res://game/menu/button.tscn" id="2_15olh"]
-[ext_resource type="PackedScene" uid="uid://b67usxh5xcbek" path="res://game/main.tscn" id="3_stxlv"]
-[ext_resource type="PackedScene" uid="uid://yde0m1ex2wfj" path="res://game/level/level_test.tscn" id="3_tjkkm"]
-[ext_resource type="PackedScene" uid="uid://rsfudw50gnu0" path="res://game/level/level_test_melee.tscn" id="4_1tmbk"]
 
 [node name="LevelSelection" type="Control"]
 layout_mode = 3
@@ -17,8 +14,6 @@ grow_vertical = 2
 mouse_filter = 1
 script = ExtResource("1_5yoid")
 button_scene = ExtResource("2_15olh")
-main_scene = ExtResource("3_stxlv")
-level_list = Array[PackedScene]([ExtResource("3_tjkkm"), ExtResource("4_1tmbk")])
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 1

@@ -22,23 +22,34 @@ func change_scene(scene: PackedScene) -> void:
 	_in_transition = false
 
 
-func load_level(main_scene: PackedScene, level: PackedScene) -> void:
+func load_level(level: int) -> void:
 	if _in_transition:
+		return
+
+	if level >= len(Resources.levels):
+		change_scene(Resources.main_screen_scene)
 		return
 
 	_in_transition = true
 
 	await _do_transition(true)
 
-	var new_scene := main_scene.instantiate() as Main
+	var level_scene = Resources.levels[level]
+	var new_scene := Resources.main_game_scene.instantiate() as Main
 	var tree = get_tree()
 	var current_scene = tree.current_scene
+
 	tree.root.add_child(new_scene)
 	tree.root.remove_child(current_scene)
+	current_scene.free()
+	
 	tree.current_scene = new_scene
+	
+	Gamestate.current_level_index = level
 
-	# add level to world
-	new_scene.world.add_child(level.instantiate())
+	new_scene.world.add_child(level_scene.instantiate())
+
+	new_scene.setup()
 
 	await _do_transition(false)
 

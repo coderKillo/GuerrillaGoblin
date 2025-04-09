@@ -4,6 +4,7 @@ extends Node2D
 @onready var world: Node2D = %World
 @onready var gui: Gui = %GUI
 @onready var score: ScoreSystem = $ScoreSystem
+@onready var camera: Camera = $Camera
 
 var _elapsed_time := 0.0
 var _tasks := {}
@@ -14,22 +15,22 @@ func _ready():
 	Events.task_register.connect(_on_task_register)
 	Events.task_complete.connect(_on_task_complete)
 
-	Events.game_state_changed.emit(Global.GameState.INIT)
-
-	_setup_level()
-
-	Events.game_state_changed.emit(Global.GameState.PLAY)
-
-
-func _setup_level():
-	# TODO: cutscene
-	pass
-
 
 func _process(delta: float):
 	_elapsed_time += delta
 
 	gui.hud().set_time(int(_elapsed_time))
+
+
+func setup() -> void:
+	Events.game_state_changed.emit(Global.GameState.INIT)
+
+	Events.game_state_changed.emit(Global.GameState.CUTSCENE)
+
+	# TODO:: pause world
+	await Events.cutscene_finished
+
+	Events.game_state_changed.emit(Global.GameState.PLAY)
 
 
 func _on_player_death():
@@ -40,8 +41,6 @@ func _on_task_register(text: String):
 	if not _tasks.has(text):
 		_tasks[text] = 0
 	_tasks[text] += 1
-
-	print(_tasks)
 
 	gui.hud().set_tasks(_tasks)
 

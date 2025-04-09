@@ -1,7 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://dnfs3c5ov8jtc"]
+[gd_scene load_steps=3 format=3 uid="uid://dnfs3c5ov8jtc"]
 
 [ext_resource type="Script" path="res://game/menu/main_sceen.gd" id="1_uu456"]
-[ext_resource type="PackedScene" uid="uid://db2yux7hmly57" path="res://game/menu/level_selection.tscn" id="2_07np6"]
 [ext_resource type="Script" path="res://game/menu/animation_controller.gd" id="3_4v5i3"]
 
 [node name="MainScreen" type="Control"]
@@ -12,7 +11,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_uu456")
-play_scene = ExtResource("2_07np6")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 1

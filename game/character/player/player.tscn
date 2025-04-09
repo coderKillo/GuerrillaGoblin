@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://fo0bvble2n4g"]
 
 [ext_resource type="Script" path="res://game/character/player/player.gd" id="1_t5cbm"]
-[ext_resource type="Texture2D" uid="uid://bihjfa5laq5j6" path="res://assets/kenney_scribble-dungeons/PNG/Double (128px)/Characters/green_character.png" id="2_7yk4d"]
+[ext_resource type="Texture2D" uid="uid://bihjfa5laq5j6" path="res://assets/kenney_scribble-dungeons/PNG/Double (128px)/Characters/green_character.png" id="2_tpd3e"]
 [ext_resource type="PackedScene" uid="uid://18644is18nsq" path="res://game/character/weapon/weapon_melee_hammer.tscn" id="3_it7kh"]
 [ext_resource type="Script" path="res://game/systems/components/air_component.gd" id="4_se7op"]
 
@@ -18,16 +18,12 @@ script = ExtResource("1_t5cbm")
 weapon = NodePath("WeaponMelee")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_7yk4d")
+texture = ExtResource("2_tpd3e")
 
 [node name="WeaponMelee" parent="." instance=ExtResource("3_it7kh")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_8od80")
-
-[node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(0.5, 0.5)
-position_smoothing_enabled = true
 
 [node name="AirComponent" type="Node2D" parent="." node_paths=PackedStringArray("character")]
 script = ExtResource("4_se7op")

@@ -17,11 +17,13 @@ config/icon="res://icon.svg"
 
 [autoload]
 
+Settings="*res://game/autoload/settings.tscn"
 Events="*res://game/autoload/events.gd"
+Global="*res://game/autoload/global.gd"
+Resources="*res://game/autoload/resources.tscn"
+Gamestate="*res://game/autoload/gamestate.gd"
+SceneChanger="*res://game/autoload/scene_changer.tscn"
 Effects="*res://game/autoload/effects.gd"
-Settings="*res://game/settings.tscn"
-Global="*res://game/global.gd"
-SceneChanger="*res://game/menu/scene_changer.tscn"
 
 [display]
 

@@ -1,6 +1,6 @@
 extends Area2D
 
-@export var explosion_force = Settings.barrel_explosion_force
+@export var explosion_force := Settings.barrel_explosion_force
 
 @onready var _animation: AnimatedSprite2D = $AnimatedSprite2D
 

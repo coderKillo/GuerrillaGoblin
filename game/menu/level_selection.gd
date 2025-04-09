@@ -1,24 +1,19 @@
 extends Control
 
 @export var button_scene: PackedScene
-@export var main_scene: PackedScene
-@export var level_list: Array[PackedScene]
 
 @onready var _container: Control = %LevelContainer
 
 
 func _ready():
-	var level_number = 1
-	for level in level_list:
+	for level_index in range(len(Resources.levels)):
 		var button := button_scene.instantiate() as Button
-		button.pressed.connect(_on_level_pressed.bind(level))
+		button.pressed.connect(_on_level_pressed.bind(level_index))
 		var label := button.get_node("Content/Label") as Label
-		label.text = str(level_number)
+		label.text = str(level_index + 1)
 
 		_container.add_child(button)
 
-		level_number += 1
 
-
-func _on_level_pressed(level: PackedScene) -> void:
-	SceneChanger.load_level(main_scene, level)
+func _on_level_pressed(level_number: int) -> void:
+	SceneChanger.load_level(level_number)

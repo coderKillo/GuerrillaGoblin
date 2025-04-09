@@ -1,7 +1,7 @@
 class_name MovementComponent
 extends Node2D
 
-@export var movement_speed := Settings.base_movement_speed
+@export var movement_speed :float= Settings.base_movement_speed
 @export var character: CharacterBody2D
 @export var agent: NavigationAgent2D
 @export var min_distance := 50

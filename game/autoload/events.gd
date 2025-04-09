@@ -9,3 +9,5 @@ signal player_death
 
 signal enemy_death(name: String)
 signal enemy_seen_player(name: String)
+
+signal cutscene_finished

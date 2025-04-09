@@ -44,6 +44,6 @@ func _destroy() -> void:
 	explosion.global_position = global_position
 	explosion.explosion_force = explosion_force
 
-	get_parent().add_child(explosion)
+	get_parent().call_deferred("add_child", explosion)
 
 	queue_free()

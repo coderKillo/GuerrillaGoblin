@@ -2,10 +2,10 @@
 
 [ext_resource type="Script" path="res://game/main.gd" id="1_8aqwj"]
 [ext_resource type="PackedScene" uid="uid://yrpc7p0fxl0j" path="res://game/screens/hud.tscn" id="2_4dwae"]
-[ext_resource type="PackedScene" uid="uid://yde0m1ex2wfj" path="res://game/level/level_test.tscn" id="2_bomfu"]
 [ext_resource type="Script" path="res://game/gui.gd" id="2_tnf5c"]
 [ext_resource type="Script" path="res://game/menu/animation_controller.gd" id="3_b4dhd"]
 [ext_resource type="PackedScene" uid="uid://ck6b7rif2o7aw" path="res://game/screens/pause_screen.tscn" id="3_oe7i7"]
+[ext_resource type="Script" path="res://game/core/camera.gd" id="3_vn1ix"]
 [ext_resource type="PackedScene" uid="uid://lkf0sel5qlgr" path="res://game/screens/finish_screen.tscn" id="4_28k00"]
 [ext_resource type="Script" path="res://game/screens/finish_screen.gd" id="5_yh3q1"]
 [ext_resource type="Script" path="res://game/systems/score_system.gd" id="8_mra1o"]
@@ -16,7 +16,10 @@ script = ExtResource("1_8aqwj")
 [node name="World" type="Node2D" parent="."]
 unique_name_in_owner = true
 
-[node name="level_test" parent="World" instance=ExtResource("2_bomfu")]
+[node name="Camera" type="Camera2D" parent="."]
+zoom = Vector2(0.5, 0.5)
+position_smoothing_enabled = true
+script = ExtResource("3_vn1ix")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
