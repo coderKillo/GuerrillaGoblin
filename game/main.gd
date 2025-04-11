@@ -15,6 +15,8 @@ func _ready():
 	Events.task_register.connect(_on_task_register)
 	Events.task_complete.connect(_on_task_complete)
 
+	gui.hud().set_time(int(_elapsed_time))
+
 
 func _process(delta: float):
 	_elapsed_time += delta
@@ -27,7 +29,6 @@ func setup() -> void:
 
 	Events.game_state_changed.emit(Global.GameState.CUTSCENE)
 
-	# TODO:: pause world
 	await Events.cutscene_finished
 
 	Events.game_state_changed.emit(Global.GameState.PLAY)

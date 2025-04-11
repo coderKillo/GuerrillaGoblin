@@ -35,4 +35,3 @@ func add_force(force: Vector3):
 	else:
 		character.velocity = Vector2(force.x, force.y)
 	air_velocity = character.velocity
-	print(character.name, ":add force:", character.velocity)

@@ -16,7 +16,6 @@ func _process(_delta):
 
 
 func _on_game_state_changed(state: Global.GameState):
-	print(state)
 	match state:
 		Global.GameState.INIT:
 			pass
@@ -29,10 +28,15 @@ func _on_game_state_changed(state: Global.GameState):
 
 
 func _play_cutscene() -> void:
+	get_tree().paused = true
+
 	var tween := get_tree().create_tween()
 
+	tween.set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
 	tween.tween_property(self, "zoom", Vector2.ONE * 0.5, 3.3).from(Vector2.ONE * 0.3)
 
 	await tween.finished
+
+	get_tree().paused = false
 
 	Events.cutscene_finished.emit()

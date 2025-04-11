@@ -42,9 +42,9 @@ func load_level(level: int) -> void:
 	tree.root.add_child(new_scene)
 	tree.root.remove_child(current_scene)
 	current_scene.free()
-	
+
 	tree.current_scene = new_scene
-	
+
 	Gamestate.current_level_index = level
 
 	new_scene.world.add_child(level_scene.instantiate())
@@ -63,6 +63,7 @@ func _do_transition(transition_in: bool) -> void:
 	var from = SHADER_HEIGHT_OUT if transition_in else SHADER_HEIGHT_IN
 	var duration = TRANSITION_TIME / 2.0
 
+	tween.set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
 	tween.tween_property(_transition, "material:shader_parameter/height", to, duration).from(from)
 
 	await tween.finished

@@ -29,7 +29,6 @@ func hud() -> Hud:
 
 func _unhandled_input(event):
 	if event.is_action_pressed("pause_game"):
-		print("toggle_pause")
 		toggle_pause()
 
 
