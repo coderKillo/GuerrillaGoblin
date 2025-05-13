@@ -1,0 +1,39 @@
+[gd_scene load_steps=6 format=3 uid="uid://cdrcqi2kfcgpg"]
+
+[ext_resource type="Script" path="res://game/player/player.gd" id="1_r5y83"]
+[ext_resource type="Texture2D" uid="uid://dl4dlgvcyy40y" path="res://assets/tiny_swords/Factions/Goblins/Troops/TNT/Red/TNT_Red.png" id="2_dm2jk"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_gdri5"]
+radius = 0.215138
+height = 0.751405
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_omy5v"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_llfci"]
+material = SubResource("StandardMaterial3D_omy5v")
+top_radius = 0.215
+bottom_radius = 0.215
+height = 0.001
+
+[node name="Player" type="CharacterBody3D" groups=["player"]]
+collision_mask = 7
+script = ExtResource("1_r5y83")
+weapon = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.274691, 0)
+shape = SubResource("CapsuleShape3D_gdri5")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0.233123, 0)
+texture = ExtResource("2_dm2jk")
+region_enabled = true
+region_rect = Rect2(0, 0, 192, 192)
+
+[node name="Weapon" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.313029, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.088637, 0)
+mesh = SubResource("CylinderMesh_llfci")

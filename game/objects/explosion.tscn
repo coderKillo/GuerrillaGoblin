@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://1204aqe48rcr"]
+
+[ext_resource type="Script" path="res://game/objects/explosion.gd" id="1_krc0f"]
+[ext_resource type="Texture2D" uid="uid://3iohb5p0n0p8" path="res://assets/tiny_swords/Effects/Explosion/Explosions.png" id="2_xfaau"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_yv0se"]
+
+[node name="Explosion" type="Area3D"]
+collision_layer = 0
+collision_mask = 11
+script = ExtResource("1_krc0f")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0)
+texture = ExtResource("2_xfaau")
+region_enabled = true
+region_rect = Rect2(576, 0, 192, 192)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_yv0se")

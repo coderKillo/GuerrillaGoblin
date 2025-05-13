@@ -1,0 +1,68 @@
+extends Node3D
+
+var _players: Array
+var _target: Node3D
+var _index: int = 1
+
+
+func _ready():
+	_players = get_tree().get_nodes_in_group("player")
+
+	_select_player(_index)
+
+
+func _process(delta):
+	if Input.is_action_just_pressed("next_player"):
+		_change_index(+1)
+
+	if Input.is_action_just_pressed("previous_player"):
+		_change_index(-1)
+
+	if _target:
+		global_position = lerp(global_position, _target.global_position, delta * 5.0)
+
+
+func _physics_process(_delta):
+	if not _target:
+		return
+
+	if Input.is_action_just_pressed("attack"):
+		#var viewport := get_viewport()
+		#var direction = viewport.get_mouse_position() - viewport.get_visible_rect().size / 2.0
+		var mouse_pos = get_viewport().get_mouse_position()
+		var origin = $Camera3D.project_ray_origin(mouse_pos)
+		var end = origin + $Camera3D.project_ray_normal(mouse_pos) * 1000.0
+
+		var query = PhysicsRayQueryParameters3D.create(origin, end)
+		#query.collide_with_areas = true  # Enable Area3D detection
+		var result = get_world_3d().direct_space_state.intersect_ray(query)
+
+		if result:
+			if result.collider is RigidBody3D:
+				_target.attack(result.collider.global_position)
+			else:
+				_target.attack(result.position)
+
+	var input_dir = Input.get_vector("move_left", "move_right", "move_up", "move_down")
+	_target.direction = (
+		(_target.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
+	)
+
+
+func _change_index(delta: int):
+	_index += delta
+
+	if _index < 0:
+		_index = _players.size() - 1
+
+	elif _index >= _players.size():
+		_index = 0
+
+	_select_player(_index)
+
+
+func _select_player(index: int):
+	if _target:
+		_target.direction = Vector3.ZERO
+
+	_target = _players[index]

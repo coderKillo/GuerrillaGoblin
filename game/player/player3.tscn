@@ -1,0 +1,54 @@
+[gd_scene load_steps=8 format=3 uid="uid://bra7ugq4bdq68"]
+
+[ext_resource type="Script" path="res://game/player/player.gd" id="1_bptyk"]
+[ext_resource type="Texture2D" uid="uid://b6mh0yf1in0la" path="res://assets/tiny_swords/Factions/Goblins/Troops/Barrel/Red/Barrel_Red.png" id="2_jcmqs"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_gdri5"]
+radius = 0.215138
+height = 0.751405
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kimet"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_s7kmv"]
+material = SubResource("StandardMaterial3D_kimet")
+top_radius = 0.215
+bottom_radius = 0.215
+height = 0.001
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_73pu1"]
+transparency = 1
+albedo_color = Color(1, 0.231373, 0.231373, 0.196078)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_icnn5"]
+material = SubResource("StandardMaterial3D_73pu1")
+top_radius = 2.0
+bottom_radius = 2.0
+height = 0.001
+
+[node name="Player" type="CharacterBody3D" groups=["player"]]
+collision_mask = 7
+script = ExtResource("1_bptyk")
+weapon = 1
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.274691, 0)
+shape = SubResource("CapsuleShape3D_gdri5")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0.233123, 0)
+texture = ExtResource("2_jcmqs")
+region_enabled = true
+region_rect = Rect2(640, 128, 128, 128)
+
+[node name="Weapon" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.257324, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.088637, 0)
+mesh = SubResource("CylinderMesh_s7kmv")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0681062, 0)
+visible = false
+mesh = SubResource("CylinderMesh_icnn5")

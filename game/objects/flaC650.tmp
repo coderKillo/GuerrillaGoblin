@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://dkn22qyv8dr8y"]
+
+[ext_resource type="Script" path="res://game/objects/flamable.gd" id="1_6js7c"]
+[ext_resource type="Texture2D" uid="uid://bc5io4pd47ai0" path="res://assets/tiny_swords/Effects/Fire/Fire.png" id="1_6xswo"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_yhgwo"]
+size = Vector3(0.250244, 0.335693, 0.291016)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_jtd1h"]
+radius = 0.55
+
+[node name="Flamable" type="RigidBody3D"]
+collision_layer = 16
+collision_mask = 4
+script = ExtResource("1_6js7c")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0.136371, -0.115881)
+texture = ExtResource("1_6xswo")
+region_enabled = true
+region_rect = Rect2(0, 0, 128, 128)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00477569, 0.0121519)
+shape = SubResource("BoxShape3D_yhgwo")
+
+[node name="Area3D" type="Area3D" parent="."]
+collision_layer = 16
+collision_mask = 11
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("SphereShape3D_jtd1h")

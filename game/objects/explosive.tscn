@@ -1,0 +1,39 @@
+[gd_scene load_steps=6 format=3 uid="uid://ulu31nmx1nkd"]
+
+[ext_resource type="Script" path="res://game/objects/explosive.gd" id="1_0fcy7"]
+[ext_resource type="Texture2D" uid="uid://bh6sacwrg5yps" path="res://assets/tiny_swords/Factions/Goblins/Troops/TNT/Dynamite/Dynamite.png" id="1_obrd6"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_rgr4w"]
+size = Vector3(0.26947, 0.364319, 0.391815)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dhj4m"]
+transparency = 1
+albedo_color = Color(1, 0.231373, 0.231373, 0.196078)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_xgcfm"]
+material = SubResource("StandardMaterial3D_dhj4m")
+top_radius = 1.0
+bottom_radius = 1.0
+height = 0.001
+
+[node name="Explosive" type="RigidBody3D"]
+collision_layer = 8
+collision_mask = 7
+lock_rotation = true
+script = ExtResource("1_0fcy7")
+explosion_radius = 1.0
+explosion_force = 2.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00619507, 0.0331726, -0.0468292)
+shape = SubResource("BoxShape3D_rgr4w")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0)
+texture = ExtResource("1_obrd6")
+region_enabled = true
+region_rect = Rect2(0, 0, 64, 64)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.139254, 0)
+mesh = SubResource("CylinderMesh_xgcfm")
