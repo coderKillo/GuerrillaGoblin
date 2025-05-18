@@ -15,21 +15,16 @@ var added_velocity := Vector3.ZERO
 var _is_burning := false
 var _timer := 0.0
 var _cooldown := 0.0
-var _debug_timer := 0.0
-var _debug_pos := Vector3.ZERO
 
 @onready var _weapon_node = $Weapon
 @onready var _sprite = $Sprite3D
 @onready var _mesh = $MeshInstance3D2
+@onready var _shadow = $MeshInstance3D
 
 
 func _physics_process(delta):
 	if not is_on_floor():
 		velocity.y -= gravity * delta
-
-	if is_on_floor():
-		_debug_timer = 0.0
-		_debug_pos = global_position
 
 	if not is_on_floor():
 		velocity.x = move_toward(velocity.x, direction.x * SPEED, AIR_MOVEMENT_FACTOR)
@@ -44,8 +39,12 @@ func _physics_process(delta):
 	velocity += added_velocity
 	added_velocity = Vector3.ZERO
 
-	Drawline3d.DrawLine(global_position, global_position * Vector3(1, 0, 1), Color.BLACK)
 	move_and_slide()
+
+	_shadow.global_position.y = 0
+
+	if global_position.y < -1:
+		queue_free()
 
 
 func _process(delta):
@@ -69,7 +68,9 @@ func _process(delta):
 				explsion.explosion_force = 10.0
 				explsion.radius = 3
 				get_parent().add_child(explsion)
-				explsion.global_position = global_position
+
+				explsion.global_position = global_position - (velocity * delta)
+				global_position = _weapon_node.global_position
 
 				_is_burning = false
 				_mesh.hide()

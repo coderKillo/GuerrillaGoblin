@@ -1,14 +1,19 @@
 extends Node3D
 
 var _players: Array
+var _goals: Array
 var _target: Node3D
 var _index: int = 1
 
 
 func _ready():
 	_players = get_tree().get_nodes_in_group("player")
+	_goals = get_tree().get_nodes_in_group("goal")
 
 	_select_player(_index)
+
+	Events.lose.connect(_on_game_end.bind(false))
+	Events.win.connect(_on_game_end.bind(true))
 
 
 func _process(delta):
@@ -18,12 +23,19 @@ func _process(delta):
 	if Input.is_action_just_pressed("previous_player"):
 		_change_index(-1)
 
-	if _target:
+	if is_instance_valid(_target):
 		global_position = lerp(global_position, _target.global_position, delta * 5.0)
+	else:
+		_player_died()
+
+	_goals = _goals.filter(func(e): return is_instance_valid(e))
+
+	if _goals.size() <= 0:
+		Events.win.emit()
 
 
 func _physics_process(_delta):
-	if not _target:
+	if not is_instance_valid(_target):
 		return
 
 	if Input.is_action_just_pressed("attack"):
@@ -62,7 +74,23 @@ func _change_index(delta: int):
 
 
 func _select_player(index: int):
-	if _target:
+	if is_instance_valid(_target):
 		_target.direction = Vector3.ZERO
 
-	_target = _players[index]
+	if is_instance_valid(_players[index]):
+		_target = _players[index]
+
+
+func _player_died():
+	_players.remove_at(_index)
+	if _players.size() > 0:
+		_change_index(0)
+	else:
+		Events.lose.emit()
+
+
+func _on_game_end(win: bool):
+	if win:
+		%Label.text = "WIN!"
+	else:
+		%Label.text = "LOSE!"

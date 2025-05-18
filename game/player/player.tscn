@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://ck42d5swfs4ke"]
+[gd_scene load_steps=8 format=3 uid="uid://ck42d5swfs4ke"]
 
 [ext_resource type="Script" path="res://game/player/player.gd" id="1_jyd77"]
 [ext_resource type="Texture2D" uid="uid://dxjs6m7acms5m" path="res://assets/tiny_swords/Factions/Goblins/Troops/Torch/Red/Torch_Red.png" id="2_8jtjd"]
@@ -14,6 +14,16 @@ albedo_color = Color(0, 0, 0, 1)
 material = SubResource("StandardMaterial3D_cf4e7")
 top_radius = 0.215
 bottom_radius = 0.215
+height = 0.001
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_73pu1"]
+transparency = 1
+albedo_color = Color(1, 0.231373, 0.231373, 0.196078)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_wjju7"]
+material = SubResource("StandardMaterial3D_73pu1")
+top_radius = 2.0
+bottom_radius = 2.0
 height = 0.001
 
 [node name="Player" type="CharacterBody3D" groups=["player"]]
@@ -36,3 +46,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.265574, 0)
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.01, 0)
 mesh = SubResource("CylinderMesh_s56q1")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0681062, 0)
+visible = false
+mesh = SubResource("CylinderMesh_wjju7")

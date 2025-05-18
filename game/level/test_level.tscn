@@ -1,12 +1,13 @@
-[gd_scene load_steps=11 format=3 uid="uid://bdrr24hu5oas1"]
+[gd_scene load_steps=12 format=3 uid="uid://bdrr24hu5oas1"]
 
 [ext_resource type="PackedScene" uid="uid://ck42d5swfs4ke" path="res://game/player/player.tscn" id="1_em45f"]
 [ext_resource type="Texture2D" uid="uid://dvdb0u3xwf1uf" path="res://addons/godot-prototype-texture/Vector/grid_512x512/grid_black_512x512.svg" id="1_k0nb2"]
-[ext_resource type="Script" path="res://game/camera.gd" id="3_e5xbq"]
 [ext_resource type="PackedScene" uid="uid://bra7ugq4bdq68" path="res://game/player/player3.tscn" id="3_qdjax"]
 [ext_resource type="PackedScene" uid="uid://cdrcqi2kfcgpg" path="res://game/player/player2.tscn" id="4_y8vd0"]
+[ext_resource type="PackedScene" uid="uid://djecxv1octrfe" path="res://game/level/camera.tscn" id="5_rxgpg"]
 [ext_resource type="PackedScene" uid="uid://cq1cctjyunbh" path="res://game/objects/barrel.tscn" id="6_ngmev"]
 [ext_resource type="PackedScene" uid="uid://dkn22qyv8dr8y" path="res://game/objects/flamable.tscn" id="7_h4nff"]
+[ext_resource type="PackedScene" uid="uid://bvy5tpageq050" path="res://game/objects/goal.tscn" id="8_viixe"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_v1hlj"]
 albedo_texture = ExtResource("1_k0nb2")
@@ -17,9 +18,10 @@ uv1_triplanar = true
 size = Vector3(150, 1, 150)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_d18qo"]
-size = Vector3(150, 1, 150)
+size = Vector3(79.6694, 1, 150)
 
 [node name="Node3D" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0486879, 0, -0.000937462)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
@@ -32,7 +34,7 @@ mesh = SubResource("BoxMesh_43rx5")
 skeleton = NodePath("../..")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.616119, 0, -0.18042)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34.5492, 0, -0.18042)
 shape = SubResource("BoxShape3D_d18qo")
 
 [node name="Player" parent="." instance=ExtResource("1_em45f")]
@@ -47,14 +49,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.488932, 0, 5.20622)
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.126528, 0.991963, 0, -0.991963, 0.126528, 0, 3.40459, 0)
 
-[node name="Camera" type="Node3D" parent="."]
-script = ExtResource("3_e5xbq")
-
-[node name="Camera3D" type="Camera3D" parent="Camera"]
-transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 15, 15)
-projection = 1
-fov = 37.8493
-size = 15.0
+[node name="Camera" parent="." instance=ExtResource("5_rxgpg")]
 
 [node name="Explosive" parent="." instance=ExtResource("6_ngmev")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.704736, 0.486431, 1.71498)
@@ -64,6 +59,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.33715, 0.486431, 1.58786)
 
 [node name="Flamable" parent="." instance=ExtResource("7_h4nff")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.25144, 0, -0.0943232)
-burn_tick_time = 0.1
 burn_radius = 1.0
 infinit_flame = true
+
+[node name="Goal" parent="." instance=ExtResource("8_viixe")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.49598, 0.560277, 1.86452)
