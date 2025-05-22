@@ -1,7 +1,7 @@
 extends CharacterBody3D
 
 const SPEED = 5.0
-const AIR_MOVEMENT_FACTOR = 0.04
+const AIR_MOVEMENT_FACTOR = 0.2
 const PUSH_FORCE = 1.0
 
 enum Weapon { TORCH, BARREL, TNT }
@@ -15,6 +15,7 @@ var added_velocity := Vector3.ZERO
 var _is_burning := false
 var _timer := 0.0
 var _cooldown := 0.0
+var _max_air_speed := 0.0
 
 @onready var _weapon_node = $Weapon
 @onready var _sprite = $Sprite3D
@@ -26,13 +27,24 @@ func _physics_process(delta):
 	if not is_on_floor():
 		velocity.y -= gravity * delta
 
+	var is_in_air = not is_on_floor()
+
 	if not is_on_floor():
-		velocity.x = move_toward(velocity.x, direction.x * SPEED, AIR_MOVEMENT_FACTOR)
-		velocity.z = move_toward(velocity.z, direction.z * SPEED, AIR_MOVEMENT_FACTOR)
+		var velocity_xz = Vector2(velocity.x, velocity.z)
+		_max_air_speed = max(_max_air_speed, velocity_xz.length())
+		velocity_xz.x += direction.x * AIR_MOVEMENT_FACTOR
+		velocity_xz.y += direction.z * AIR_MOVEMENT_FACTOR
+
+		var speed = min(_max_air_speed, velocity_xz.length())
+		velocity_xz = velocity_xz.normalized() * speed
+
+		velocity.x = velocity_xz.x
+		velocity.z = velocity_xz.y
 	elif direction:
 		velocity.x = direction.x * SPEED
 		velocity.z = direction.z * SPEED
 	else:
+		_max_air_speed = 0.0
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		velocity.z = move_toward(velocity.z, 0, SPEED)
 
@@ -42,6 +54,9 @@ func _physics_process(delta):
 	move_and_slide()
 
 	_shadow.global_position.y = 0
+
+	if is_on_floor() and is_in_air:
+		_landing()
 
 	if global_position.y < -1:
 		queue_free()
@@ -139,6 +154,11 @@ func attack(target: Vector3):
 			pass
 
 
+func jump():
+	if is_on_floor():
+		velocity.y += 1.0
+
+
 func burn():
 	match weapon:
 		Weapon.TORCH:
@@ -171,3 +191,13 @@ func _calculate_launch_velocity(
 		(displacement.y / flight_time) + 0.5 * gravity * flight_time,
 		displacement.z / flight_time
 	)
+
+
+func _landing():
+	for explosive in get_tree().get_nodes_in_group("explosive"):
+		if explosive.global_position.distance_to(global_position) > 2.0:
+			continue
+
+		if not explosive._is_burning:
+			continue
+		explosive.timer = 0.0

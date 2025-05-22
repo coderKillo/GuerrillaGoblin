@@ -101,3 +101,24 @@ func DrawCube(Center, HalfExtents, LineColor, time = 0.0):
 	DrawRay(LinePointStart, Vector3(0, HalfExtents * 2.0, 0), LineColor, time)
 	LinePointStart += Vector3(0, 0, -HalfExtents * 2.0)
 	DrawRay(LinePointStart, Vector3(0, HalfExtents * 2.0, 0), LineColor, time)
+
+
+func DrawTrajectory(Start, End, LineColor, time = 0.0):
+	var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
+	var flight_time = 1.0
+	var displacement = End - Start
+	var max_points = 50
+	var delta = flight_time / max_points
+
+	var velocity = Vector3(
+		displacement.x / flight_time,
+		(displacement.y / flight_time) + 0.5 * gravity * flight_time,
+		displacement.z / flight_time
+	)
+	var point = Start
+	var prev_point = Start
+	for i in max_points:
+		velocity.y -= gravity * delta
+		point += velocity * delta
+		Drawline3d.DrawLine(point, prev_point, LineColor, time)
+		prev_point = point

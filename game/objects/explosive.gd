@@ -18,7 +18,6 @@ func _ready():
 
 
 func _process(delta):
-	# _draw_trajectory(Color.GREEN, 0.0)
 	if not _is_burning:
 		return
 

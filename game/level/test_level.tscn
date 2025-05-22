@@ -18,7 +18,7 @@ uv1_triplanar = true
 size = Vector3(150, 1, 150)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_d18qo"]
-size = Vector3(79.6694, 1, 150)
+size = Vector3(149.53, 1, 150)
 
 [node name="Node3D" type="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0486879, 0, -0.000937462)
@@ -34,7 +34,7 @@ mesh = SubResource("BoxMesh_43rx5")
 skeleton = NodePath("../..")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34.5492, 0, -0.18042)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.380862, 0, -0.18042)
 shape = SubResource("BoxShape3D_d18qo")
 
 [node name="Player" parent="." instance=ExtResource("1_em45f")]
@@ -52,10 +52,10 @@ transform = Transform3D(1, 0, 0, 0, 0.126528, 0.991963, 0, -0.991963, 0.126528, 
 [node name="Camera" parent="." instance=ExtResource("5_rxgpg")]
 
 [node name="Explosive" parent="." instance=ExtResource("6_ngmev")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.704736, 0.486431, 1.71498)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.251804, 0.486431, 1.71659)
 
 [node name="Explosive2" parent="." instance=ExtResource("6_ngmev")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.33715, 0.486431, 1.58786)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.2287, 0.486431, 1.58786)
 
 [node name="Flamable" parent="." instance=ExtResource("7_h4nff")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.25144, 0, -0.0943232)
