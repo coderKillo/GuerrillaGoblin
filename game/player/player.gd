@@ -103,8 +103,8 @@ func attack(target: Vector3):
 	var distance = global_position.distance_to(target_on_same_plane)
 	match weapon:
 		Weapon.TORCH:
-			if not _is_burning:
-				return
+			# if not _is_burning:
+			# 	return
 
 			if distance > 7.0:
 				return
@@ -115,7 +115,7 @@ func attack(target: Vector3):
 			get_parent().add_child(object)
 
 			if distance > 1.0:
-				_is_burning = false
+				# _is_burning = false
 				_sprite.modulate = Color.WHITE
 
 				object.burn_time = 1.3
@@ -185,6 +185,8 @@ func _calculate_launch_velocity(
 	start_pos: Vector3, target_pos: Vector3, flight_time: float
 ) -> Vector3:
 	var displacement := target_pos - start_pos
+	# TODO: continue
+	flight_time /= velocity.length()
 
 	return Vector3(
 		displacement.x / flight_time,
