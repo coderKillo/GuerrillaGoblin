@@ -1,0 +1,66 @@
+class_name MovementComponent
+extends Node
+
+@export var character: CharacterBody3D
+
+@export_group("config")
+@export var jump_velocity: float = 9.5
+@export var speed: float = 5.0
+@export var air_movement_factor: float = 0.2
+
+var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
+var movement_direction := Vector2.ZERO
+var added_velocity := Vector3.ZERO
+
+var velocity: Vector3:
+	set(value):
+		character.velocity = value
+	get:
+		return character.velocity
+
+var _max_air_speed := 0.0
+
+
+func _process(delta):
+	if not character.is_on_floor():
+		velocity.y -= gravity * delta
+
+	if not character.is_on_floor():
+		var air_velocity_xz = _get_air_velocity()
+
+		velocity.x = air_velocity_xz.x
+		velocity.z = air_velocity_xz.y
+
+	elif movement_direction:
+		velocity.x = movement_direction.x * speed
+		velocity.z = movement_direction.y * speed
+
+	else:
+		_max_air_speed = 0.0
+
+		velocity.x = move_toward(velocity.x, 0, speed)
+		velocity.z = move_toward(velocity.z, 0, speed)
+
+	velocity += added_velocity
+	added_velocity = Vector3.ZERO
+
+	character.move_and_slide()
+
+
+func jump():
+	if not character.is_on_floor():
+		return
+	character.velocity.y = jump_velocity
+
+
+func _get_air_velocity() -> Vector2:
+	var velocity_xz = Vector2(velocity.x, velocity.z)
+	_max_air_speed = max(_max_air_speed, velocity_xz.length())
+
+	velocity_xz.x += movement_direction.x * air_movement_factor
+	velocity_xz.y += movement_direction.y * air_movement_factor
+
+	var air_speed = min(_max_air_speed, velocity_xz.length())
+	velocity_xz = velocity_xz.normalized() * air_speed
+
+	return velocity_xz
