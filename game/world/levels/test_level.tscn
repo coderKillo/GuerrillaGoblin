@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://dcjw6qhvwmorf"]
+[gd_scene load_steps=26 format=3 uid="uid://dcjw6qhvwmorf"]
 
 [ext_resource type="Script" path="res://game/world/player_controller.gd" id="1_ae61t"]
 [ext_resource type="Script" path="res://game/world/game_camera.gd" id="2_nin4c"]
@@ -7,7 +7,6 @@
 [ext_resource type="Script" path="res://game/core/model2d.gd" id="4_hee7r"]
 [ext_resource type="Script" path="res://game/entities/components/movement_component.gd" id="6_yprmc"]
 [ext_resource type="Script" path="res://game/entities/components/animation_component.gd" id="7_6s4tk"]
-[ext_resource type="Script" path="res://game/entities/components/facing_component.gd" id="8_sg1ff"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_g254v"]
 size = Vector3(10, 0.1, 10)
@@ -179,6 +178,3 @@ character = NodePath("../CharacterBody3D")
 [node name="AnimationComponent" type="Node" parent="Player" node_paths=PackedStringArray("_animation")]
 script = ExtResource("7_6s4tk")
 _animation = NodePath("../Model/AnimatedSprite2D")
-
-[node name="FacingComponent" type="Node" parent="Player"]
-script = ExtResource("8_sg1ff")
