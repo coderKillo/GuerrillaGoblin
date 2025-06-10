@@ -50,7 +50,10 @@ func _process(delta):
 func jump():
 	if not character.is_on_floor():
 		return
-	character.velocity.y = jump_velocity
+	velocity.y = jump_velocity
+
+func is_moving() -> bool:
+	return velocity.length() > 0
 
 
 func _get_air_velocity() -> Vector2:
