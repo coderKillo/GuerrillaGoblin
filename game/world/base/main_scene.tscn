@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://iommge1oofmd"]
+
+[ext_resource type="Script" path="res://game/world/base/main_scene.gd" id="1_glar4"]
+[ext_resource type="Script" path="res://game/world/base/player_controller.gd" id="2_peo17"]
+[ext_resource type="Script" path="res://game/world/base/game_camera.gd" id="3_mv1a7"]
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_glar4")
+
+[node name="World" type="Node2D" parent="."]
+
+[node name="PlayerController" type="Node" parent="." node_paths=PackedStringArray("target")]
+script = ExtResource("2_peo17")
+target = NodePath("")
+
+[node name="GameCamera" type="Camera2D" parent="."]
+script = ExtResource("3_mv1a7")
+
+[node name="Camera3D" type="Camera3D" parent="GameCamera"]
+process_mode = 4
+transform = Transform3D(0.0222144, 0.58669, -0.809507, 0.00354425, 0.809655, 0.586895, 0.999747, -0.0159066, 0.0159066, -12.7697, 9.08571, 0.359023)
+visible = false
+cull_mask = 1047552
+size = 7.306

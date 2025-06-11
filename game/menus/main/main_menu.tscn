@@ -1,0 +1,74 @@
+[gd_scene load_steps=4 format=3 uid="uid://dnfs3c5ov8jtc"]
+
+[ext_resource type="Script" path="res://game/menus/main/main_menu.gd" id="1_j5hal"]
+[ext_resource type="PackedScene" uid="uid://bvbdxwtkxgxbu" path="res://game/gui/elements/buttons/animated_button.tscn" id="1_jfgn5"]
+[ext_resource type="Script" path="res://game/menus/animation_controller.gd" id="3_4v5i3"]
+
+[node name="MainScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_j5hal")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.0699918, 0.141423, 0.0889083, 1)
+
+[node name="CenterContainer2" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="CenterContainer2"]
+layout_mode = 2
+theme_override_constants/margin_top = -200
+
+[node name="Label" type="Label" parent="CenterContainer2/MarginContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.456844, 0.706656, 0.518501, 1)
+theme_override_colors/font_shadow_color = Color(0.986752, 0.986752, 0.986752, 1)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 2
+theme_override_font_sizes/font_size = 100
+text = "Guerrilla Goblin"
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="CenterContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 200
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/MarginContainer"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Play" parent="CenterContainer/MarginContainer/VBoxContainer" instance=ExtResource("1_jfgn5")]
+unique_name_in_owner = true
+layout_mode = 2
+label_text = "Play"
+
+[node name="Exit" parent="CenterContainer/MarginContainer/VBoxContainer" instance=ExtResource("1_jfgn5")]
+unique_name_in_owner = true
+layout_mode = 2
+label_text = "Exit"
+
+[node name="AnimationController" type="Node" parent="."]
+script = ExtResource("3_4v5i3")

@@ -16,3 +16,5 @@ enum COLLISION_LAYER {
 	FIRE = 1 << 13,
 	FLAMABLE = 1 << 14,
 }
+
+const BUTTON_GROUP = "button"

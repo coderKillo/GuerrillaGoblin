@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://dcjw6qhvwmorf"]
 
-[ext_resource type="Script" path="res://game/world/player_controller.gd" id="1_ae61t"]
-[ext_resource type="Script" path="res://game/world/game_camera.gd" id="2_nin4c"]
+[ext_resource type="Script" path="res://game/world/base/player_controller.gd" id="1_ae61t"]
+[ext_resource type="Script" path="res://game/world/base/game_camera.gd" id="2_nin4c"]
 [ext_resource type="PackedScene" uid="uid://dn2hswaq6jltc" path="res://game/entities/player/player.tscn" id="3_hffx7"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_g254v"]
@@ -38,9 +38,11 @@ skeleton = NodePath("../..")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="World/StaticBody3D2"]
 shape = SubResource("BoxShape3D_c3muj")
 
+[node name="Player" parent="World" instance=ExtResource("3_hffx7")]
+
 [node name="PlayerController" type="Node" parent="." node_paths=PackedStringArray("target")]
 script = ExtResource("1_ae61t")
-target = NodePath("../Player")
+target = NodePath("../World/Player")
 
 [node name="GameCamera" type="Camera2D" parent="."]
 script = ExtResource("2_nin4c")
@@ -51,8 +53,3 @@ transform = Transform3D(0.0222144, 0.58669, -0.809507, 0.00354425, 0.809655, 0.5
 visible = false
 cull_mask = 1047552
 size = 7.306
-
-[node name="Player" parent="." instance=ExtResource("3_hffx7")]
-
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 0, 6, 0)
