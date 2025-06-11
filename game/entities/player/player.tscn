@@ -1,0 +1,153 @@
+[gd_scene load_steps=23 format=3 uid="uid://dn2hswaq6jltc"]
+
+[ext_resource type="Script" path="res://game/entities/player/player.gd" id="1_5dn5p"]
+[ext_resource type="Script" path="res://game/core/model2d.gd" id="2_20cjh"]
+[ext_resource type="Texture2D" uid="uid://dxjs6m7acms5m" path="res://assets/tiny_swords/Factions/Goblins/Troops/Torch/Red/Torch_Red.png" id="3_2jmc8"]
+[ext_resource type="Script" path="res://game/entities/components/movement_component.gd" id="4_bdqg1"]
+[ext_resource type="Script" path="res://game/entities/components/animation_component.gd" id="5_pgj6x"]
+[ext_resource type="Script" path="res://game/entities/components/attack_component.gd" id="6_56mff"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_f7gll"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_wjlw4"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6mfsd"]
+atlas = ExtResource("3_2jmc8")
+region = Rect2(0, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vkbx5"]
+atlas = ExtResource("3_2jmc8")
+region = Rect2(192, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f8y1n"]
+atlas = ExtResource("3_2jmc8")
+region = Rect2(384, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tda17"]
+atlas = ExtResource("3_2jmc8")
+region = Rect2(576, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1ml44"]
+atlas = ExtResource("3_2jmc8")
+region = Rect2(768, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5wkcm"]
+atlas = ExtResource("3_2jmc8")
+region = Rect2(960, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2wnjh"]
+atlas = ExtResource("3_2jmc8")
+region = Rect2(1152, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5alob"]
+atlas = ExtResource("3_2jmc8")
+region = Rect2(0, 192, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p3tym"]
+atlas = ExtResource("3_2jmc8")
+region = Rect2(192, 192, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3xmch"]
+atlas = ExtResource("3_2jmc8")
+region = Rect2(384, 192, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_us1vc"]
+atlas = ExtResource("3_2jmc8")
+region = Rect2(576, 192, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rk75k"]
+atlas = ExtResource("3_2jmc8")
+region = Rect2(768, 192, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1vdys"]
+atlas = ExtResource("3_2jmc8")
+region = Rect2(960, 192, 192, 192)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_dt7ej"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6mfsd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vkbx5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f8y1n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tda17")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1ml44")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5wkcm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2wnjh")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5alob")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p3tym")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3xmch")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_us1vc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rk75k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1vdys")
+}],
+"loop": true,
+"name": &"move",
+"speed": 10.0
+}]
+
+[node name="Player" type="Node2D" node_paths=PackedStringArray("object_3d", "model_2d")]
+script = ExtResource("1_5dn5p")
+object_3d = NodePath("CharacterBody3D")
+model_2d = NodePath("Model")
+
+[node name="CharacterBody3D" type="CharacterBody3D" parent="."]
+collision_mask = 787
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.972198, 0)
+mesh = SubResource("CapsuleMesh_f7gll")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5211, 0)
+shape = SubResource("BoxShape3D_wjlw4")
+
+[node name="Model" type="Node2D" parent="." node_paths=PackedStringArray("sprites")]
+script = ExtResource("2_20cjh")
+sprites = [NodePath("AnimatedSprite2D")]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Model"]
+position = Vector2(0, -32)
+sprite_frames = SubResource("SpriteFrames_dt7ej")
+animation = &"idle"
+autoplay = "idle"
+
+[node name="MovementComponent" type="Node" parent="." node_paths=PackedStringArray("character")]
+script = ExtResource("4_bdqg1")
+character = NodePath("../CharacterBody3D")
+
+[node name="AnimationComponent" type="Node" parent="." node_paths=PackedStringArray("_animation")]
+script = ExtResource("5_pgj6x")
+_animation = NodePath("../Model/AnimatedSprite2D")
+
+[node name="AttackComponent" type="Node" parent="."]
+script = ExtResource("6_56mff")
