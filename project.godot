@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Guerrilla Goblin"
-run/main_scene="res://game/level/test_level.tscn"
+run/main_scene="res://game/menus/main/main_menu.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -19,6 +19,8 @@ config/icon="res://icon.svg"
 
 Events="*res://game/autoload/events.gd"
 Resources="*res://game/autoload/resources.gd"
+SceneChanger="*res://game/autoload/scene_changer/scene_changer.tscn"
+GameState="*res://game/autoload/gamestate.gd"
 
 [debug_draw_3d]
 

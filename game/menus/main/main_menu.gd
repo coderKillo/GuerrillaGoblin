@@ -10,7 +10,7 @@ func _ready():
 
 
 func _on_play_button_pressed():
-	SceneChanger.change_scene(Resources.levels[0])
+	SceneChanger.change_scene(Resources.select_level_scene)
 
 
 func _on_exit_button_pressed():
