@@ -31,3 +31,14 @@ static func get_global_mouse_position_3d(viewport: Viewport) -> Vector3:
 		viewport.get_camera_2d().get_global_mouse_position(),
 		viewport.get_camera_3d().get_world_3d()
 	)
+
+
+static func time_to_string(time_s: int) -> String:
+	var hours = int(time_s / 3600.0) % 24
+	var minutes = int(time_s / 60.0) % 60
+	var seconds = int(time_s) % 60
+
+	if hours > 0:
+		return "%02d:%02d:%02d" % [hours, minutes, seconds]
+	else:
+		return "%02d:%02d" % [minutes, seconds]

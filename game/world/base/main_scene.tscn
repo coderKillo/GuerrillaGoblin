@@ -1,17 +1,21 @@
-[gd_scene load_steps=4 format=3 uid="uid://iommge1oofmd"]
+[gd_scene load_steps=9 format=3 uid="uid://iommge1oofmd"]
 
 [ext_resource type="Script" path="res://game/world/base/main_scene.gd" id="1_glar4"]
 [ext_resource type="Script" path="res://game/world/base/player_controller.gd" id="2_peo17"]
 [ext_resource type="Script" path="res://game/world/base/game_camera.gd" id="3_mv1a7"]
+[ext_resource type="PackedScene" uid="uid://c43f5l4dqvmlu" path="res://game/gui/screens/death_screen/death_screen.tscn" id="4_2iy4l"]
+[ext_resource type="Script" path="res://game/gui/gui.gd" id="4_t76n6"]
+[ext_resource type="PackedScene" uid="uid://c3o5yv76xnwja" path="res://game/gui/screens/win_screen/win_screen.tscn" id="5_xwd0y"]
+[ext_resource type="PackedScene" uid="uid://ck6b7rif2o7aw" path="res://game/gui/screens/pause_screen/pause_screen.tscn" id="6_6h6t4"]
+[ext_resource type="Script" path="res://game/menus/animation_controller.gd" id="8_yw03c"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_glar4")
 
 [node name="World" type="Node2D" parent="."]
 
-[node name="PlayerController" type="Node" parent="." node_paths=PackedStringArray("target")]
+[node name="PlayerController" type="Node" parent="."]
 script = ExtResource("2_peo17")
-target = NodePath("")
 
 [node name="GameCamera" type="Camera2D" parent="."]
 script = ExtResource("3_mv1a7")
@@ -22,3 +26,20 @@ transform = Transform3D(0.0222144, 0.58669, -0.809507, 0.00354425, 0.809655, 0.5
 visible = false
 cull_mask = 1047552
 size = 7.306
+
+[node name="Gui" type="CanvasLayer" parent="."]
+process_mode = 3
+script = ExtResource("4_t76n6")
+
+[node name="DeathScreen" parent="Gui" instance=ExtResource("4_2iy4l")]
+visible = false
+
+[node name="WinScreen" parent="Gui" instance=ExtResource("5_xwd0y")]
+visible = false
+
+[node name="PauseScreen" parent="Gui" instance=ExtResource("6_6h6t4")]
+visible = false
+
+[node name="AnimationController" type="Node" parent="Gui"]
+process_mode = 3
+script = ExtResource("8_yw03c")

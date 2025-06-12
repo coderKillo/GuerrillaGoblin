@@ -19,6 +19,7 @@ gradient = SubResource("Gradient_5soiv")
 
 [node name="SceneChanger" type="CanvasLayer"]
 process_mode = 3
+layer = 99
 script = ExtResource("1_astn1")
 
 [node name="Transition" type="TextureRect" parent="."]
