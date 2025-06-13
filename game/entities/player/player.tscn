@@ -1,91 +1,92 @@
-[gd_scene load_steps=23 format=3 uid="uid://dn2hswaq6jltc"]
+[gd_scene load_steps=24 format=3 uid="uid://dn2hswaq6jltc"]
 
 [ext_resource type="Script" path="res://game/entities/player/player.gd" id="1_5dn5p"]
 [ext_resource type="Script" path="res://game/core/model2d.gd" id="2_20cjh"]
-[ext_resource type="Texture2D" uid="uid://dxjs6m7acms5m" path="res://assets/tiny_swords/Factions/Goblins/Troops/Torch/Red/Torch_Red.png" id="3_2jmc8"]
+[ext_resource type="Texture2D" uid="uid://brd4f74v5ev46" path="res://game/entities/player/torch/Torch_Red2.png" id="3_qcvhu"]
 [ext_resource type="Script" path="res://game/entities/components/movement_component.gd" id="4_bdqg1"]
 [ext_resource type="Script" path="res://game/entities/components/animation_component.gd" id="5_pgj6x"]
 [ext_resource type="Script" path="res://game/entities/components/attack_component.gd" id="6_56mff"]
+[ext_resource type="PackedScene" uid="uid://cllc1goumvfpx" path="res://game/entities/components/shadow_component/shadow_component.tscn" id="7_o1bpq"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_f7gll"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_wjlw4"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_6mfsd"]
-atlas = ExtResource("3_2jmc8")
+[sub_resource type="AtlasTexture" id="AtlasTexture_mn0q0"]
+atlas = ExtResource("3_qcvhu")
 region = Rect2(0, 0, 192, 192)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_vkbx5"]
-atlas = ExtResource("3_2jmc8")
+[sub_resource type="AtlasTexture" id="AtlasTexture_tw74x"]
+atlas = ExtResource("3_qcvhu")
 region = Rect2(192, 0, 192, 192)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_f8y1n"]
-atlas = ExtResource("3_2jmc8")
+[sub_resource type="AtlasTexture" id="AtlasTexture_v1iph"]
+atlas = ExtResource("3_qcvhu")
 region = Rect2(384, 0, 192, 192)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_tda17"]
-atlas = ExtResource("3_2jmc8")
+[sub_resource type="AtlasTexture" id="AtlasTexture_awqu5"]
+atlas = ExtResource("3_qcvhu")
 region = Rect2(576, 0, 192, 192)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_1ml44"]
-atlas = ExtResource("3_2jmc8")
+[sub_resource type="AtlasTexture" id="AtlasTexture_5mryr"]
+atlas = ExtResource("3_qcvhu")
 region = Rect2(768, 0, 192, 192)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_5wkcm"]
-atlas = ExtResource("3_2jmc8")
+[sub_resource type="AtlasTexture" id="AtlasTexture_xvgk4"]
+atlas = ExtResource("3_qcvhu")
 region = Rect2(960, 0, 192, 192)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_2wnjh"]
-atlas = ExtResource("3_2jmc8")
+[sub_resource type="AtlasTexture" id="AtlasTexture_4k5pf"]
+atlas = ExtResource("3_qcvhu")
 region = Rect2(1152, 0, 192, 192)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_5alob"]
-atlas = ExtResource("3_2jmc8")
+[sub_resource type="AtlasTexture" id="AtlasTexture_2m5yb"]
+atlas = ExtResource("3_qcvhu")
 region = Rect2(0, 192, 192, 192)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_p3tym"]
-atlas = ExtResource("3_2jmc8")
+[sub_resource type="AtlasTexture" id="AtlasTexture_e6iur"]
+atlas = ExtResource("3_qcvhu")
 region = Rect2(192, 192, 192, 192)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_3xmch"]
-atlas = ExtResource("3_2jmc8")
+[sub_resource type="AtlasTexture" id="AtlasTexture_8t0e8"]
+atlas = ExtResource("3_qcvhu")
 region = Rect2(384, 192, 192, 192)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_us1vc"]
-atlas = ExtResource("3_2jmc8")
+[sub_resource type="AtlasTexture" id="AtlasTexture_e8p5q"]
+atlas = ExtResource("3_qcvhu")
 region = Rect2(576, 192, 192, 192)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_rk75k"]
-atlas = ExtResource("3_2jmc8")
+[sub_resource type="AtlasTexture" id="AtlasTexture_ohsh1"]
+atlas = ExtResource("3_qcvhu")
 region = Rect2(768, 192, 192, 192)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_1vdys"]
-atlas = ExtResource("3_2jmc8")
+[sub_resource type="AtlasTexture" id="AtlasTexture_jgc1m"]
+atlas = ExtResource("3_qcvhu")
 region = Rect2(960, 192, 192, 192)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_dt7ej"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_6mfsd")
+"texture": SubResource("AtlasTexture_mn0q0")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_vkbx5")
+"texture": SubResource("AtlasTexture_tw74x")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_f8y1n")
+"texture": SubResource("AtlasTexture_v1iph")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_tda17")
+"texture": SubResource("AtlasTexture_awqu5")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_1ml44")
+"texture": SubResource("AtlasTexture_5mryr")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_5wkcm")
+"texture": SubResource("AtlasTexture_xvgk4")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_2wnjh")
+"texture": SubResource("AtlasTexture_4k5pf")
 }],
 "loop": true,
 "name": &"idle",
@@ -93,22 +94,22 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_5alob")
+"texture": SubResource("AtlasTexture_2m5yb")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_p3tym")
+"texture": SubResource("AtlasTexture_e6iur")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_3xmch")
+"texture": SubResource("AtlasTexture_8t0e8")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_us1vc")
+"texture": SubResource("AtlasTexture_e8p5q")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_rk75k")
+"texture": SubResource("AtlasTexture_ohsh1")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_1vdys")
+"texture": SubResource("AtlasTexture_jgc1m")
 }],
 "loop": true,
 "name": &"move",
@@ -131,6 +132,8 @@ mesh = SubResource("CapsuleMesh_f7gll")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5211, 0)
 shape = SubResource("BoxShape3D_wjlw4")
 
+[node name="Sprite3D" type="Sprite3D" parent="CharacterBody3D"]
+
 [node name="Model" type="Node2D" parent="." node_paths=PackedStringArray("sprites")]
 script = ExtResource("2_20cjh")
 sprites = [NodePath("AnimatedSprite2D")]
@@ -151,3 +154,7 @@ _animation = NodePath("../Model/AnimatedSprite2D")
 
 [node name="AttackComponent" type="Node" parent="."]
 script = ExtResource("6_56mff")
+
+[node name="ShadowComponent" parent="." node_paths=PackedStringArray("model2d", "body3d") instance=ExtResource("7_o1bpq")]
+model2d = NodePath("../Model")
+body3d = NodePath("../CharacterBody3D")
