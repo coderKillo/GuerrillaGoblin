@@ -1,16 +1,92 @@
-[gd_scene load_steps=24 format=3 uid="uid://dn2hswaq6jltc"]
+[gd_scene load_steps=43 format=3 uid="uid://dn2hswaq6jltc"]
 
 [ext_resource type="Script" path="res://game/entities/player/player.gd" id="1_5dn5p"]
 [ext_resource type="Script" path="res://game/core/model2d.gd" id="2_20cjh"]
+[ext_resource type="Script" path="res://game/entities/components/attack_component/weapons/torch.gd" id="3_0bw3b"]
 [ext_resource type="Texture2D" uid="uid://brd4f74v5ev46" path="res://game/entities/player/torch/Torch_Red2.png" id="3_qcvhu"]
 [ext_resource type="Script" path="res://game/entities/components/movement_component.gd" id="4_bdqg1"]
 [ext_resource type="Script" path="res://game/entities/components/animation_component.gd" id="5_pgj6x"]
-[ext_resource type="Script" path="res://game/entities/components/attack_component.gd" id="6_56mff"]
+[ext_resource type="Script" path="res://game/entities/components/attack_component/attack_component.gd" id="6_gvgkh"]
 [ext_resource type="PackedScene" uid="uid://cllc1goumvfpx" path="res://game/entities/components/shadow_component/shadow_component.tscn" id="7_o1bpq"]
 
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_f7gll"]
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_h3jcw"]
+radius = 0.266543
+height = 0.831711
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_wjlw4"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_64rla"]
+size = Vector3(0.656309, 0.748047, 1.07159)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_521p3"]
+atlas = ExtResource("3_qcvhu")
+region = Rect2(0, 384, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_flq5v"]
+atlas = ExtResource("3_qcvhu")
+region = Rect2(192, 384, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aajdl"]
+atlas = ExtResource("3_qcvhu")
+region = Rect2(384, 384, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oog2e"]
+atlas = ExtResource("3_qcvhu")
+region = Rect2(576, 384, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lr4jn"]
+atlas = ExtResource("3_qcvhu")
+region = Rect2(768, 384, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4bf5v"]
+atlas = ExtResource("3_qcvhu")
+region = Rect2(960, 384, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aopt5"]
+atlas = ExtResource("3_qcvhu")
+region = Rect2(0, 576, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y7d0o"]
+atlas = ExtResource("3_qcvhu")
+region = Rect2(192, 576, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vypik"]
+atlas = ExtResource("3_qcvhu")
+region = Rect2(384, 576, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bo5m5"]
+atlas = ExtResource("3_qcvhu")
+region = Rect2(576, 576, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eews5"]
+atlas = ExtResource("3_qcvhu")
+region = Rect2(768, 576, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gig4j"]
+atlas = ExtResource("3_qcvhu")
+region = Rect2(960, 576, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mxule"]
+atlas = ExtResource("3_qcvhu")
+region = Rect2(0, 768, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8jcnx"]
+atlas = ExtResource("3_qcvhu")
+region = Rect2(192, 768, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l7ghf"]
+atlas = ExtResource("3_qcvhu")
+region = Rect2(384, 768, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_623ck"]
+atlas = ExtResource("3_qcvhu")
+region = Rect2(576, 768, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2hvmw"]
+atlas = ExtResource("3_qcvhu")
+region = Rect2(768, 768, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1hg2o"]
+atlas = ExtResource("3_qcvhu")
+region = Rect2(960, 768, 192, 192)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mn0q0"]
 atlas = ExtResource("3_qcvhu")
@@ -68,6 +144,75 @@ region = Rect2(960, 192, 192, 192)
 animations = [{
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_521p3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_flq5v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aajdl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oog2e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lr4jn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4bf5v")
+}],
+"loop": false,
+"name": &"attack",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aopt5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y7d0o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vypik")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bo5m5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eews5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gig4j")
+}],
+"loop": false,
+"name": &"attack_down",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mxule")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8jcnx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l7ghf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_623ck")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2hvmw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1hg2o")
+}],
+"loop": false,
+"name": &"attack_up",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_mn0q0")
 }, {
 "duration": 1.0,
@@ -122,17 +267,31 @@ object_3d = NodePath("CharacterBody3D")
 model_2d = NodePath("Model")
 
 [node name="CharacterBody3D" type="CharacterBody3D" parent="."]
-collision_mask = 787
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="CharacterBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.972198, 0)
-mesh = SubResource("CapsuleMesh_f7gll")
+collision_mask = 799
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5211, 0)
-shape = SubResource("BoxShape3D_wjlw4")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.423944, 0)
+shape = SubResource("CapsuleShape3D_h3jcw")
 
 [node name="Sprite3D" type="Sprite3D" parent="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0.350926, 0)
+pixel_size = 0.0156
+texture = ExtResource("3_qcvhu")
+region_enabled = true
+region_rect = Rect2(0, 192, 192, 192)
+
+[node name="Torch" type="Node3D" parent="CharacterBody3D"]
+transform = Transform3D(0.996345, 0, -0.0854169, 0, 1, 0, 0.0854169, 0, 0.996345, -0.0046441, 0.24286, 0)
+script = ExtResource("3_0bw3b")
+
+[node name="Area3D" type="Area3D" parent="CharacterBody3D/Torch"]
+collision_layer = 8192
+collision_mask = 8192
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D/Torch/Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.85221, 0.177246, -0.00827026)
+shape = SubResource("BoxShape3D_64rla")
+disabled = true
 
 [node name="Model" type="Node2D" parent="." node_paths=PackedStringArray("sprites")]
 script = ExtResource("2_20cjh")
@@ -141,8 +300,10 @@ sprites = [NodePath("AnimatedSprite2D")]
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Model"]
 position = Vector2(0, -32)
 sprite_frames = SubResource("SpriteFrames_dt7ej")
-animation = &"idle"
+animation = &"attack"
 autoplay = "idle"
+frame = 5
+frame_progress = 1.0
 
 [node name="MovementComponent" type="Node" parent="." node_paths=PackedStringArray("character")]
 script = ExtResource("4_bdqg1")
@@ -152,8 +313,9 @@ character = NodePath("../CharacterBody3D")
 script = ExtResource("5_pgj6x")
 _animation = NodePath("../Model/AnimatedSprite2D")
 
-[node name="AttackComponent" type="Node" parent="."]
-script = ExtResource("6_56mff")
+[node name="AttackComponent" type="Node" parent="." node_paths=PackedStringArray("weapon")]
+script = ExtResource("6_gvgkh")
+weapon = NodePath("../CharacterBody3D/Torch")
 
 [node name="ShadowComponent" parent="." node_paths=PackedStringArray("model2d", "body3d") instance=ExtResource("7_o1bpq")]
 model2d = NodePath("../Model")

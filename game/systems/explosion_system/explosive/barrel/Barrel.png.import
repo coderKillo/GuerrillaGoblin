@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://brd4f74v5ev46"
-path.s3tc="res://.godot/imported/Torch_Red2.png-bb7a10bdc3d6bb6c6aa77a22cf70bec2.s3tc.ctex"
+uid="uid://bs5ju81migi0a"
+path.s3tc="res://.godot/imported/Barrel.png-5d4ad1d3903077cbd7a8244921068d42.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://game/entities/player/torch/Torch_Red2.png"
-dest_files=["res://.godot/imported/Torch_Red2.png-bb7a10bdc3d6bb6c6aa77a22cf70bec2.s3tc.ctex"]
+source_file="res://game/systems/explosion_system/explosive/barrel/Barrel.png"
+dest_files=["res://.godot/imported/Barrel.png-5d4ad1d3903077cbd7a8244921068d42.s3tc.ctex"]
 
 [params]
 

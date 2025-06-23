@@ -18,7 +18,7 @@ static func ground_position_3d(position: Vector2, world: World3D) -> Vector3:
 	query.collision_mask = Globals.COLLISION_LAYER.GROUND
 
 	var result = world.direct_space_state.intersect_ray(query)
-	DebugDraw3D.draw_line(virtual_camera_3d_position, ground_position, Color(1, 1, 0), 1.0)
+	# DebugDraw3D.draw_line(virtual_camera_3d_position, ground_position, Color(1, 1, 0), 1.0)
 
 	if result:
 		return result.position

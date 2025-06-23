@@ -12,7 +12,7 @@ enum COLLISION_LAYER {
 	STATIC = 1 << 4,
 	GROUND = 1 << 8,
 	WALL = 1 << 9,
-	EXPLOSIVE = 1 << 12,
+	FORCE = 1 << 12,
 	FIRE = 1 << 13,
 	FLAMABLE = 1 << 14,
 }

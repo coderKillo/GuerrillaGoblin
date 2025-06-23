@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://dcjw6qhvwmorf"]
+[gd_scene load_steps=7 format=3 uid="uid://dcjw6qhvwmorf"]
 
 [ext_resource type="Script" path="res://game/world/base/player_controller.gd" id="1_ae61t"]
 [ext_resource type="Script" path="res://game/world/base/game_camera.gd" id="2_nin4c"]
 [ext_resource type="PackedScene" uid="uid://dn2hswaq6jltc" path="res://game/entities/player/player.tscn" id="3_hffx7"]
+[ext_resource type="PackedScene" uid="uid://dcxxo4m7cqica" path="res://game/systems/explosion_system/explosive/barrel/barrel.tscn" id="4_tcm7y"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_g254v"]
 size = Vector3(10, 0.1, 10)
@@ -13,6 +14,7 @@ size = Vector3(10, 0.1, 10)
 [node name="TestLevel" type="Node2D"]
 
 [node name="World" type="Node2D" parent="."]
+y_sort_enabled = true
 
 [node name="StaticBody3D" type="StaticBody3D" parent="World"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.05, 0)
@@ -28,6 +30,7 @@ shape = SubResource("BoxShape3D_c3muj")
 
 [node name="StaticBody3D2" type="StaticBody3D" parent="World"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.997, 1.684, 0)
+visible = false
 collision_layer = 256
 collision_mask = 287
 
@@ -40,16 +43,20 @@ shape = SubResource("BoxShape3D_c3muj")
 
 [node name="Player" parent="World" instance=ExtResource("3_hffx7")]
 
+[node name="Barrel" parent="World" instance=ExtResource("4_tcm7y")]
+position = Vector2(255, 0)
+
 [node name="PlayerController" type="Node" parent="." node_paths=PackedStringArray("target")]
 script = ExtResource("1_ae61t")
 target = NodePath("../World/Player")
 
 [node name="GameCamera" type="Camera2D" parent="."]
+visible = false
 script = ExtResource("2_nin4c")
 
 [node name="Camera3D" type="Camera3D" parent="GameCamera"]
 process_mode = 4
-transform = Transform3D(0.0222144, 0.58669, -0.809507, 0.00354425, 0.809655, 0.586895, 0.999747, -0.0159066, 0.0159066, -12.7697, 9.08571, 0.359023)
-visible = false
-cull_mask = 1047552
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 5.399, 4.795)
+cull_mask = 1047553
+projection = 1
 size = 7.306

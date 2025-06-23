@@ -1,0 +1,119 @@
+[gd_scene load_steps=14 format=3 uid="uid://dcxxo4m7cqica"]
+
+[ext_resource type="Script" path="res://game/systems/explosion_system/explosive/barrel/barrel.gd" id="1_x6d3p"]
+[ext_resource type="Texture2D" uid="uid://bs5ju81migi0a" path="res://game/systems/explosion_system/explosive/barrel/Barrel.png" id="2_2tbno"]
+[ext_resource type="Script" path="res://game/core/model2d.gd" id="3_48rc8"]
+[ext_resource type="Script" path="res://game/systems/explosion_system/fire/fire_detector.gd" id="4_2r1y5"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_f6dh4"]
+height = 0.507251
+radius = 0.400427
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uykwo"]
+atlas = ExtResource("2_2tbno")
+region = Rect2(0, 256, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n3meu"]
+atlas = ExtResource("2_2tbno")
+region = Rect2(128, 256, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0bt06"]
+atlas = ExtResource("2_2tbno")
+region = Rect2(256, 256, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4qed1"]
+atlas = ExtResource("2_2tbno")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oc3jg"]
+atlas = ExtResource("2_2tbno")
+region = Rect2(0, 128, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_peqi5"]
+atlas = ExtResource("2_2tbno")
+region = Rect2(128, 128, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_32yyk"]
+atlas = ExtResource("2_2tbno")
+region = Rect2(256, 128, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6kke4"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uykwo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n3meu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0bt06")
+}],
+"loop": true,
+"name": &"hit",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4qed1")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oc3jg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_peqi5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_32yyk")
+}],
+"loop": true,
+"name": &"tick",
+"speed": 10.0
+}]
+
+[node name="Barrel" type="Node2D" node_paths=PackedStringArray("object_3d", "model_2d")]
+script = ExtResource("1_x6d3p")
+object_3d = NodePath("RigidBody3D")
+model_2d = NodePath("Model2D")
+
+[node name="RigidBody3D" type="RigidBody3D" parent="."]
+collision_layer = 8
+collision_mask = 779
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.243226, 0)
+shape = SubResource("CylinderShape3D_f6dh4")
+
+[node name="Sprite3D" type="Sprite3D" parent="RigidBody3D"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0.352618, 0)
+pixel_size = 0.0156
+texture = ExtResource("2_2tbno")
+region_enabled = true
+region_rect = Rect2(0, 0, 128, 128)
+
+[node name="FireDetectArea" type="Area3D" parent="RigidBody3D"]
+collision_layer = 0
+collision_mask = 8192
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="RigidBody3D/FireDetectArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.246267, 0)
+shape = SubResource("CylinderShape3D_f6dh4")
+
+[node name="Model2D" type="Node2D" parent="."]
+script = ExtResource("3_48rc8")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Model2D"]
+position = Vector2(0, -32)
+sprite_frames = SubResource("SpriteFrames_6kke4")
+animation = &"hit"
+autoplay = "idle"
+frame_progress = 0.91422
+
+[node name="FireDetector" type="Node" parent="." node_paths=PackedStringArray("_area")]
+script = ExtResource("4_2r1y5")
+_area = NodePath("../RigidBody3D/FireDetectArea")

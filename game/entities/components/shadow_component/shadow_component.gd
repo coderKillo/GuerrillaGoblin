@@ -18,7 +18,6 @@ func _physics_process(_delta):
 
 	var ground_vector = body3d.global_position - _get_ground_position()
 	var scale_factor = 1 - ground_vector.y / SHADOW_VISIBLE_DISTANCE
-	print(scale_factor)
 
 	shadow_sprite.offset.y = (
 		(-body3d.global_position.y + ground_vector.y) * Globals.SCALE * Globals.BASE_VECTOR.y
