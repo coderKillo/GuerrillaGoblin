@@ -7,7 +7,7 @@ signal fire_consumed
 @export var _scan_interval: float = 0.5
 
 var _scan_timer: float
-var _ignore_areas: Array[Area3D]
+var _ignore_areas: Array[EmitterArea]
 
 
 func _ready():
@@ -28,6 +28,10 @@ func _physics_process(delta):
 	for area in _area.get_overlapping_areas():
 		if area in _ignore_areas:
 			return
+		var emitter := area as EmitterArea
+		if not emitter:
+			return
+		emitter.body_collided += 1
 		fire_consumed.emit()
 		break
 
@@ -35,5 +39,10 @@ func _physics_process(delta):
 
 
 func _on_area_entered(area: Area3D):
+	var emitter := area as EmitterArea
+	if not emitter:
+		return
+
+	emitter.body_collided += 1
 	_ignore_areas.append(area)
 	fire_consumed.emit()

@@ -57,6 +57,6 @@ script = ExtResource("2_nin4c")
 [node name="Camera3D" type="Camera3D" parent="GameCamera"]
 process_mode = 4
 transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 5.399, 4.795)
-cull_mask = 1047553
+cull_mask = 1047552
 projection = 1
 size = 7.306

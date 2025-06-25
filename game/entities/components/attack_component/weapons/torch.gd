@@ -2,18 +2,24 @@ extends Weapon
 
 @export var enable_duration := 0.5
 
-#@onready var _area: Area3D = $Area3D
-@onready var _shape: CollisionShape3D = $Area3D/CollisionShape3D
+@onready var _emitter: FireEmitter = $FireEmitter
+
+var fire_stacks := 1
 
 
 func _ready():
-	_shape.disabled = true
+	_emitter.disabled(true)
 
 
 func trigger():
-	_shape.set_deferred("disabled", false)
+	if _emitter.fire_stack() <= 0:
+		print("out")
+		return
+	print("on")
+
+	_emitter.call_deferred("disabled", false)
 	await get_tree().create_timer(enable_duration).timeout
-	_shape.set_deferred("disabled", true)
+	_emitter.call_deferred("disabled", true)
 
 
 func _process(_delta):
