@@ -1,12 +1,12 @@
 @tool
 extends Entity25D
 
-@onready var _fire_detector: FireDetector = $FireDetector
+@export var _fire_detector: FireDetector
 
 
 func _ready_25d():
-	_fire_detector.fire_consumed.connect(_on_fire_consumed)
+	_fire_detector.ignited.connect(_on_ignited)
 
 
-func _on_fire_consumed():
+func _on_ignited():
 	print("fire")

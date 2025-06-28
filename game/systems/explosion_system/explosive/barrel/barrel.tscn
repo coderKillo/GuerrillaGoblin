@@ -76,8 +76,9 @@ animations = [{
 "speed": 10.0
 }]
 
-[node name="Barrel" type="Node2D" node_paths=PackedStringArray("object_3d", "model_2d")]
+[node name="Barrel" type="Node2D" node_paths=PackedStringArray("_fire_detector", "object_3d", "model_2d")]
 script = ExtResource("1_x6d3p")
+_fire_detector = NodePath("RigidBody3D/FireDetector")
 object_3d = NodePath("RigidBody3D")
 model_2d = NodePath("Model2D")
 
@@ -96,11 +97,12 @@ texture = ExtResource("2_2tbno")
 region_enabled = true
 region_rect = Rect2(0, 0, 128, 128)
 
-[node name="FireDetectArea" type="Area3D" parent="RigidBody3D"]
+[node name="FireDetector" type="Area3D" parent="RigidBody3D"]
 collision_layer = 0
 collision_mask = 8192
+script = ExtResource("4_2r1y5")
 
-[node name="CollisionShape3D2" type="CollisionShape3D" parent="RigidBody3D/FireDetectArea"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D/FireDetector"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.246267, 0)
 shape = SubResource("CylinderShape3D_f6dh4")
 
@@ -112,8 +114,4 @@ position = Vector2(0, -32)
 sprite_frames = SubResource("SpriteFrames_6kke4")
 animation = &"hit"
 autoplay = "idle"
-frame_progress = 0.91422
-
-[node name="FireDetector" type="Node" parent="." node_paths=PackedStringArray("_area")]
-script = ExtResource("4_2r1y5")
-_area = NodePath("../RigidBody3D/FireDetectArea")
+frame_progress = 0.468471

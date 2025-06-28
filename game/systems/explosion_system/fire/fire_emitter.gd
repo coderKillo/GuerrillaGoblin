@@ -1,44 +1,47 @@
 class_name FireEmitter
-extends Node
+extends Area3D
 
-signal emitter_collided
+@export var _initial_chages: int = 0
 
-@export var _emitter: EmitterArea
-@export var _shape: CollisionShape3D
-@export var _stack_init_value: int = 0
+@onready var _shape: CollisionShape3D = $CollisionShape3D
 
-var _stack := 0
+var has_ignited := false
+
+var _ignition_charges := 0
+var _ignition_timer := 0.0
 
 
 func _ready():
-	assert(_emitter)
 	assert(_shape)
 
-	_shape.disabled = true
-	_stack = _stack_init_value
+	monitoring = true
+	monitorable = true
+	_ignition_charges = _initial_chages
 
 
-func _process(_delta):
-	print(_stack)
-	if _stack <= 0:
-		_shape.disabled = false
+func _physics_process(delta):
+	if _ignition_charges <= 0:
 		return
 
-	_shape.disabled = true
+	if _ignition_timer > 0.0:
+		return
+	_ignition_timer -= delta
 
-	print(_emitter.body_collided)
-	if _emitter.body_collided > 0:
-		_stack -= 1
-		_emitter.body_collided = 0
+	if has_ignited:
+		has_ignited = false
+		_ignition_charges -= 1
+		_ignition_timer = Globals.IGNITION_CHARGE_INTERVAL
 
 
 func disabled(value: bool):
+	_ignition_timer = 0.0
+	_shape.disabled = value
 	set_process(!value)
 
 
-func add_fire(amount: int = 1):
-	_stack += amount
+func add_charges(value: int = 1):
+	_ignition_charges += value
 
 
-func fire_stack() -> int:
-	return _stack
+func charges() -> int:
+	return _ignition_charges

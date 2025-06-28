@@ -2,20 +2,25 @@ extends Node
 
 const UP_DOWN_ANGLE_TOLERANCE = 25
 
-@export var _animation: AnimatedSprite2D
+@export var _model: Model2D
 
 @onready var _movement_component: MovementComponent = $"../MovementComponent"
 @onready var _attack_component: AttackComponent = $"../AttackComponent"
 
 var _block_animation := false
+var _animations: Array[AnimatedSprite2D]
 
 
 func _ready():
 	assert(_movement_component)
 	assert(_attack_component)
-	assert(_animation)
+	assert(_model)
 
 	_attack_component.attacking.connect(_on_attacking)
+
+	for child in _model.get_children():
+		if child is AnimatedSprite2D:
+			_animations.append(child)
 
 
 func _process(_delta):
@@ -38,27 +43,31 @@ func _on_attacking():
 
 
 func _play_animation(animation: String, once: bool = false):
+	if _animations.is_empty():
+		return
 	if _block_animation:
 		return
 
-	_animation.play(animation)
+	for item in _animations:
+		item.play(animation)
 
 	if once:
 		_block_animation = true
-		await _animation.animation_finished
+		await _animations[0].animation_finished
 		_block_animation = false
 
 
 func _flip_sprite():
-	if _get_aim_ortho_angle() > 0:
-		_animation.flip_h = true
-	else:
-		_animation.flip_h = false
+	for item in _animations:
+		if _get_aim_ortho_angle() > 0:
+			item.flip_h = true
+		else:
+			item.flip_h = false
 
 
 func _get_aim_ortho_angle() -> float:
-	var mouse_position = _animation.get_global_mouse_position()
-	var direction = _animation.global_position.direction_to(mouse_position)
+	var mouse_position = _model.get_global_mouse_position()
+	var direction = _model.global_position.direction_to(mouse_position)
 	return rad_to_deg(direction.orthogonal().angle())
 
 

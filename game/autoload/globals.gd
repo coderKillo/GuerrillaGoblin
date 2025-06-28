@@ -18,3 +18,5 @@ enum COLLISION_LAYER {
 }
 
 const BUTTON_GROUP = "button"
+
+const IGNITION_CHARGE_INTERVAL = 0.5
