@@ -1,4 +1,4 @@
-[gd_scene load_steps=77 format=3 uid="uid://dn2hswaq6jltc"]
+[gd_scene load_steps=80 format=3 uid="uid://dn2hswaq6jltc"]
 
 [ext_resource type="Script" path="res://game/entities/player/player.gd" id="1_5dn5p"]
 [ext_resource type="Script" path="res://game/core/model2d.gd" id="2_20cjh"]
@@ -7,9 +7,11 @@
 [ext_resource type="Script" path="res://game/entities/components/movement_component.gd" id="4_bdqg1"]
 [ext_resource type="Script" path="res://game/systems/explosion_system/fire/fire_emitter.gd" id="5_bd3v5"]
 [ext_resource type="Script" path="res://game/entities/components/animation_component.gd" id="5_pgj6x"]
+[ext_resource type="Script" path="res://game/systems/explosion_system/force/force_emitter.gd" id="5_vpek1"]
 [ext_resource type="Script" path="res://game/entities/components/attack_component/attack_component.gd" id="6_gvgkh"]
 [ext_resource type="Texture2D" uid="uid://ctbwmqcv6hdmi" path="res://game/entities/player/torch/Torch_Fire.png" id="6_ricsw"]
 [ext_resource type="PackedScene" uid="uid://cllc1goumvfpx" path="res://game/entities/components/shadow_component/shadow_component.tscn" id="7_o1bpq"]
+[ext_resource type="Script" path="res://game/entities/components/gravity_component.gd" id="11_ore84"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_h3jcw"]
 radius = 0.266543
@@ -17,6 +19,9 @@ height = 0.831711
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_64rla"]
 size = Vector3(0.656309, 0.748047, 1.07159)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_u05xa"]
+radius = 1.54986
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_521p3"]
 atlas = ExtResource("3_qcvhu")
@@ -535,7 +540,7 @@ fire_animation = NodePath("../../Model/FireAnimation")
 
 [node name="FireEmitter" type="Area3D" parent="CharacterBody3D/Torch"]
 collision_layer = 8192
-collision_mask = 8192
+collision_mask = 0
 script = ExtResource("5_bd3v5")
 _initial_chages = 1
 
@@ -544,9 +549,18 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.85221, 0.177246, -0.0082702
 shape = SubResource("BoxShape3D_64rla")
 disabled = true
 
+[node name="ForceEmitter" type="Area3D" parent="CharacterBody3D"]
+collision_layer = 0
+collision_mask = 4096
+script = ExtResource("5_vpek1")
+deadzone = 0.267
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D/ForceEmitter"]
+shape = SubResource("SphereShape3D_u05xa")
+
 [node name="Model" type="Node2D" parent="." node_paths=PackedStringArray("sprites")]
 script = ExtResource("2_20cjh")
-sprites = [NodePath("AnimatedSprite2D")]
+sprites = [NodePath("AnimatedSprite2D"), NodePath("FireAnimation")]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Model"]
 position = Vector2(0, -32)
@@ -575,3 +589,8 @@ weapon = NodePath("../CharacterBody3D/Torch")
 [node name="ShadowComponent" parent="." node_paths=PackedStringArray("model2d", "body3d") instance=ExtResource("7_o1bpq")]
 model2d = NodePath("../Model")
 body3d = NodePath("../CharacterBody3D")
+
+[node name="GravityComponent" type="Node" parent="." node_paths=PackedStringArray("_movement", "_force_emitter")]
+script = ExtResource("11_ore84")
+_movement = NodePath("../MovementComponent")
+_force_emitter = NodePath("../CharacterBody3D/ForceEmitter")

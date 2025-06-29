@@ -2,11 +2,20 @@
 extends Entity25D
 
 @export var _fire_detector: FireDetector
+@export var _force_detector: ForceDetector
+
+@onready var _animation = $Model2D/AnimatedSprite2D
 
 
 func _ready_25d():
 	_fire_detector.ignited.connect(_on_ignited)
+	_force_detector.force_detected.connect(_on_force_detected)
 
 
 func _on_ignited():
-	print("fire")
+	_animation.play("hit")
+
+
+func _on_force_detected(_force: Vector3):
+	if _fire_detector.is_ignited:
+		print("BOOOM")

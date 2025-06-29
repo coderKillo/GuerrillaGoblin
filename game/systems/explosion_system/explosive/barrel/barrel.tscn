@@ -1,9 +1,10 @@
-[gd_scene load_steps=14 format=3 uid="uid://dcxxo4m7cqica"]
+[gd_scene load_steps=15 format=3 uid="uid://dcxxo4m7cqica"]
 
 [ext_resource type="Script" path="res://game/systems/explosion_system/explosive/barrel/barrel.gd" id="1_x6d3p"]
 [ext_resource type="Texture2D" uid="uid://bs5ju81migi0a" path="res://game/systems/explosion_system/explosive/barrel/Barrel.png" id="2_2tbno"]
 [ext_resource type="Script" path="res://game/core/model2d.gd" id="3_48rc8"]
 [ext_resource type="Script" path="res://game/systems/explosion_system/fire/fire_detector.gd" id="4_2r1y5"]
+[ext_resource type="Script" path="res://game/systems/explosion_system/force/force_detector.gd" id="4_k08rm"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_f6dh4"]
 height = 0.507251
@@ -76,15 +77,17 @@ animations = [{
 "speed": 10.0
 }]
 
-[node name="Barrel" type="Node2D" node_paths=PackedStringArray("_fire_detector", "object_3d", "model_2d")]
+[node name="Barrel" type="Node2D" node_paths=PackedStringArray("_fire_detector", "_force_detector", "object_3d", "model_2d")]
 script = ExtResource("1_x6d3p")
 _fire_detector = NodePath("RigidBody3D/FireDetector")
+_force_detector = NodePath("RigidBody3D/ForceDetector")
 object_3d = NodePath("RigidBody3D")
 model_2d = NodePath("Model2D")
 
 [node name="RigidBody3D" type="RigidBody3D" parent="."]
 collision_layer = 8
 collision_mask = 779
+lock_rotation = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.243226, 0)
@@ -106,12 +109,24 @@ script = ExtResource("4_2r1y5")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.246267, 0)
 shape = SubResource("CylinderShape3D_f6dh4")
 
-[node name="Model2D" type="Node2D" parent="."]
+[node name="ForceDetector" type="Area3D" parent="RigidBody3D" node_paths=PackedStringArray("apply_force_to")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2418, 0)
+collision_layer = 4096
+collision_mask = 0
+script = ExtResource("4_k08rm")
+deadzone = 0.4
+apply_force_to = NodePath("..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D/ForceDetector"]
+shape = SubResource("CylinderShape3D_f6dh4")
+
+[node name="Model2D" type="Node2D" parent="." node_paths=PackedStringArray("sprites")]
 script = ExtResource("3_48rc8")
+sprites = [NodePath("AnimatedSprite2D")]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Model2D"]
 position = Vector2(0, -32)
 sprite_frames = SubResource("SpriteFrames_6kke4")
 animation = &"hit"
 autoplay = "idle"
-frame_progress = 0.468471
+frame_progress = 0.135343

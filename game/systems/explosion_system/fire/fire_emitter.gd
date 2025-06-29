@@ -14,8 +14,10 @@ var _ignition_timer := 0.0
 func _ready():
 	assert(_shape)
 
-	monitoring = true
+	monitoring = false
 	monitorable = true
+	collision_layer = Globals.COLLISION_LAYER.FIRE
+	collision_mask = 0x0
 	_ignition_charges = _initial_chages
 
 
@@ -36,7 +38,7 @@ func _physics_process(delta):
 func disabled(value: bool):
 	_ignition_timer = 0.0
 	_shape.disabled = value
-	set_process(!value)
+	set_physics_process(!value)
 
 
 func add_charges(value: int = 1):

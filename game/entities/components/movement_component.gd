@@ -4,11 +4,9 @@ extends Node
 @export var character: CharacterBody3D
 
 @export_group("config")
-@export var jump_velocity: float = 9.5
 @export var speed: float = 5.0
 @export var air_movement_factor: float = 0.2
 
-var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 var movement_direction := Vector2.ZERO
 var added_velocity := Vector3.ZERO
 
@@ -21,10 +19,7 @@ var velocity: Vector3:
 var _max_air_speed := 0.0
 
 
-func _process(delta):
-	if not character.is_on_floor():
-		velocity.y -= gravity * delta
-
+func _process(_delta):
 	if not character.is_on_floor():
 		var air_velocity_xz = _get_air_velocity()
 
@@ -46,11 +41,6 @@ func _process(delta):
 
 	character.move_and_slide()
 
-
-func jump():
-	if not character.is_on_floor():
-		return
-	velocity.y = jump_velocity
 
 func is_moving() -> bool:
 	return velocity.length() > 0
