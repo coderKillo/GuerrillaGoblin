@@ -14,3 +14,8 @@ var levels: Array[PackedScene] = [preload("res://game/world/levels/test_level.ts
 var animated_button_scene: PackedScene = preload(
 	"res://game/gui/elements/buttons/animated_button.tscn"
 )
+
+# Objects
+var explosion_scene: PackedScene = preload(
+	"res://game/systems/explosion_system/explosion/explosion.tscn"
+)

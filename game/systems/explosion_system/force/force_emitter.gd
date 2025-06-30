@@ -36,3 +36,7 @@ func _physics_process(_delta):
 
 func disable(value: bool):
 	set_physics_process(!value)
+
+
+func is_disabled() -> bool:
+	return !is_physics_processing()

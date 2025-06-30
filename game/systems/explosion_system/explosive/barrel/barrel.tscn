@@ -1,14 +1,19 @@
-[gd_scene load_steps=15 format=3 uid="uid://dcxxo4m7cqica"]
+[gd_scene load_steps=18 format=3 uid="uid://dcxxo4m7cqica"]
 
 [ext_resource type="Script" path="res://game/systems/explosion_system/explosive/barrel/barrel.gd" id="1_x6d3p"]
 [ext_resource type="Texture2D" uid="uid://bs5ju81migi0a" path="res://game/systems/explosion_system/explosive/barrel/Barrel.png" id="2_2tbno"]
 [ext_resource type="Script" path="res://game/core/model2d.gd" id="3_48rc8"]
 [ext_resource type="Script" path="res://game/systems/explosion_system/fire/fire_detector.gd" id="4_2r1y5"]
 [ext_resource type="Script" path="res://game/systems/explosion_system/force/force_detector.gd" id="4_k08rm"]
+[ext_resource type="Script" path="res://game/systems/explosion_system/force/force_emitter.gd" id="5_5pp20"]
+[ext_resource type="PackedScene" uid="uid://cllc1goumvfpx" path="res://game/entities/components/shadow_component/shadow_component.tscn" id="6_1q16f"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_f6dh4"]
 height = 0.507251
 radius = 0.400427
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_fucs0"]
+radius = 1.41
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_uykwo"]
 atlas = ExtResource("2_2tbno")
@@ -120,6 +125,16 @@ apply_force_to = NodePath("..")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D/ForceDetector"]
 shape = SubResource("CylinderShape3D_f6dh4")
 
+[node name="ForceEmitter" type="Area3D" parent="RigidBody3D" node_paths=PackedStringArray("exclude_detectors")]
+collision_layer = 0
+collision_mask = 4096
+script = ExtResource("5_5pp20")
+deadzone = 0.4
+exclude_detectors = [NodePath("../ForceDetector")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D/ForceEmitter"]
+shape = SubResource("SphereShape3D_fucs0")
+
 [node name="Model2D" type="Node2D" parent="." node_paths=PackedStringArray("sprites")]
 script = ExtResource("3_48rc8")
 sprites = [NodePath("AnimatedSprite2D")]
@@ -130,3 +145,7 @@ sprite_frames = SubResource("SpriteFrames_6kke4")
 animation = &"hit"
 autoplay = "idle"
 frame_progress = 0.135343
+
+[node name="ShadowComponent" parent="." node_paths=PackedStringArray("model2d", "body3d") instance=ExtResource("6_1q16f")]
+model2d = NodePath("../Model2D")
+body3d = NodePath("../RigidBody3D")

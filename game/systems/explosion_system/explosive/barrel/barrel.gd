@@ -18,4 +18,8 @@ func _on_ignited():
 
 func _on_force_detected(_force: Vector3):
 	if _fire_detector.is_ignited:
-		print("BOOOM")
+		var explosion = Resources.explosion_scene.instantiate()
+		explosion.global_position = global_position
+		explosion.y_level = y_level
+		get_parent().add_child(explosion)
+		queue_free()
