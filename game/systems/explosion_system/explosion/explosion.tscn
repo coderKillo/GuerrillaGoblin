@@ -87,6 +87,7 @@ model_2d = NodePath("Model2D")
 [node name="ForceEmitter" type="Area3D" parent="."]
 script = ExtResource("2_ka81t")
 force = 15
+debug_name = "Explosion"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="ForceEmitter"]
 shape = SubResource("SphereShape3D_46jed")

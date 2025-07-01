@@ -26,6 +26,13 @@ func _process(delta):
 	_process_25d(delta)
 
 
+func _physics_process(delta):
+	if Engine.is_editor_hint():
+		return
+
+	_physics_process_25d(delta)
+
+
 # abstract
 func _ready_25d():
 	pass
@@ -33,6 +40,11 @@ func _ready_25d():
 
 # abstract
 func _process_25d(_delta):
+	pass
+
+
+# abstract
+func _physics_process_25d(_delta):
 	pass
 
 

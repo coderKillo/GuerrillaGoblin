@@ -6,6 +6,11 @@ signal force_detected(Vector3)
 @export var deadzone: float = 0
 @export var apply_force_to: Node
 
+@export_group("Debug")
+@export var debug := false
+@export var debug_name := "no defined name"
+@onready var logger := Logger.create(debug_name, debug)
+
 
 func _ready():
 	monitoring = false
@@ -16,6 +21,8 @@ func _ready():
 
 func apply_force(force: Vector3):
 	force_detected.emit(force)
+
+	logger.call("receive force %s" % force)
 
 	if apply_force_to is MovementComponent:
 		apply_force_to.added_velocity += force

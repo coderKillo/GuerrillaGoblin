@@ -570,7 +570,8 @@ collision_layer = 4096
 collision_mask = 0
 script = ExtResource("6_g0b36")
 deadzone = 0.26
-apply_force_to = NodePath("..")
+apply_force_to = NodePath("../../MovementComponent")
+debug_name = "player"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D/ForceDetector"]
 shape = SubResource("CylinderShape3D_hknkg")

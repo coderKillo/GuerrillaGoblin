@@ -5,6 +5,11 @@ extends Area3D
 @export var deadzone: float = 0
 @export var exclude_detectors: Array[ForceDetector]
 
+@export_group("Debug")
+@export var debug := false
+@export var debug_name := "no defined name"
+@onready var logger := Logger.create(debug_name, debug)
+
 
 func _ready():
 	monitoring = true
@@ -31,7 +36,9 @@ func _physics_process(_delta):
 		var emitter_position = global_position + (direction * deadzone)
 		var detector_position = detector.global_position + (-direction * detector.deadzone)
 
-		detector.apply_force(emitter_position.direction_to(detector_position) * force)
+		var force_vector = emitter_position.direction_to(detector_position) * force
+		logger.call("apply %s force to %s" % [force_vector, detector.owner.name])
+		detector.apply_force(force_vector)
 
 
 func disable(value: bool):
