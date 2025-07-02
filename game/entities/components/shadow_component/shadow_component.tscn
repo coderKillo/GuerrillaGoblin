@@ -3,10 +3,8 @@
 [ext_resource type="Script" path="res://game/entities/components/shadow_component/shadow_component.gd" id="1_rygkn"]
 [ext_resource type="Texture2D" uid="uid://4k5aud568ll1" path="res://game/entities/components/shadow_component/shadow.png" id="2_dalb3"]
 
-[node name="ShadowComponent" type="Node" node_paths=PackedStringArray("model2d", "body3d")]
+[node name="ShadowComponent" type="Node"]
 script = ExtResource("1_rygkn")
-model2d = NodePath("")
-body3d = NodePath("")
 
 [node name="ShadowSprite" type="Sprite2D" parent="."]
 texture = ExtResource("2_dalb3")

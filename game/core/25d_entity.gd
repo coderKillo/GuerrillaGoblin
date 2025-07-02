@@ -14,6 +14,9 @@ extends Node2D
 func _ready():
 	_sync_3d_object()
 
+	if Engine.is_editor_hint():
+		return
+
 	_ready_25d()
 
 

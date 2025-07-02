@@ -17,6 +17,18 @@ func _physics_process(_delta):
 	if Input.is_action_just_pressed("attack"):
 		target.attack.attack()
 
+	if Input.is_action_just_pressed("attack2"):
+		target.throw.disable(false)
+
+	if Input.is_action_just_released("attack2"):
+		target.throw.throw()
+		target.throw.disable(true)
+
+	if Input.is_action_pressed("attack2"):
+		target.throw.update_arc(
+			target.object_3d.global_position, Utils.get_global_mouse_position_3d(get_viewport())
+		)
+
 	var input_dir = Input.get_vector("move_left", "move_right", "move_up", "move_down")
 
 	# if _is_attacking():

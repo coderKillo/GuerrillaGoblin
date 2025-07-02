@@ -47,6 +47,7 @@ func load_level(level: int) -> void:
 	tree.current_scene = new_scene
 
 	GameState.current_level_index = level
+	GameState.world = new_scene.world
 
 	new_scene.world.add_child(level_scene.instantiate())
 

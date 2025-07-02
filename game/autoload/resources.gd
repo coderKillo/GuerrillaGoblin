@@ -19,3 +19,7 @@ var animated_button_scene: PackedScene = preload(
 var explosion_scene: PackedScene = preload(
 	"res://game/systems/explosion_system/explosion/explosion.tscn"
 )
+
+var barrel_scene: PackedScene = preload(
+	"res://game/systems/explosion_system/explosive/barrel/barrel.tscn"
+)
