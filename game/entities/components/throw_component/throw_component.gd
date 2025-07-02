@@ -4,6 +4,7 @@ extends Node
 @export var _throw_time := 1.0
 @export var _cooldown := 1.0
 @export var _throw_object: PackedScene
+@export var _origin: Node3D
 
 @onready var _path: Path2D = $Path2D
 @onready var _line: Line2D = $Line2D
@@ -29,16 +30,16 @@ func disable(value: bool):
 	_target_sprite.visible = !value
 
 
-func update_arc(origin: Vector3, target: Vector3):
+func update_arc(target: Vector3):
 	if _disabled:
 		return
 
-	Math.set_arc(_path.curve, origin, target, _throw_time)
+	Math.set_arc(_path.curve, _origin.global_position, target, _throw_time)
 	_line.clear_points()
 	for point in _path.curve.get_baked_points():
 		_line.add_point(point)
 
-	_start_velocity = Math.arc_start_velocity(origin, target, _throw_time)
+	_start_velocity = Math.arc_start_velocity(_origin.global_position, target, _throw_time)
 	_target_sprite.global_position = Math.to_2d_vector(target)
 
 
@@ -56,8 +57,6 @@ func throw():
 
 	_cooldown_timer = _cooldown
 
-	var origin = _path.curve.get_point_position(0)
-
 	var object: Entity25D = _throw_object.instantiate()
 	if GameState.world:
 		GameState.world.add_child(object)
@@ -65,5 +64,5 @@ func throw():
 		owner.add_child(object)
 		object.top_level = true
 
-	object.position = origin
+	object.object_3d.global_position = _origin.global_position
 	object.object_3d.apply_impulse(_start_velocity)

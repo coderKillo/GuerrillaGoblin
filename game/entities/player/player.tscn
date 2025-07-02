@@ -578,6 +578,9 @@ debug_name = "player"
 [node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D/ForceDetector"]
 shape = SubResource("CylinderShape3D_hknkg")
 
+[node name="ThrowOrigin" type="Node3D" parent="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.900469, 0.526507, -0.0479352)
+
 [node name="Model" type="Node2D" parent="." node_paths=PackedStringArray("sprites")]
 script = ExtResource("2_20cjh")
 sprites = [NodePath("AnimatedSprite2D"), NodePath("FireAnimation")]
@@ -615,5 +618,6 @@ script = ExtResource("11_ore84")
 _movement = NodePath("../MovementComponent")
 _force_emitter = NodePath("../CharacterBody3D/ForceEmitter")
 
-[node name="ThrowComponent" parent="." instance=ExtResource("14_6awmi")]
+[node name="ThrowComponent" parent="." node_paths=PackedStringArray("_origin") instance=ExtResource("14_6awmi")]
 _throw_object = ExtResource("15_4rsku")
+_origin = NodePath("../CharacterBody3D/ThrowOrigin")
