@@ -7,6 +7,7 @@ signal ignited
 ## If the time is 0, then the area will stay disabled.
 @export var disable_time_after_ignition := 0.0
 @export var is_ignited = false
+@export var exclude_emitter: Array[FireEmitter]
 
 @onready var _shape: CollisionShape3D = $CollisionShape3D
 
@@ -24,6 +25,9 @@ func _on_area_entered(area: Area3D):
 		return
 	var emitter := area as FireEmitter
 	if not emitter:
+		return
+
+	if emitter in exclude_emitter:
 		return
 
 	emitter.has_ignited = true

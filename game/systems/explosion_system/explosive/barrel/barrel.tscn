@@ -134,7 +134,6 @@ exclude_detectors = [NodePath("../ForceDetector")]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D/ForceEmitter"]
 shape = SubResource("SphereShape3D_fucs0")
-disabled = true
 
 [node name="Model2D" type="Node2D" parent="." node_paths=PackedStringArray("sprites")]
 script = ExtResource("3_48rc8")

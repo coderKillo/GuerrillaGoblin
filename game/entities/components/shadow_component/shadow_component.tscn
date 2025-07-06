@@ -7,4 +7,5 @@
 script = ExtResource("1_rygkn")
 
 [node name="ShadowSprite" type="Sprite2D" parent="."]
+y_sort_enabled = true
 texture = ExtResource("2_dalb3")

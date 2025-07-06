@@ -3,16 +3,14 @@
 [ext_resource type="Script" path="res://game/world/base/player_controller.gd" id="1_ae61t"]
 [ext_resource type="Script" path="res://game/world/base/game_camera.gd" id="2_nin4c"]
 [ext_resource type="PackedScene" uid="uid://dn2hswaq6jltc" path="res://game/entities/player/player.tscn" id="3_hffx7"]
+[ext_resource type="PackedScene" uid="uid://c4mnvpqt7x0vk" path="res://game/systems/explosion_system/fire/fire_big/fire_big.tscn" id="3_o35n8"]
 [ext_resource type="PackedScene" uid="uid://dcxxo4m7cqica" path="res://game/systems/explosion_system/explosive/barrel/barrel.tscn" id="4_tcm7y"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_g254v"]
 size = Vector3(100, 0.1, 100)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_c3muj"]
-size = Vector3(100, 0.1, 40)
-
-[sub_resource type="BoxMesh" id="BoxMesh_xgdpn"]
-size = Vector3(101.08, 0.1, 40)
+size = Vector3(100, 0.1, 100)
 
 [node name="TestLevel" type="Node2D"]
 
@@ -32,21 +30,27 @@ skeleton = NodePath("../..")
 shape = SubResource("BoxShape3D_c3muj")
 
 [node name="StaticBody3D2" type="StaticBody3D" parent="World"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 52.8494, 3.97491, 1.75574)
+process_mode = 4
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.997, 1.684, 0)
+visible = false
 collision_layer = 256
 collision_mask = 287
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="World/StaticBody3D2"]
-mesh = SubResource("BoxMesh_xgdpn")
+mesh = SubResource("BoxMesh_g254v")
 skeleton = NodePath("../..")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="World/StaticBody3D2"]
 shape = SubResource("BoxShape3D_c3muj")
 
 [node name="Player" parent="World" instance=ExtResource("3_hffx7")]
+position = Vector2(-2, 1)
 
 [node name="Barrel" parent="World" instance=ExtResource("4_tcm7y")]
-position = Vector2(255, 0)
+position = Vector2(-257, 73)
+
+[node name="FireBig" parent="World" instance=ExtResource("3_o35n8")]
+position = Vector2(50, 29)
 
 [node name="PlayerController" type="Node" parent="." node_paths=PackedStringArray("target")]
 script = ExtResource("1_ae61t")
@@ -61,4 +65,5 @@ process_mode = 4
 transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 5.399, 4.795)
 cull_mask = 1047552
 projection = 1
+current = true
 size = 7.306

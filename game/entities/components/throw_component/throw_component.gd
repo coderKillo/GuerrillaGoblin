@@ -1,6 +1,8 @@
 class_name ThrowComponent
 extends Node
 
+signal object_thrown(object: Node)
+
 @export var _throw_time := 1.0
 @export var _cooldown := 1.0
 @export var _throw_object: PackedScene
@@ -61,8 +63,9 @@ func throw():
 	if GameState.world:
 		GameState.world.add_child(object)
 	else:
-		owner.add_child(object)
-		object.top_level = true
+		owner.owner.get_node("World").add_child(object)
 
 	object.object_3d.global_position = _origin.global_position
 	object.object_3d.apply_impulse(_start_velocity)
+
+	object_thrown.emit(object)

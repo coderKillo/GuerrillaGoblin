@@ -1,0 +1,110 @@
+[gd_scene load_steps=16 format=3 uid="uid://c4mnvpqt7x0vk"]
+
+[ext_resource type="Script" path="res://game/core/25d_entity.gd" id="1_tij1c"]
+[ext_resource type="Texture2D" uid="uid://bc5io4pd47ai0" path="res://assets/tiny_swords/Effects/Fire/Fire.png" id="2_56hee"]
+[ext_resource type="Script" path="res://game/core/model2d.gd" id="3_cab0e"]
+[ext_resource type="Script" path="res://game/systems/explosion_system/fire/fire_emitter.gd" id="3_wegk2"]
+[ext_resource type="Texture2D" uid="uid://cgna353k3d40d" path="res://game/systems/explosion_system/fire/fire_big/Fire.png" id="5_pfras"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_3y20a"]
+height = 0.562147
+radius = 0.288984
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_2uo36"]
+height = 0.880549
+radius = 0.723474
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lxjpo"]
+atlas = ExtResource("5_pfras")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nf2sa"]
+atlas = ExtResource("5_pfras")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wnopm"]
+atlas = ExtResource("5_pfras")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t5ysb"]
+atlas = ExtResource("5_pfras")
+region = Rect2(384, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_26loe"]
+atlas = ExtResource("5_pfras")
+region = Rect2(512, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wf68q"]
+atlas = ExtResource("5_pfras")
+region = Rect2(640, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kkmr3"]
+atlas = ExtResource("5_pfras")
+region = Rect2(768, 0, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5xsbs"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lxjpo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nf2sa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wnopm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t5ysb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_26loe")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wf68q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kkmr3")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[node name="FireBig" type="Node2D" node_paths=PackedStringArray("object_3d", "model_2d")]
+script = ExtResource("1_tij1c")
+object_3d = NodePath("StaticBody3D")
+model_2d = NodePath("Model2D")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+collision_layer = 0
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.301359, 0)
+shape = SubResource("CylinderShape3D_3y20a")
+
+[node name="Sprite3D" type="Sprite3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0.453827, 0)
+pixel_size = 0.0156
+texture = ExtResource("2_56hee")
+region_enabled = true
+region_rect = Rect2(0, 0, 128, 128)
+
+[node name="FireEmitter" type="Area3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.255052, 0)
+script = ExtResource("3_wegk2")
+_initial_chages = 100
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D/FireEmitter"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.171309, 0)
+shape = SubResource("CylinderShape3D_2uo36")
+
+[node name="Model2D" type="Node2D" parent="."]
+script = ExtResource("3_cab0e")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Model2D"]
+sprite_frames = SubResource("SpriteFrames_5xsbs")
+autoplay = "default"
+frame_progress = 0.663301
+offset = Vector2(0, -45)

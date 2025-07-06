@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bc5io4pd47ai0"
-path.s3tc="res://.godot/imported/Fire.png-d8bf6395cedfdb80858955c3006cde06.s3tc.ctex"
+uid="uid://cgna353k3d40d"
+path.s3tc="res://.godot/imported/Fire.png-74ac3e0ac977dce8d4d123f471b8dbb9.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://assets/tiny_swords/Effects/Fire/Fire.png"
-dest_files=["res://.godot/imported/Fire.png-d8bf6395cedfdb80858955c3006cde06.s3tc.ctex"]
+source_file="res://game/systems/explosion_system/fire/fire_big/Fire.png"
+dest_files=["res://.godot/imported/Fire.png-74ac3e0ac977dce8d4d123f471b8dbb9.s3tc.ctex"]
 
 [params]
 

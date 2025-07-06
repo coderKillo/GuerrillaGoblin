@@ -12,6 +12,9 @@ func _ready():
 	assert(model2d)
 	assert(body3d)
 
+	self.remove_child(shadow_sprite)
+	model2d.add_child(shadow_sprite)
+
 
 func _physics_process(_delta):
 	shadow_sprite.global_position = model2d.global_position

@@ -26,6 +26,9 @@ func _process(delta):
 	else:
 		_sync_2d_object()
 
+	if Engine.is_editor_hint():
+		return
+
 	_process_25d(delta)
 
 
