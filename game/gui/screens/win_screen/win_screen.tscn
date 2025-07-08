@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://c3o5yv76xnwja"]
 
-[ext_resource type="Script" path="res://game/gui/screens/win_screen/win_screen.gd" id="1_v631i"]
+[ext_resource type="Script" uid="uid://u1x7thtufwy0" path="res://game/gui/screens/win_screen/win_screen.gd" id="1_v631i"]
 [ext_resource type="PackedScene" uid="uid://bvbdxwtkxgxbu" path="res://game/gui/elements/buttons/animated_button.tscn" id="2_x7i6u"]
 
 [node name="WinScreen" type="Control"]

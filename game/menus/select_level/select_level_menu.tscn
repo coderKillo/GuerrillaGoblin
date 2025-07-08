@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://c7wukfjqb38wx"]
 
-[ext_resource type="Script" path="res://game/menus/select_level/select_level_menu.gd" id="1_d5it3"]
-[ext_resource type="Script" path="res://game/menus/animation_controller.gd" id="2_4lu6h"]
+[ext_resource type="Script" uid="uid://8t2xbnm6fl7h" path="res://game/menus/select_level/select_level_menu.gd" id="1_d5it3"]
+[ext_resource type="Script" uid="uid://djug2rd1v0nej" path="res://game/menus/animation_controller.gd" id="2_4lu6h"]
 
 [node name="SelectLevelMenu" type="Control"]
 layout_mode = 3

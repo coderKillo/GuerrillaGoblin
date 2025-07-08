@@ -1,8 +1,8 @@
 class_name Globals
 
 const SCALE = 64
-const BASE_VECTOR = Vector3(1.0, 0.707, 0.707)
-const CAMERA_3D_NORMAL = Vector3(0, -1, 1)
+const BASE_VECTOR = Vector3(1.0, sqrt(2.0) / 2.0, sqrt(2.0) / 2.0)
+const CAMERA_3D_NORMAL = Vector3(0, -1, -1)
 
 enum COLLISION_LAYER {
 	PLAYER = 1 << 0,

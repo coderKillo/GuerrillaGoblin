@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://bvbdxwtkxgxbu"]
 
-[ext_resource type="Script" path="res://game/gui/elements/buttons/animated_button.gd" id="1_i1pjw"]
+[ext_resource type="Script" uid="uid://d4mfuyubv7qho" path="res://game/gui/elements/buttons/animated_button.gd" id="1_i1pjw"]
 
 [node name="AnimatedButton" type="Button" groups=["button"]]
 self_modulate = Color(1, 1, 1, 0)

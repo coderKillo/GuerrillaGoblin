@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://dnfs3c5ov8jtc"]
 
-[ext_resource type="Script" path="res://game/menus/main/main_menu.gd" id="1_j5hal"]
+[ext_resource type="Script" uid="uid://bv0bnaxdtpysw" path="res://game/menus/main/main_menu.gd" id="1_j5hal"]
 [ext_resource type="PackedScene" uid="uid://bvbdxwtkxgxbu" path="res://game/gui/elements/buttons/animated_button.tscn" id="1_jfgn5"]
-[ext_resource type="Script" path="res://game/menus/animation_controller.gd" id="3_4v5i3"]
+[ext_resource type="Script" uid="uid://djug2rd1v0nej" path="res://game/menus/animation_controller.gd" id="3_4v5i3"]
 [ext_resource type="PackedScene" uid="uid://dm583bignxyho" path="res://game/menus/settings/settings_menu.tscn" id="4_jmoeh"]
 
 [node name="MainScreen" type="Control"]
@@ -100,6 +100,7 @@ label_text = "Back"
 
 [node name="SettingContainer" parent="HBoxContainer/Settings" instance=ExtResource("4_jmoeh")]
 layout_mode = 2
+current_tab = 0
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(645, 360)

@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://c43f5l4dqvmlu"]
 
-[ext_resource type="Script" path="res://game/gui/screens/death_screen/death_screen.gd" id="1_41fle"]
+[ext_resource type="Script" uid="uid://cyk3dq2lolpfi" path="res://game/gui/screens/death_screen/death_screen.gd" id="1_41fle"]
 [ext_resource type="PackedScene" uid="uid://bvbdxwtkxgxbu" path="res://game/gui/elements/buttons/animated_button.tscn" id="2_uhf02"]
 
 [node name="DeathScreen" type="Control"]

@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://clmxriy4cqsat"]
 
-[ext_resource type="Script" path="res://game/autoload/scene_changer/scene_changer.gd" id="1_astn1"]
-[ext_resource type="Shader" path="res://game/autoload/scene_changer/diamond_transition.gdshader" id="1_nnuei"]
+[ext_resource type="Script" uid="uid://bmbpcftgaog0t" path="res://game/autoload/scene_changer/scene_changer.gd" id="1_astn1"]
+[ext_resource type="Shader" uid="uid://7fvmry4cgp7" path="res://game/autoload/scene_changer/diamond_transition.gdshader" id="1_nnuei"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jicio"]
 shader = ExtResource("1_nnuei")

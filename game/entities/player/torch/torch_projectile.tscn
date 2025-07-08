@@ -1,9 +1,9 @@
 [gd_scene load_steps=24 format=3 uid="uid://ceedk7stvfi2c"]
 
-[ext_resource type="Script" path="res://game/entities/player/torch/torch_projectile.gd" id="1_lplpa"]
-[ext_resource type="Script" path="res://game/core/model2d.gd" id="2_rtarb"]
+[ext_resource type="Script" uid="uid://cqtr7avavvy34" path="res://game/entities/player/torch/torch_projectile.gd" id="1_lplpa"]
+[ext_resource type="Script" uid="uid://c66xaxb8p2jhr" path="res://game/core/model2d.gd" id="2_rtarb"]
 [ext_resource type="Texture2D" uid="uid://bifcpko4yadsx" path="res://game/entities/player/torch/Torch_Projectile.png" id="3_j5c3x"]
-[ext_resource type="Script" path="res://game/systems/explosion_system/fire/fire_emitter.gd" id="3_o462o"]
+[ext_resource type="Script" uid="uid://dso2ed885n7gl" path="res://game/systems/explosion_system/fire/fire_emitter.gd" id="3_o462o"]
 [ext_resource type="PackedScene" uid="uid://cllc1goumvfpx" path="res://game/entities/components/shadow_component/shadow_component.tscn" id="6_urq88"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_02l3s"]

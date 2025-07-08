@@ -1,9 +1,9 @@
 [gd_scene load_steps=16 format=3 uid="uid://c4mnvpqt7x0vk"]
 
-[ext_resource type="Script" path="res://game/core/25d_entity.gd" id="1_tij1c"]
+[ext_resource type="Script" uid="uid://bngbbtijgp4yx" path="res://game/core/25d_entity.gd" id="1_tij1c"]
 [ext_resource type="Texture2D" uid="uid://bc5io4pd47ai0" path="res://assets/tiny_swords/Effects/Fire/Fire.png" id="2_56hee"]
-[ext_resource type="Script" path="res://game/core/model2d.gd" id="3_cab0e"]
-[ext_resource type="Script" path="res://game/systems/explosion_system/fire/fire_emitter.gd" id="3_wegk2"]
+[ext_resource type="Script" uid="uid://c66xaxb8p2jhr" path="res://game/core/model2d.gd" id="3_cab0e"]
+[ext_resource type="Script" uid="uid://dso2ed885n7gl" path="res://game/systems/explosion_system/fire/fire_emitter.gd" id="3_wegk2"]
 [ext_resource type="Texture2D" uid="uid://cgna353k3d40d" path="res://game/systems/explosion_system/fire/fire_big/Fire.png" id="5_pfras"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_3y20a"]

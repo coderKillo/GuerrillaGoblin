@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://dcjw6qhvwmorf"]
 
-[ext_resource type="Script" path="res://game/world/base/player_controller.gd" id="1_ae61t"]
-[ext_resource type="Script" path="res://game/world/base/game_camera.gd" id="2_nin4c"]
+[ext_resource type="Script" uid="uid://dhqr1ynvatedp" path="res://game/world/base/player_controller.gd" id="1_ae61t"]
+[ext_resource type="Script" uid="uid://cwn8rdb8ft8a" path="res://game/world/base/game_camera.gd" id="2_nin4c"]
 [ext_resource type="PackedScene" uid="uid://dn2hswaq6jltc" path="res://game/entities/player/player.tscn" id="3_hffx7"]
 [ext_resource type="PackedScene" uid="uid://c4mnvpqt7x0vk" path="res://game/systems/explosion_system/fire/fire_big/fire_big.tscn" id="3_o35n8"]
 [ext_resource type="PackedScene" uid="uid://dcxxo4m7cqica" path="res://game/systems/explosion_system/explosive/barrel/barrel.tscn" id="4_tcm7y"]
@@ -48,6 +48,7 @@ position = Vector2(-2, 1)
 
 [node name="Barrel" parent="World" instance=ExtResource("4_tcm7y")]
 position = Vector2(-257, 73)
+_explosion_offset = null
 
 [node name="FireBig" parent="World" instance=ExtResource("3_o35n8")]
 position = Vector2(50, 29)
@@ -63,7 +64,7 @@ script = ExtResource("2_nin4c")
 [node name="Camera3D" type="Camera3D" parent="GameCamera"]
 process_mode = 4
 transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 5.399, 4.795)
-cull_mask = 1047552
+cull_mask = 1047553
 projection = 1
 current = true
 size = 7.306

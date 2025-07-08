@@ -22,6 +22,7 @@ var _max_air_speed := 0.0
 func _process(_delta):
 	if not character.is_on_floor():
 		var air_velocity_xz = _get_air_velocity()
+		print(air_velocity_xz)
 
 		velocity.x = air_velocity_xz.x
 		velocity.z = air_velocity_xz.y
@@ -49,6 +50,7 @@ func is_moving() -> bool:
 func _get_air_velocity() -> Vector2:
 	var velocity_xz = Vector2(velocity.x, velocity.z)
 	_max_air_speed = max(_max_air_speed, velocity_xz.length())
+	_max_air_speed = max(_max_air_speed, speed)
 
 	velocity_xz.x += movement_direction.x * air_movement_factor
 	velocity_xz.y += movement_direction.y * air_movement_factor

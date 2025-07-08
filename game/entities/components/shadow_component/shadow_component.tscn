@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://cllc1goumvfpx"]
 
-[ext_resource type="Script" path="res://game/entities/components/shadow_component/shadow_component.gd" id="1_rygkn"]
+[ext_resource type="Script" uid="uid://c3t5k0utw3aia" path="res://game/entities/components/shadow_component/shadow_component.gd" id="1_rygkn"]
 [ext_resource type="Texture2D" uid="uid://4k5aud568ll1" path="res://game/entities/components/shadow_component/shadow.png" id="2_dalb3"]
 
 [node name="ShadowComponent" type="Node"]

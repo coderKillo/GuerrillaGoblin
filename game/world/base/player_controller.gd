@@ -11,8 +11,9 @@ func _physics_process(_delta):
 	if Input.is_action_just_pressed("jump"):
 		if not target.movement.character.is_on_floor():
 			return
-		target.movement.character.global_position.y += 1
-		target.movement.added_velocity.y -= 9.5
+		# target.movement.character.global_position.y += 1
+		# target.movement.added_velocity.y -= 9.5
+		target.movement.added_velocity.y = 10
 
 	if Input.is_action_just_pressed("attack"):
 		target.attack.attack()

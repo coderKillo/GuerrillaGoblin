@@ -1,19 +1,19 @@
 [gd_scene load_steps=85 format=3 uid="uid://dn2hswaq6jltc"]
 
-[ext_resource type="Script" path="res://game/entities/player/player.gd" id="1_5dn5p"]
-[ext_resource type="Script" path="res://game/core/model2d.gd" id="2_20cjh"]
-[ext_resource type="Script" path="res://game/entities/components/attack_component/weapons/torch.gd" id="3_0bw3b"]
+[ext_resource type="Script" uid="uid://c72f46ngsxvr2" path="res://game/entities/player/player.gd" id="1_5dn5p"]
+[ext_resource type="Script" uid="uid://c66xaxb8p2jhr" path="res://game/core/model2d.gd" id="2_20cjh"]
+[ext_resource type="Script" uid="uid://bbsf3aakpk32d" path="res://game/entities/components/attack_component/weapons/torch.gd" id="3_0bw3b"]
 [ext_resource type="Texture2D" uid="uid://brd4f74v5ev46" path="res://game/entities/player/torch/Torch_Red2.png" id="3_qcvhu"]
-[ext_resource type="Script" path="res://game/entities/components/movement_component.gd" id="4_bdqg1"]
-[ext_resource type="Script" path="res://game/systems/explosion_system/fire/fire_detector.gd" id="5_2ixuy"]
-[ext_resource type="Script" path="res://game/systems/explosion_system/fire/fire_emitter.gd" id="5_bd3v5"]
-[ext_resource type="Script" path="res://game/entities/components/animation_component.gd" id="5_pgj6x"]
-[ext_resource type="Script" path="res://game/systems/explosion_system/force/force_emitter.gd" id="5_vpek1"]
-[ext_resource type="Script" path="res://game/systems/explosion_system/force/force_detector.gd" id="6_g0b36"]
-[ext_resource type="Script" path="res://game/entities/components/attack_component/attack_component.gd" id="6_gvgkh"]
+[ext_resource type="Script" uid="uid://b0pkl156ymle3" path="res://game/entities/components/movement_component.gd" id="4_bdqg1"]
+[ext_resource type="Script" uid="uid://dpv0x4fkee7sx" path="res://game/systems/explosion_system/fire/fire_detector.gd" id="5_2ixuy"]
+[ext_resource type="Script" uid="uid://dso2ed885n7gl" path="res://game/systems/explosion_system/fire/fire_emitter.gd" id="5_bd3v5"]
+[ext_resource type="Script" uid="uid://gbvqgglkj6qv" path="res://game/entities/components/animation_component.gd" id="5_pgj6x"]
+[ext_resource type="Script" uid="uid://deoojs4nsvi43" path="res://game/systems/explosion_system/force/force_emitter.gd" id="5_vpek1"]
+[ext_resource type="Script" uid="uid://b76v7tvkurx0d" path="res://game/systems/explosion_system/force/force_detector.gd" id="6_g0b36"]
+[ext_resource type="Script" uid="uid://cgn17gkvdjdjy" path="res://game/entities/components/attack_component/attack_component.gd" id="6_gvgkh"]
 [ext_resource type="Texture2D" uid="uid://ctbwmqcv6hdmi" path="res://game/entities/player/torch/Torch_Fire.png" id="6_ricsw"]
 [ext_resource type="PackedScene" uid="uid://cllc1goumvfpx" path="res://game/entities/components/shadow_component/shadow_component.tscn" id="7_o1bpq"]
-[ext_resource type="Script" path="res://game/entities/components/gravity_component.gd" id="11_ore84"]
+[ext_resource type="Script" uid="uid://h1owv6miuamo" path="res://game/entities/components/gravity_component.gd" id="11_ore84"]
 [ext_resource type="PackedScene" uid="uid://cpjdg42hka0nu" path="res://game/entities/components/throw_component/throw_component.tscn" id="14_swe8b"]
 [ext_resource type="PackedScene" uid="uid://ceedk7stvfi2c" path="res://game/entities/player/torch/torch_projectile.tscn" id="15_l88a3"]
 
@@ -530,7 +530,7 @@ model_2d = NodePath("Model")
 collision_mask = 799
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.423944, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.409589, 0)
 shape = SubResource("CapsuleShape3D_h3jcw")
 
 [node name="Sprite3D" type="Sprite3D" parent="CharacterBody3D"]
@@ -610,6 +610,7 @@ autoplay = "idle"
 [node name="MovementComponent" type="Node" parent="." node_paths=PackedStringArray("character")]
 script = ExtResource("4_bdqg1")
 character = NodePath("../CharacterBody3D")
+air_movement_factor = 0.5
 
 [node name="AnimationComponent" type="Node" parent="." node_paths=PackedStringArray("_model")]
 script = ExtResource("5_pgj6x")

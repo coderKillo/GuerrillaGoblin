@@ -1,8 +1,8 @@
 [gd_scene load_steps=16 format=3 uid="uid://b3gptmsu0n1am"]
 
-[ext_resource type="Script" path="res://game/systems/explosion_system/explosion/explosion.gd" id="1_mbah0"]
-[ext_resource type="Script" path="res://game/systems/explosion_system/force/force_emitter.gd" id="2_ka81t"]
-[ext_resource type="Script" path="res://game/core/model2d.gd" id="2_usmur"]
+[ext_resource type="Script" uid="uid://cu6k8nwfh8wjx" path="res://game/systems/explosion_system/explosion/explosion.gd" id="1_mbah0"]
+[ext_resource type="Script" uid="uid://deoojs4nsvi43" path="res://game/systems/explosion_system/force/force_emitter.gd" id="2_ka81t"]
+[ext_resource type="Script" uid="uid://c66xaxb8p2jhr" path="res://game/core/model2d.gd" id="2_usmur"]
 [ext_resource type="Texture2D" uid="uid://dneqex1u0aq4g" path="res://game/systems/explosion_system/explosion/Explosions.png" id="3_6sfp5"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_46jed"]

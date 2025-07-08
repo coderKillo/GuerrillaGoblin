@@ -3,6 +3,7 @@ extends Entity25D
 
 @export var _fire_detector: FireDetector
 @export var _force_detector: ForceDetector
+@export var _explosion_offset := -0.5
 
 @onready var _animation = $Model2D/AnimatedSprite2D
 
@@ -21,4 +22,5 @@ func _on_force_detected(_force: Vector3):
 		var explosion = Resources.explosion_scene.instantiate()
 		get_parent().add_child(explosion)
 		explosion.object_3d.global_position = object_3d.global_position
+		explosion.object_3d.global_position.y += _explosion_offset
 		queue_free()
