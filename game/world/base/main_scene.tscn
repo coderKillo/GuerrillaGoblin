@@ -1,13 +1,23 @@
-[gd_scene load_steps=4 format=3 uid="uid://iommge1oofmd"]
+[gd_scene load_steps=5 format=3 uid="uid://iommge1oofmd"]
 
 [ext_resource type="Script" uid="uid://cwmkuiev8fvn0" path="res://game/world/base/main_scene.gd" id="1_glar4"]
 [ext_resource type="Script" uid="uid://dhqr1ynvatedp" path="res://game/world/base/player_controller.gd" id="2_peo17"]
 [ext_resource type="Script" uid="uid://cwn8rdb8ft8a" path="res://game/world/base/game_camera.gd" id="3_mv1a7"]
 
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_fetsm"]
+
 [node name="Main" type="Node2D"]
 script = ExtResource("1_glar4")
 
 [node name="World" type="Node2D" parent="."]
+
+[node name="DeathArea" type="Area3D" parent="World"]
+collision_layer = 0
+collision_mask = 11
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/DeathArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.22565, 0)
+shape = SubResource("WorldBoundaryShape3D_fetsm")
 
 [node name="PlayerController" type="Node" parent="."]
 script = ExtResource("2_peo17")

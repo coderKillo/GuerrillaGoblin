@@ -87,7 +87,6 @@ y_sort_enabled = true
 script = ExtResource("1_x6d3p")
 _fire_detector = NodePath("RigidBody3D/FireDetector")
 _force_detector = NodePath("RigidBody3D/ForceDetector")
-_explosion_offset = null
 object_3d = NodePath("RigidBody3D")
 model_2d = NodePath("Model2D")
 
